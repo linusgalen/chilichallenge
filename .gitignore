@@ -1,3 +1,14 @@
+### Database ###
+*.db
+
+### ingore idea-map ###
+.idea/
+
+### Vitrual ###
+.venv/
+venv/
+EMV/
+
 ### ArchLinuxPackages ###
 *.tar
 *.tar.*
