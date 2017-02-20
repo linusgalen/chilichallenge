@@ -1,8 +1,9 @@
-from flask import Flask, Response
+from flask import Flask, Response, redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_basicauth import BasicAuth
 from flask_admin import Admin
 from flask_admin.contrib import sqla
+
 
 app = Flask(__name__)
 app.config.from_object('config')
