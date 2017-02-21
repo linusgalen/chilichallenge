@@ -15,7 +15,7 @@ app.config['BASIC_AUTH_PASSWORD'] = 'admin'
 basic_auth = BasicAuth(app)
 
 from app import views, models
-## from models import User, Book, Contactpost
+from app.models import User, Challenge, Address, Order, Product, UserHasUser
 
 class ModelView(sqla.ModelView):
     def is_accessible(self):
@@ -38,6 +38,9 @@ class AuthException(HTTPException):
         ))
 
 admin = Admin(app, name='Admin Page')
-##admin.add_view(ModelView(User, db.session))
-##admin.add_view(ModelView(Book, db.session))
-##admin.add_view(ModelView(Contactpost, db.session))
+# Added all the tables currently in the models/app.db database. Run db_create.py if it doesn't exist.
+admin.add_view(ModelView(User, db.session))
+admin.add_view(ModelView(Challenge, db.session))
+admin.add_view(ModelView(Order, db.session))
+admin.add_view(ModelView(Product, db.session))
+admin.add_view(ModelView(UserHasUser, db.session))
