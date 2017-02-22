@@ -7,25 +7,20 @@ For more details please check here:
 https://github.com/PiTiLeZarD/workbench_alchemy
 """
 
-
-
-
 class User(db.Model):
-
-    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True)  # pylint: disable=invalid-name
     email = db.Column(db.String(45))
     password = db.Column(db.String(45))
     username = db.Column(db.String(45))
-    address_id = db.Column(
-        db.Integer, db.ForeignKey('address.id', onupdate="CASCADE", ondelete="CASCADE")
-    )
-    address = db.relationship('Address', backref=db.backref('children', lazy='dynamic'))
+    #address_id = db.Column(
+    #    db.Integer, db.ForeignKey('address.id', onupdate="CASCADE", ondelete="CASCADE")
+    #)
+    #address = db.relationship('Address', backref=db.backref('children', lazy='dynamic'))
 
-    #def __init__(self, email, password, username, address_id):
-    #    self.username = username
-    #    self.email = email
-    #    self.password=password
-    #    self.address_id=address_id
+    def __init__(self, username, email, password):
+        self.username=username
+        self.email=email
+        self.password=password
 
     @property
     def is_authenticated(self):
@@ -67,8 +62,6 @@ class Product(db.Model):
 
 
 class Order(db.Model):
-
-
     id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     datetime = db.Column(db.DateTime)
     user_id = db.Column(
