@@ -1,8 +1,10 @@
 ### Database ###
 *.db
+db_repository
 
 ### ingore idea-map ###
 .idea/
+.idea/*
 
 ### Vitrual ###
 .venv/

@@ -12,27 +12,48 @@ https://github.com/PiTiLeZarD/workbench_alchemy
 
 class User(db.Model):
 
-    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
-    email = db.Column(db.String(45), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
+    email = db.Column(db.String(45))
     password = db.Column(db.String(45))
     username = db.Column(db.String(45))
     address_id = db.Column(
-        db.Integer, db.ForeignKey("address.id", onupdate="CASCADE", ondelete="CASCADE"), autoincrement=False, index=True,
-        primary_key=True, nullable=False
+        db.Integer, db.ForeignKey('address.id', onupdate="CASCADE", ondelete="CASCADE")
     )
+    address = db.relationship('Address', backref=db.backref('children', lazy='dynamic'))
+
+    #def __init__(self, email, password, username, address_id):
+    #    self.username = username
+    #    self.email = email
+    #    self.password=password
+    #    self.address_id=address_id
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)  # python 3
 
     #addres = relationship("Addre", foreign_keys=[address_id], backref="user")
 
     def __repr__(self):
         return self.__str__()
 
-    def __str__(self):
-        return "<User(%(address_id)s, %(id)s)>" % self.__dict__
+    def __repr__(self):
+        return '<User %r>' % (self.username)
 
 
 class Product(db.Model):
 
-    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    id = db.Column(db.Integer, autoincrement=True, primary_key=True, nullable=False)  # pylint: disable=invalid-name
     name = db.Column(db.String(45))
     description = db.Column(db.String(200))
     imgurl = db.Column(db.String(45))
@@ -122,7 +143,7 @@ class UserHasUser(db.Model):
 
 class Address(db.Model):
 
-    id = db.Column(db.Integer, autoincrement=False, primary_key=True, nullable=False)  # pylint: disable=invalid-name
+    id = db.Column(db.Integer, primary_key=True)  # pylint: disable=invalid-name
     first_name = db.Column(db.String(45))
     last_name = db.Column(db.String(45))
     address = db.Column(db.String(45))
