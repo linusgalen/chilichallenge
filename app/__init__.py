@@ -38,10 +38,19 @@ class AuthException(HTTPException):
         ))
 
 admin = Admin(app, name='Admin Page')
+
+class ExtendedView(ModelView):
+    column_display_pk = True # optional, but I like to see the IDs in the list
+    column_hide_backrefs = False
+
+
+
 # Added all the tables currently in the models/app.db database. Run db_create.py if it doesn't exist.
-admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(Challenge, db.session))
-admin.add_view(ModelView(Order, db.session))
-admin.add_view(ModelView(Product, db.session))
-admin.add_view(ModelView(UserHasUser, db.session))
-admin.add_view(ModelView(Address, db.session))
+admin.add_view(ExtendedView(User, db.session))
+
+
+admin.add_view(ExtendedView(Challenge, db.session))
+admin.add_view(ExtendedView(Order, db.session))
+admin.add_view(ExtendedView(Product, db.session))
+admin.add_view(ExtendedView(UserHasUser, db.session))
+admin.add_view(ExtendedView(Address, db.session))
