@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_basicauth import BasicAuth
 from flask_admin import Admin
 from flask_admin.contrib import sqla
-
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -44,3 +44,12 @@ admin.add_view(ModelView(Challenge, db.session))
 admin.add_view(ModelView(Order, db.session))
 admin.add_view(ModelView(Product, db.session))
 admin.add_view(ModelView(UserHasUser, db.session))
+
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view =  "login"
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.filter(User.id==userid).first()
