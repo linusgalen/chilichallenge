@@ -1,0 +1,53 @@
+{% block content %}
+  <h1>Register</h1>
+  <form action="" method="post" name="login">
+      {{ form.hidden_tag() }}
+      <p>
+          Username:<br>
+          {{ form.username (size=80) }}<br>
+          {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          <p>
+          Name:<br>
+          {{ form.name (size=80) }}<br>
+          {% for error in form.name.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          <p>
+        Address:<br>
+          {{ form.address (size=80) }}<br>
+  {% for error in form.address.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          <p>
+          Zipcode:<br>
+          {{ form.zipcode (size=80) }}<br>
+  {% for error in form.zipcode.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          <p>
+          City:<br>
+          {{ form.city (size=80) }}<br>
+  {% for error in form.city.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          <p>
+          Email:<br>
+          {{ form.email (size=80) }}<br>
+  {% for error in form.email.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          <p>
+       Password:<br>
+          {{ form.password (size=80) }}<br>
+  {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+          {% endfor %}<br>
+          <p>
+
+      </p>
+      <p>{{ form.remember_me }} Remember Me</p>
+      <p><input type="submit" value="Sign In"></p>
+  </form>
+{% endblock %}
