@@ -1,13 +1,17 @@
+
 {% block content %}
+    <div> class="form-group"</div>
   <h1>Registrering</h1>
   <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
       <p>
+
           Användarnamn:<br>
-          {{ form.username (size=80) }}<br>
+          {{ form.username (size=80, placeholder="Användarnamn") }}<br>
           {% for error in form.username.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
+
           <p>
           Namn:<br>
           {{ form.name (size=80) }}<br>
