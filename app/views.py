@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
 from flask.ext.login import LoginManager
 import json
-from .forms import LoginForm
+from .forms import UserForm
 from .models import User
 
 
@@ -24,7 +24,7 @@ def load_user(id):
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
-    form = LoginForm()
+    form = UserForm()
 
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first_or_404()
@@ -43,10 +43,11 @@ def signout():
     return redirect(url_for('index'))
 
 @app.route('/register', methods=["GET", "POST"])
-def signup():
-    form =LoginForm()
+def register():
+    form =UserForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, password=form.password.data)
+        user = User(name=form.name.data,username=form.username.data,address=form.address.data,
+                    zipcode=form.zipcode.data,city=form.city.data,password=form.password.data)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('index'))

@@ -1,33 +1,33 @@
 {% block content %}
-  <h1>Register</h1>
+  <h1>Registrering</h1>
   <form action="" method="post" name="login">
       {{ form.hidden_tag() }}
       <p>
-          Username:<br>
+          Användarnamn:<br>
           {{ form.username (size=80) }}<br>
           {% for error in form.username.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
           <p>
-          Name:<br>
+          Namn:<br>
           {{ form.name (size=80) }}<br>
           {% for error in form.name.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
           <p>
-        Address:<br>
+        Adress:<br>
           {{ form.address (size=80) }}<br>
   {% for error in form.address.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
           <p>
-          Zipcode:<br>
+          Postnummer:<br>
           {{ form.zipcode (size=80) }}<br>
   {% for error in form.zipcode.errors %}
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
           <p>
-          City:<br>
+          Postort:<br>
           {{ form.city (size=80) }}<br>
   {% for error in form.city.errors %}
             <span style="color: red;">[{{ error }}]</span>
@@ -39,7 +39,7 @@
             <span style="color: red;">[{{ error }}]</span>
           {% endfor %}<br>
           <p>
-       Password:<br>
+       Lösenord:<br>
           {{ form.password (size=80) }}<br>
   {% for error in form.password.errors %}
             <span style="color: red;">[{{ error }}]</span>
@@ -47,7 +47,17 @@
           <p>
 
       </p>
-      <p>{{ form.remember_me }} Remember Me</p>
-      <p><input type="submit" value="Sign In"></p>
+{#     Bekräfta lösenord:<br>#}
+{#          {{ form.password (size=80) }}<br>#}
+{#  {% for error in form.password.errors %}#}
+{#            <span style="color: red;">[{{ error }}]</span>#}
+{#          {% endfor %}<br>#}
+{#          <p>#}
+{##}
+{#      </p>#}
+  <div>
+      <button id="button_cancel" type="button" class="btn btn-default">Cancel</button>
+      <input type="submit" value="Registrera">
+  </div>
   </form>
 {% endblock %}
