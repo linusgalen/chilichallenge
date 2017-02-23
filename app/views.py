@@ -2,7 +2,7 @@ from app import app, db, models
 from flask import render_template, request, session, url_for, flash, redirect, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 import json
 
 
