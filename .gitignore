@@ -1,7 +1,12 @@
+### INGORE
+
 ### Database ###
 *.db
+/db_repository/**
+
 
 ### ingore idea-map ###
+
 .idea/*
 
 ### Vitrual ###
@@ -202,7 +207,7 @@ celerybeat-schedule
 
 # virtualenv
 .venv
-venv/
+/venv/*
 ENV/
 
 # Spyder project settings
@@ -231,7 +236,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# Fix for the idea map: 
+# Fix for the idea map:
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
