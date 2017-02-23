@@ -11,13 +11,13 @@ product_list=[
     {
         'name': 'Chili el medio',
         'description': 'Den här chilin kommer ifrån har plockats med kärlek och kommer ge en stabil hetta i munnen',
-        'imgurl': 'https://cdn.pixabay.com/photo/2015/02/06/01/16/pepper-625626_960_720.jpg',
+        'imgurl': 'https://upload.wikimedia.org/wikipedia/commons/9/98/Red_Pepper_-_on_white.jpg',
         'price': 69
     },
     {
         'name': 'Chili el diablo',
         'description': 'Detta är inget för veklingar. Chili el diablo kommer ifrån El salvador och odlas av blinda munkar vilket gör den väldiigt exklusiv men ack så stark!',
-        'imgurl': 'https://cdn.pixabay.com/photo/2015/02/06/01/16/pepper-625626_960_720.jpg',
+        'imgurl': 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Habanero_peper.jpg',
         'price': 199
     }
 
