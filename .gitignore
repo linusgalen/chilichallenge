@@ -2,7 +2,8 @@
 
 ### Database ###
 *.db
-db_repository
+/db_repository/**
+
 
 ### ingore idea-map ###
 .idea/
@@ -206,7 +207,7 @@ celerybeat-schedule
 
 # virtualenv
 .venv
-venv/
+/venv/*
 ENV/
 
 # Spyder project settings
