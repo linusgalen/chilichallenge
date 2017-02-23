@@ -134,8 +134,8 @@ class UserHasUser(db.Model):
         primary_key=True, nullable=False
     )
 
-    #user = db.relationship("User", backref="userHasUser")
-    #user = db.relationship("User", backref="userHasUser")
+    user1 = db.relationship("User",  foreign_keys=[user_id1])
+    user2 = db.relationship("User",  foreign_keys=[user_id2])
 
     def __repr__(self):
         return '1:'+str(self.user_id1)+'2:'+str(self.user_id2)
