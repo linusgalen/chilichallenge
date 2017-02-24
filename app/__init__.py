@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_basicauth import BasicAuth
 from flask_admin import Admin
 from flask_admin.contrib import sqla
-
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config.from_object('config')
@@ -15,7 +15,7 @@ app.config['BASIC_AUTH_PASSWORD'] = 'admin'
 basic_auth = BasicAuth(app)
 
 from app import views, models
-## from models import User, Book, Contactpost
+from app.models import User, Challenge, Address, Order, Product, UserHasUser
 
 class ModelView(sqla.ModelView):
     def is_accessible(self):
@@ -38,6 +38,30 @@ class AuthException(HTTPException):
         ))
 
 admin = Admin(app, name='Admin Page')
-##admin.add_view(ModelView(User, db.session))
-##admin.add_view(ModelView(Book, db.session))
-##admin.add_view(ModelView(Contactpost, db.session))
+
+#With extended views forigen and primary keys will be visible in adminpage
+class ExtendedView(ModelView):
+    column_display_pk = True # optional, but I like to see the IDs in the list
+    column_hide_backrefs = False
+
+
+
+
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view =  "login"
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.query.filter(User.id==userid).first()
+
+
+# Added all the tables currently in the models/app.db database. Run db_create.py if it doesn't exist.
+
+admin.add_view(ExtendedView(User, db.session))
+admin.add_view(ExtendedView(Challenge, db.session))
+admin.add_view(ExtendedView(Order, db.session))
+admin.add_view(ExtendedView(Product, db.session))
+admin.add_view(ExtendedView(UserHasUser, db.session))
+admin.add_view(ExtendedView(Address, db.session))
