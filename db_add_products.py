@@ -4,7 +4,7 @@ from app.models import Product
 product_list=[
     {
         'name': 'Svag Röd Chili',
-        'description': 'Den har chilin kommer ifran den morkaste djungeln och har plockats med karlek. Perfekt för nyborjaren',
+        'description': 'Den har chilin kommer ifran den morkaste djungeln och har plockats med karlek. Perfekt for nyborjaren',
         'imgurl':'http://www.publicdomainpictures.net/pictures/10000/velka/1-1248162429KMBk.jpg',
         'price' : 59
     },
