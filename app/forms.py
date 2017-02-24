@@ -11,3 +11,11 @@ class UserForm(Form):
     zipcode    = IntegerField('Zipcode', validators=[DataRequired()])
     city = StringField('City', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
+
+class Address_form(Form):
+    first_name = StringField('First name', validators=[DataRequired()])
+    last_name = StringField('Last name', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    zipcode = IntegerField('Zipcode', validators=[DataRequired()])
+    city = StringField('City', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])

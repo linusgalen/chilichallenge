@@ -4,8 +4,8 @@ from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
 from flask.ext.login import LoginManager
 import json
-from .forms import UserForm
-from .models import User, Product
+from .forms import UserForm, Address_form
+from .models import User, Product, UserHasUser
 
 
 @app.route('/')
@@ -56,7 +56,19 @@ def register():
 
 
 @app.route('/select', methods=["GET"])
-def select_chili():
+def select_friend():
     product_list = Product.query.all()
     return render_template('select_chili.html',
                            product_list=product_list)
+
+
+@app.route('/select_friend', methods=["GET", "POST"])
+def select_chili():
+    address_form=Address_form()
+    #TODO: get global user and get the friends
+    #friend_list=UserHasUser.
+    if address_form.validate_on_submit():
+        redirect('/index')
+
+    return render_template('select_friend.html',
+                           adress_form=address_form)
