@@ -29,8 +29,8 @@
             position: relative;
         }
 
-        #Hem {padding-top:50px;height:700px;color: #fff; background-color: #1E88E5;}
-        #Om {padding-top:50px;height:700px;color: #fff; background-color: #673ab7;}
+        #Hem {padding-top:50px;height:700px;color: #fff; background-color: #ff8a84;}
+        #Om {padding-top:50px;height:700px;color: #fff; background-color: #eae5d0;}
 
     </style>
 
@@ -40,9 +40,8 @@
 
 <body data-spy = "scroll" data-target = ".navbar" data-offset = "50">
 
-    <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=
                         "#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -55,30 +54,31 @@
                 <a class="navbar-brand" href="#">ChiliChallange</a>
             </div>
             <div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Hem <span class="sr-only">(current)</span></a></li>
-
-                        <li><a href="#">Om</a></li ></ul>
+                        <li><a href="#Hem">Hem</a></li>
+                        <li><a href="#Om">Om</a></li>
+                    </ul>
 
                     <ul class="nav navbar-nav navbar-right">
                         <li > <a href="#">Logga In</a> </li>
                     </ul>
 
                 </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
+            </div>
+        </div><!-- /.container-fluid -->
     </nav>
+
 
 {% endblock %}
 
-<div id="Hem" class=""container-fluid">
+<div id="Hem" class="container-fluid">
     <h1>Hem testing testing</h1>
     <p>HEJEHEJEHJJEJEHEHEH
     Gåt det att scrollaaaaaa? </p>
 </div>
 
-<div id="Om" class=""container-fluid">
+<div id="Om" class="container-fluid">
     <h1>Om testing testing</h1>
     <p>HEJEHEJEHJJEJEHEHEH
     Gåt det att scrollaaaaaa? </p>
@@ -87,9 +87,11 @@
 <div class="content">
 
     {% block content %}
+
     {% endblock %}
 
-</div >
+</div>
 
 </body>
+
 </html>
