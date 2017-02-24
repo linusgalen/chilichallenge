@@ -5,7 +5,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 from flask.ext.login import LoginManager
 import json
 from .forms import UserForm
-from .models import User
+from .models import User, Product
 
 
 @app.route('/')
@@ -53,3 +53,10 @@ def register():
         return redirect(url_for('index'))
 
     return render_template('register.html', form=form)
+
+
+@app.route('/select', methods=["GET"])
+def select_chili():
+    product_list = Product.query.all()
+    return render_template('select_chili.html',
+                           product_list=product_list)
