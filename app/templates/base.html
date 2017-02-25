@@ -29,16 +29,19 @@
             position: relative;
         }
 
-        #Hem {padding-top:50px;height:700px;color: #fff; background-color: #ff8a84;}
-        #Om {padding-top:50px;height:700px;color: #fff; background-color: #eae5d0;}
+        #home {padding-top:50px; height:700px; color: #fff; background-color: #ff8a84;}
+        #about {padding-top:50px; height:700px; color: #fff; background-color: #eae5d0;}
+        #the_end {padding-top:10px; height:200px; color: #fff; background-color: #ff8a84;}
 
     </style>
 
 </head>
 
-{% block nav %}
 
-<body data-spy = "scroll" data-target = ".navbar" data-offset = "50">
+
+<body data-spy = "scroll" data-target = "navbar" data-offset = "50">
+
+{% block nav %}
 
 <nav class="navbar navbar-default navbar-fixed-top" id="navbar">
         <div class="container-fluid">
@@ -56,8 +59,8 @@
             <div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="#Hem">Hem</a></li>
-                        <li><a href="#Om">Om</a></li>
+                        <li><a href="#home">Hem</a></li>
+                        <li><a href="#about">Om</a></li>
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
@@ -70,18 +73,34 @@
     </nav>
 
 
+{#    <nav class ="navbar navbar-default navbar-fixed-bottom" id="foot">#}
+{#        <div class = "container-fluid">#}
+{#            <div class="container">#}
+{#                <h2>THIS IS THE END BRO</h2>#}
+{#            </div>#}
+{#        </div>#}
+{#    </nav>#}
+
+
+
 {% endblock %}
 
-<div id="Hem" class="container-fluid">
-    <h1>Hem testing testing</h1>
-    <p>HEJEHEJEHJJEJEHEHEH
-    Gåt det att scrollaaaaaa? </p>
+<div id="home" class="container-fluid">
+    <h1>Hem</h1>
+    <p>Testing Testing Testing</p>
 </div>
 
-<div id="Om" class="container-fluid">
-    <h1>Om testing testing</h1>
-    <p>HEJEHEJEHJJEJEHEHEH
-    Gåt det att scrollaaaaaa? </p>
+<div id="about" class="container-fluid">
+    <h1>Om</h1>
+    <p>Testing Testing Testing Testing </p>
+</div>
+
+<div id="the_end" class="containter-fluid">
+    <h2>THIS IS THE END BRO</h2>
+    <p>   </p>
+    <p>Längst ned på sidan innehåll. Contact osv osv osv osv. </p>
+    <p>    </p>
+    <p>Copyright ChiliChallange.</p>
 </div>
 
 <div class="content">
