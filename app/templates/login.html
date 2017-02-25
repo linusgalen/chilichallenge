@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="container center_div">
+        <div class="form-group" action="" method="post" name="login">
+            <form class="form-inline" action="" method="post" name="login">
+                <h1 class="col-sm-10">Logga in</h1>
+
+                {{ form.hidden_tag() }}
+
+                <div class="col-sm-10">
+                    {{ form.username (size=20, placeholder="Användarnamn", class="form-control") }}
+                    {% for error in form.username.errors %}
+                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                        <span style="color: red;">{{ error }} </span>
+                    {% endfor %}<br><br>
+                </div>
+
+                <div class="col-sm-10">
+                    {{ form.password (size=40, placeholder="Lösenord", class="form-control") }}
+                    {% for error in form.password.errors %}
+                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                        <span style="color: red;">{{ error }} </span>
+                    {% endfor %}<br><br>
+                </div>
+
+                <div class="col-sm-10">
+                    <p>{{ form.remember_me }} Remember Me</p>
+                    <p><input type="submit" value="Sign In" class="btn btn-default"></p>
+                    Har du inget konto?
+                    <a href="/register" >Registrera dig </a>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
