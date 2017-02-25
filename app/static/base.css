@@ -2,5 +2,29 @@
 
 #thenavbar{
     opacity: 0.5;
+}
 
+body {
+    position: relative;
+}
+
+#home {
+    padding-top: 50px;
+    height: 700px;
+    color: #fff;
+    background-color: #ff8a84;
+}
+
+#about {
+    padding-top: 50px;
+    height: 700px;
+    color: #fff;
+    background-color: #eae5d0;
+}
+
+#the_end {
+    padding-top: 10px;
+    height: 200px;
+    color: #fff;
+    background-color: #ff8a84;
 }
