@@ -15,6 +15,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -22,7 +23,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
     <![endif]-->
-
 
     <style>
         body {
@@ -43,21 +43,20 @@
 <body data-spy = "scroll" data-target = ".navbar" data-offset = "50">
 
 
-<nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+<nav class="navbar navbar-default navbar-fixed-top" id="thenavbar">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=
-                        "#bs-example-navbar-collapse-1" aria-expanded="false">
+                        "#thenavbar" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-
                 </button>
                 <a class="navbar-brand" href="#">ChiliChallange</a>
             </div>
             <div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse" id="thenavbar">
                     <ul class="nav navbar-nav">
                         <li><a href="#home">Hem</a></li>
                         <li><a href="#about">Om</a></li>
@@ -67,21 +66,10 @@
                         <li > <a href="#">Logga In</a> </li>
                     </ul>
 
-                </div><!-- /.navbar-collapse -->
+                </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </nav>
-
-
-{#    <nav class ="navbar navbar-default navbar-fixed-bottom" id="foot">#}
-{#        <div class = "container-fluid">#}
-{#            <div class="container">#}
-{#                <h2>THIS IS THE END BRO</h2>#}
-{#            </div>#}
-{#        </div>#}
-{#    </nav>#}
-
-
 
 {% endblock %}
 
@@ -96,12 +84,13 @@
 </div>
 
 <div id="the_end" class="containter-fluid">
-    <h2>THIS IS THE END BRO</h2>
+    <h2 style="text-align: center">THIS IS THE END BRO</h2>
     <p>   </p>
-    <p>Längst ned på sidan innehåll. Contact osv osv osv osv. </p>
+    <p style="text-align: center"> Längst ned på sidan innehåll. Contact osv osv osv osv. </p>
     <p>    </p>
-    <p>Copyright ChiliChallange.</p>
+    <p style="text-align: center"> Copyright ChiliChallange.</p>
 </div>
+
 
 <div class="content">
 
