@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="user" class="media">
+    {% for product in product_list %}
+    <div class="media-body">
+
+            <h4 class="media-heading">{{ product.name }}</h4>
+            <b>Email: </b> <h2></h2>
+            <b>Namn: </b> <h2> </h2>
+        </div>
+{% endfor %}
+</div>
+
+{% endblock %}
