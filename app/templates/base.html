@@ -25,6 +25,17 @@
 
 </head>
 
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+
 {% block nav %}
 
 <body data-spy = "scroll" data-target = ".navbar" data-offset = "50">
