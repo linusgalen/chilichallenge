@@ -63,6 +63,7 @@ def select_chili():
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
+
     # if load_user!=None:
     #     return redirect (url_for('login'))
     # else:
