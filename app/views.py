@@ -56,6 +56,11 @@ def register():
 
 @app.route('/checkout')
 def checkout():
+    
+    #should 1: retreive product data from the database.
+    #should 2: send this data as a parameter to the template renderer.
+    #should 3: compute price here, and send it in to template rendered for display.
+
     return render_template('checkout.html')
 
 @app.route('/charge', methods=['POST'])
