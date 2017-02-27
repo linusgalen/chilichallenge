@@ -91,3 +91,13 @@ def select_chili():
     product_list = Product.query.all()
     return render_template('select_chili.html',
                            product_list=product_list)
+
+@app.route('/profile', methods=["GET", "POST"])
+def profile_page():
+    if load_user!=None:
+        return redirect(url_for('login'))
+    else:
+        current_user=User.query.get(int(id))
+
+    return render_template('profile_page.html',
+                           current_user=current_user)
