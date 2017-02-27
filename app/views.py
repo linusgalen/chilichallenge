@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
 from flask_login import LoginManager
 import json
-from .forms import UserForm, Address_form
+from .forms import UserForm, AddressForm
 from .models import User, Product, UserHasUser
 
 
@@ -64,11 +64,23 @@ def select_friend():
 
 @app.route('/select_friend', methods=["GET", "POST"])
 def select_chili():
-    address_form=Address_form()
+    address_form=AddressForm()
     #TODO: get global user and get the friends
     #friend_list=UserHasUser.
     if address_form.validate_on_submit():
         redirect('/index')
 
     return render_template('select_friend.html',
+                           adress_form=address_form)
+
+@app.route('/checkout', methods=["GET", "POST"])
+def checkout():
+    product_list = Product.query.all()
+    address_form=AddressForm()
+
+
+
+
+    return render_template('checkout_process.html',
+                           product_list=product_list,
                            adress_form=address_form)
