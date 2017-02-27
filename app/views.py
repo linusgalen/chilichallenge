@@ -28,17 +28,40 @@ def load_user(id):
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('index'))
+    print("Tjena")
     form = RegisterForm()
-
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first_or_404()
-        if user.is_correct_password(form.password.data):
-            login_user(user)
+        print("Tjena2")
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(Username=username, Password=password).first()
 
+        if user is not None:
+            print("Inne i det godkända")
+            login_user(user)
+            flash('Logged in successfully.')
+            session['remember_me'] = form.remember_me.data
             return redirect(url_for('index'))
         else:
-            return redirect(url_for('login'))
-    return render_template('login.html', form=form)
+            print("Inne i det ej godkända")
+            flash("Username or password incorrect!")
+            return render_template('login.html',
+                                   title='Sign In',
+                                   form=form)
+
+    return render_template('login.html',
+                       title='Logga in',
+                       form=form)
+# if user.is_correct_password(password):
+
+
+# else:
+#flash('Fel användarnamn eller lösenord')
+#return redirect(url_for('login'))
+
+
 
 @app.route('/signout')
 def signout():
