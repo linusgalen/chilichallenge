@@ -63,10 +63,11 @@ def select_chili():
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
-    if load_user!=None:
-        return render_template redirect (url_for('/login'))
-        else
-        current_user=User.query.get(int(id))
+    # if load_user!=None:
+    #     return redirect (url_for('login'))
+    # else:
 
-    return render_template('profile_page.html',
-                           current_user=current_user)
+  #  current_user=User.query.get(int(id))
+
+    return render_template('profile_page.html')
+ #                          current_user=current_user)

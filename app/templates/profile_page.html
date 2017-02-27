@@ -10,13 +10,25 @@
 {% endblock %}
 
 {% block content %}
-
-<div id="user" class="media">
+<ul id="user_info" class="media-list">
+    <div id="user" class="media">
         <div class="media-body">
             <h4 class="media-heading">Välkommen till din profilsida!</h4>
             <b>Email: </b> <h2> {{ current_user.email }}</h2>
-            <b>Namn: </b> <h2> {{ current_user.username }}</h2>
+            <b>Username: </b> <h2> {{ current_user.username }}</h2>
+
+            <b>Adress: </b>
+            <address>
+                <b> {{ current_user.first_name }} {{ current_user.last_name }} </b>
+                <h2>{{ current_user.address }}</h2>
+                <h2>{{ current_user.zip }} {{ current_user.city }}</h2>
+            </address>
         </div>
 </div>
+</ul>
+
+    <p>
+        <button class="btn btn-large btn-primary" type="button">Ändra uppgifter</button>
+    </p>
 
 {% endblock %}
