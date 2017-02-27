@@ -50,11 +50,10 @@ def signout():
 def register():
     form =RegisterForm()
     if form.validate_on_submit():
-        address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data, zip=form.zip.data, city=form.city.data )
+        address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data, zip=form.zip.data, city=form.city.data , email=form.email.data)
         db.session.add(address)
-        address_id = form.address.id
         db.session.commit()
-        user = User(username=form.username.data, password=form.password.data, email=form.email.data, address_id=form.address.data)
+        user = User(username=form.username.data, password=form.password.data, email=form.email.data, address_id=address.id )
         db.session.add(user)
         db.session.commit()
 
