@@ -77,6 +77,11 @@ def select_chili():
 def checkout():
     product_list = Product.query.all()
     address_form=AddressForm()
+    address_form.product_id.choices=[(product.id, 'Välj') for product in product_list]
+
+    if 'product_radio' in request.form:
+        selected_product=request.form['product_radio']
+        print(selected_product)
 
 
 

@@ -45,12 +45,11 @@
                         </ul>
                     </div>
 
-                    <form role="form">
+                    <form role="form" method="post" id="checkout_from">
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="step1">
                                 <h3>Select chili</h3>
-
-                                <div class="row">
+                                <div class="row" data-toggle="buttons">
                                     {% for product in product_list %}
                                         <div class="col-xs-6 col-md-3">
                                             <div class="thumbnail">
@@ -59,11 +58,9 @@
                                                     <h3>{{ product.name }}</h3>
                                                     <p>{{ product.description }}</p>
                                                     <p style="color: darkred" >Pris: {{ product.price }}</p>
-
                                                     <p>
-                                                        <label class="btn btn-primary">
-                                                            Välj
-                                                            <input type="radio" name="select_product" value="{{ product.id }}" hidden>
+                                                        <label class="btn btn-primary" for="product_radio_{{ product.id }}">
+                                                            <input type="radio" id="product_radio_{{ product.id }}" name="product_radio" value="{{ product.id }}" autocomplete="off" hidden> Välj
                                                         </label>
                                                         <a href="#" class="btn btn-default" role="button">Mer info</a>
                                                     </p>
@@ -74,13 +71,13 @@
                                 </div>
 
 
-                                <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                <ul id="next1_button" class="list-inline pull-right" hidden>
+                                    <li><button  type="button" class="btn btn-primary next-step">Nästa</button></li>
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="step2">
                                 <h3>Step 2</h3>
-                                <p>This is step 2</p>
+                                <p id="">This is step 2</p>
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                                     <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>

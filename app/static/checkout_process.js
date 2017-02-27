@@ -26,6 +26,12 @@ $(document).ready(function () {
         prevTab($active);
 
     });
+
+     $('input[type=radio][name=product_radio]').change(function() {
+        console.log(this.value)
+        $('#next1_button').show()
+    });
+
 });
 
 function nextTab(elem) {
