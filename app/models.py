@@ -63,7 +63,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)  # pylint: disable=invalid-name
     name = db.Column(db.String(45))
     description = db.Column(db.String(200))
-    imgurl = db.Column(db.String(45))
+    imgurl = db.Column(db.String(120))
     price = db.Column(db.String(45))
 
     #One-to-Many relationship

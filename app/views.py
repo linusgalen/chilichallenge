@@ -2,10 +2,10 @@ from app import app, db, models
 from flask import render_template, request, session, url_for, flash, redirect, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
-from flask.ext.login import LoginManager
+from flask_login import LoginManager
 import json
 from .forms import UserForm
-from .models import User
+from .models import User, Product
 
 
 @app.route('/')
@@ -54,9 +54,10 @@ def register():
 
     return render_template('register.html', form=form)
 
+
 @app.route('/checkout')
 def checkout():
-    
+
     #should 1: retreive product data from the database.
     #should 2: send this data as a parameter to the template renderer.
     #should 3: compute price here, and send it in to template rendered for display.
@@ -84,3 +85,9 @@ def charge():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+@app.route('/select', methods=["GET"])
+def select_chili():
+    product_list = Product.query.all()
+    return render_template('select_chili.html',
+                           product_list=product_list)
