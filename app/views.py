@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
 from flask_login import LoginManager
 import json
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from .models import User, Product, Address
 
 @app.before_request
@@ -30,22 +30,18 @@ def load_user(id):
 def login():
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
-    print("Tjena")
-    form = RegisterForm()
+    form = LoginForm()
     if form.validate_on_submit():
-        print("Tjena2")
         username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(Username=username, Password=password).first()
+        user = User.query.filter_by(username=username, password=password).first()
 
         if user is not None:
-            print("Inne i det godkända")
             login_user(user)
             flash('Logged in successfully.')
             session['remember_me'] = form.remember_me.data
             return redirect(url_for('index'))
         else:
-            print("Inne i det ej godkända")
             flash("Username or password incorrect!")
             return render_template('login.html',
                                    title='Sign In',
@@ -67,7 +63,7 @@ def login():
 def signout():
     logout_user()
 
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
