@@ -1,12 +1,12 @@
 from app import app, db, models
-from flask import render_template, request, session, url_for, flash, redirect, jsonify
+from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
 from flask_login import LoginManager
 import json
 from .forms import UserForm
 from .models import User, Product
-
+import logging
 
 @app.route('/')
 @app.route('/index')
@@ -56,18 +56,22 @@ def register():
 
 
 @app.route('/checkout')
+#an input parameter to this function MUST be some kind of order ID
 def checkout():
+    logging.warning("hej") #just testing som stuff.
 
+    amount = 1000
     #should 1: retreive product data from the database.
     #should 2: send this data as a parameter to the template renderer.
     #should 3: compute price here, and send it in to template rendered for display.
 
-    return render_template('checkout.html')
+    return render_template('checkout.html', amount = amount)
 
 @app.route('/charge', methods=['POST'])
 def charge():
     # Amount in cents
-    amount = 500
+    amount = 10000
+    username = g.user.username
 
     customer = stripe.Customer.create(
         email='customer@example.com',
