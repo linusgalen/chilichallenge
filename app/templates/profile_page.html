@@ -1,3 +1,22 @@
 
 {% extends "base.html" %}
 
+{% block nav %}
+    {{super()}}
+{% endblock %}
+
+{% block foot %}
+    {{ super()}}
+{% endblock %}
+
+{% block content %}
+
+<div id="user" class="media">
+        <div class="media-body">
+            <h4 class="media-heading">Välkommen till din profilsida!</h4>
+            <b>Email: </b> <h2> {{ current_user.email }}</h2>
+            <b>Namn: </b> <h2> {{ current_user.username }}</h2>
+        </div>
+</div>
+
+{% endblock %}
