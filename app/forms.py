@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField, BooleanField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, IntegerField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Email
 
 class RegisterForm(Form):
@@ -20,6 +20,8 @@ class AddressForm(Form):
     city = StringField('City', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     product_id = SelectField('Product id')
+    message = TextAreaField('Personal message to friend', validators=[DataRequired()])
+
 
 
 class LoginForm(Form):
