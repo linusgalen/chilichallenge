@@ -104,9 +104,9 @@ def aboutchili():
     product=product_list
     return render_template('aboutchili.html',
                            product_list=product)
-
-@app.route('/aboutchili/<int: product_id>')
-def product(product_id):
-    product =db.session.query(Product).get(product_id).seralize
-    return jsonify(product)
+#
+# @app.route('/aboutchili/<int: product_id>')
+# def product(product_id):
+#     product =db.session.query(Product).get(product_id).seralize
+#     return jsonify(product)
 
