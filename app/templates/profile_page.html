@@ -19,9 +19,9 @@
 
             <b>Adress: </b>
             <address>
-                <b> {{ current_user.first_name }} {{ current_user.last_name }} </b>
-                <h2>{{ current_user.address }}</h2>
-                <h2>{{ current_user.zip }} {{ current_user.city }}</h2>
+                <b> {{ current_address.first_name }} {{ current_address.last_name }} </b>
+                <h2>{{ current_address.address }}</h2>
+                <h2>{{ current_address.zip }} {{ current_address.city }}</h2>
             </address>
         </div>
 </div>
@@ -31,4 +31,25 @@
         <button class="btn btn-large btn-primary" type="button">Ändra uppgifter</button>
     </p>
 
+<div class="container">
+  <h2>Dina ordrar</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Namn</th>
+        <th>Produkt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2017</td>
+        <td>du är</td>
+        <td>Hot hot hotie</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 {% endblock %}
+
