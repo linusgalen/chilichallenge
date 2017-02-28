@@ -68,7 +68,7 @@ def profile_page():
     #     return redirect (url_for('login'))
     # else:
 
-  #  current_user=User.query.get(int(id))
+    current_user=User.query.get(int(id))
 
-    return render_template('profile_page.html')
- #                          current_user=current_user)
+    return render_template('profile_page.html',
+                           current_user=current_user)
