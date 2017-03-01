@@ -32,7 +32,7 @@
     </p>
 
 <div class="container">
-  <h2>Dina ordrar</h2>
+  <h2>Dina löjliga ordrar</h2>
   <table class="table">
     <thead>
       <tr>
@@ -42,11 +42,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+    <tr>
         <td>2017</td>
         <td>du är</td>
         <td>Hot hot hotie</td>
       </tr>
+    {% for challenge in challenge_list %}
+      <tr>
+        <td>{{challenge.datetime}}</td>
+        <td>{{}}</td>
+        <td>Hot hot hotie</td>
+      </tr>
+    {% endfor %}
     </tbody>
   </table>
 </div>

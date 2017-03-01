@@ -94,8 +94,9 @@ def profile_page():
     #     return redirect (url_for('login'))
     # else:
     current_address = Address.query.filter_by(id = g.user.address_id).first();
-    #Here are we <3 gullungar
-    user_orders = Challenge.query.filter(user_id = g.user.id);
+    challenge_list = Challenge.query.filter_by(user_id = g.user.id).all();
+
     return render_template('profile_page.html',
                            current_user = g.user,
-                           current_address = current_address)
+                           current_address = current_address,
+                           challenge_list = challenge_list)
