@@ -92,17 +92,6 @@ def register():
     return render_template('register.html', form=form)
 
 
-@app.route('/checkout1')
-#an input parameter to this function MUST be some kind of order ID
-def checkout1():
-    logging.warning("hej") #just testing som stuff.
-
-    amount = 1000
-    #should 1: retreive product data from the database.
-    #should 2: send this data as a parameter to the template renderer.
-    #should 3: compute price here, and send it in to template rendered for display.
-
-    return render_template('checkout.html', amount = amount)
 
 @app.route('/charge', methods=['POST'])
 def charge():
@@ -152,6 +141,7 @@ def checkout():
     product_list = Product.query.all()
     address_form=AddressForm()
     address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
+    amount = 1000;
 
     if 'product_radio' in request.form:
         selected_product=request.form['product_radio']
@@ -162,7 +152,7 @@ def checkout():
 
     return render_template('checkout_process.html',
                            product_list=product_list,
-                           adress_form=address_form)
+                           adress_form=address_form, amount=amount)
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():

@@ -152,6 +152,21 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="complete">
+
+                              <form action="/charge" method="post">
+                                <article>
+                                  <label>
+                                    <span>Total amount is ${{ amount / 100 }}</span>
+                                  </label>
+                                </article>
+
+                                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="{{ key }}"
+                                        data-description="A Flask Charge"
+                                        data-amount= {{ amount }}
+                                        data-locale="auto"></script>
+                              </form>
+
                                 <h3>Complete</h3>
                                 <p>You have successfully completed all steps.</p>
 
