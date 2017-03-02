@@ -101,12 +101,11 @@ def profile_page():
 @app.route('/aboutchili', methods=["GET"])
 def aboutchili():
     product_list = Product.query.all()
-    product=product_list
     return render_template('aboutchili.html',
-                           product_list=product)
-#
-# @app.route('/aboutchili/<int: product_id>')
-# def product(product_id):
-#     product =db.session.query(Product).get(product_id).seralize
-#     return jsonify(product)
+                           product_list=product_list)
+
+@app.route('/aboutchili/<int:product_id>')
+def product(product_id):
+    product =db.session.query(Product).get(product_id).seralize
+    return jsonify(product)
 
