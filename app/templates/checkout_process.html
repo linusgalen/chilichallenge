@@ -152,16 +152,65 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="complete">
-                                <h3>Complete</h3>
-                                <p>You have successfully completed all steps.</p>
-                                <p id="order_note">Pris:</p>
+
+
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Produktdetaljer</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Produkt</th>
+                                                    <th>Pris</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td id="confirm_product_name"></td>
+                                                    <td id="confirm_product_price"></td>
+                                                    <td>
+                                                        <img src="" id="confirm_product_img">
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Chilin kommer skickas till</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="confirm_address"></div>
+                                        <div id="confirm_zipcode"></div>
+                                        <div id="confirm_city"></div>
+
+
+                                    </div>
+                                </div>
+
+                                <form action="/charge" method="post">
+                                    <script id="stripe_script" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="{{ key }}"
+                                            data-description="A Flask Charge"
+                                            data-amount= 10000
+                                            data-locale="auto"></script>
+                                </form>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
-                    </form>
+                        <div class="clearfix"></div>
                 </div>
-            </section>
+                </form>
         </div>
+        </section>
+    </div>
     </div>
 
 

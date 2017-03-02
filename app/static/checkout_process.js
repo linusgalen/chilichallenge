@@ -55,10 +55,28 @@ $(document).ready(function () {
         values['product_price']=$('#product_price_'+product_id).text();
         values['product_img']=$('#product_img_'+product_id).attr('src');
         values['product_description']=$('#product_description_'+product_id).text();
+        values['product_name']=$('#product_name_'+product_id).text();
 
-        $('#order_note').clearData();
 
-        $('#order_note').append(values['product_price']);
+        $('#confirm_product_img').empty();
+        $('#confirm_product_price').empty();
+        $('#confirm_product_name').empty();
+        $('#confirm_address').empty();
+        $('#confirm_city').empty();
+        $('#confirm_zipcode').empty();
+
+
+
+        $('#confirm_product_img').append(values['product_img']);
+        $('#confirm_product_price').append(values['product_price']);
+        $('#confirm_product_name').append(values['product_name']);
+
+        $('#confirm_address').append(values['address']);
+        $('#confirm_zipcode').append(values['zipcode']);
+        $('#confirm_city').append(values['city']);
+
+        $('#stripe_script').attr('data-amount', values['product_price']);
+
 
         console.log(values);
     });
