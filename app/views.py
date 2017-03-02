@@ -96,6 +96,7 @@ def profile_page():
     current_address = Address.query.filter_by(id = g.user.address_id).first();
     challenge_list = Challenge.query.filter_by(user_id = g.user.id).all();
 
+
     return render_template('profile_page.html',
                            current_user = g.user,
                            current_address = current_address,
