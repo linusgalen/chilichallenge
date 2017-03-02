@@ -5,10 +5,11 @@ from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
 import json
 
-
+from .models import User, Product, Address, Challenge
 from .models import User, Product, UserHasUser
 from .forms import RegisterForm, LoginForm, AddressForm
-from .models import User, Product, Address
+
+
 
 @app.before_request
 def before_request():
@@ -122,13 +123,18 @@ def checkout():
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
-    if load_user!=None:
-        return redirect(url_for('login'))
-    else:
-        current_user=User.query.get(int(id))
+
+    # if load_user!=None:
+    #     return redirect (url_for('login'))
+    # else:
+    current_address = Address.query.filter_by(id = g.user.address_id).first();
+    challenge_list = Challenge.query.filter_by(user_id = g.user.id).all();
+
 
     return render_template('profile_page.html',
-                           current_user=current_user)
+                           current_user = g.user,
+                           current_address = current_address,
+                           challenge_list = challenge_list)
 
 
 @app.route('/aboutchili', methods=["GET"])
