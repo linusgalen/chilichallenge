@@ -136,3 +136,17 @@ def profile_page():
                            current_address = current_address,
                            challenge_list = challenge_list)
 
+
+@app.route('/aboutchili', methods=["GET"])
+def aboutchili():
+    product_list = Product.query.all()
+    return render_template('aboutchili.html',
+                           product_list=product_list)
+
+
+@app.route('/aboutchili/<int:product_id>')
+def product(product_id):
+    product =db.session.query(Product).get(product_id).seralize
+    return jsonify(product)
+
+
