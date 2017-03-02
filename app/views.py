@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from app import app, db, models
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
@@ -177,4 +179,3 @@ def aboutchili():
 def product(product_id):
     product =db.session.query(Product).get(product_id).seralize
     return jsonify(product)
-
