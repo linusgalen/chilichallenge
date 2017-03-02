@@ -54,6 +54,7 @@
                                 {% endblock %}
 
 
+
                                 <ul id="next1_button" class="list-inline pull-right" hidden>
                                     <li><button  type="button" class="btn btn-primary next-step">Nästa</button></li>
                                 </ul>
@@ -61,55 +62,53 @@
                             <div class="tab-pane" role="tabpanel" id="step2">
                                 <h3>Step 2</h3>
                                 <div class="container center_div">
-                                    <form class="form-inline" action="" method="post" name="shipping_address">
-                                        <h1 class="col-sm-10">Skriv in vem som ska frå utmaningen</h1>
+                                    <h1 class="col-sm-10">Skriv in vem som ska frå utmaningen</h1>
 
-                                        {{ adress_form.hidden_tag() }}
+                                    {{ adress_form.hidden_tag() }}
 
-                                        <div class="col-sm-10">
-                                            {{ adress_form.email (size=20, placeholder="Din email för kvitto", class="form-control") }}
-                                            {% for error in adress_form.email.errors %}
-                                                <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                                <span style="color: red;">{{ error }} </span>
-                                            {% endfor %}<br><br>
-                                        </div>
+                                    <div class="col-sm-10">
+                                        {{ adress_form.email (size=20, placeholder="Din email för kvitto", class="form-control", id="checkout_email") }}
+                                        {% for error in adress_form.email.errors %}
+                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                                            <span style="color: red;">{{ error }} </span>
+                                        {% endfor %}<br><br>
+                                    </div>
 
-                                        <div class="col-sm-10">
-                                            {{ adress_form.first_name (size=20, placeholder="Förnamn", class="form-control") }}
-                                            {% for error in adress_form.first_name.errors %}
-                                                <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                                <span style="color: red;">{{ error }} </span>
-                                            {% endfor %}<br><br>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            {{ adress_form.last_name (size=40, placeholder="Efternamn", class="form-control") }}
-                                            {% for error in adress_form.last_name.errors %}
-                                                <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                                <span style="color: red;">{{ error }} </span>
-                                            {% endfor %}<br><br>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            {{ adress_form.address (size=40, placeholder="Gatuadress", class="form-control") }}
-                                            {% for error in adress_form.address.errors %}
-                                                <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                                <span style="color: red;">{{ error }} </span>
-                                            {% endfor %}<br><br>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            {{ adress_form.zipcode (size=40, placeholder="Postnummer", class="form-control", type="number", maxlength="5") }}
-                                            {% for error in adress_form.zipcode.errors %}
-                                                <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                                <span style="color: red;">{{ error }} </span>
-                                            {% endfor %}<br><br>
-                                        </div>
-                                        <div class="col-sm-10">
-                                            {{ adress_form.city (size=40, placeholder="Stad", class="form-control") }}
-                                            {% for error in adress_form.city.errors %}
-                                                <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                                <span style="color: red;">{{ error }} </span>
-                                            {% endfor %}<br><br>
-                                        </div>
-                                    </form>
+                                    <div class="col-sm-10">
+                                        {{ adress_form.first_name (size=20, placeholder="Förnamn", class="form-control", id="checkout_first_name") }}
+                                        {% for error in adress_form.first_name.errors %}
+                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                                            <span style="color: red;">{{ error }} </span>
+                                        {% endfor %}<br><br>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        {{ adress_form.last_name (size=40, placeholder="Efternamn", class="form-control", id="checkout_last_name") }}
+                                        {% for error in adress_form.last_name.errors %}
+                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                                            <span style="color: red;">{{ error }} </span>
+                                        {% endfor %}<br><br>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        {{ adress_form.address (size=40, placeholder="Gatuadress", class="form-control", id="checkout_address") }}
+                                        {% for error in adress_form.address.errors %}
+                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                                            <span style="color: red;">{{ error }} </span>
+                                        {% endfor %}<br><br>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        {{ adress_form.zipcode (size=40, placeholder="Postnummer", class="form-control", type="number", maxlength="5", id="checkout_zip") }}
+                                        {% for error in adress_form.zipcode.errors %}
+                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                                            <span style="color: red;">{{ error }} </span>
+                                        {% endfor %}<br><br>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        {{ adress_form.city (size=40, placeholder="Stad", class="form-control", id="checkout_city") }}
+                                        {% for error in adress_form.city.errors %}
+                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                                            <span style="color: red;">{{ error }} </span>
+                                        {% endfor %}<br><br>
+                                    </div>
                                 </div>
 
                                 <ul class="list-inline pull-right">
@@ -135,14 +134,67 @@
                                 </ul>
                             </div>
                             <div class="tab-pane" role="tabpanel" id="complete">
-                                <h3>Complete</h3>
-                                <p>You have successfully completed all steps.</p>
+
+
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Produktdetaljer</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Produkt</th>
+                                                    <th>Pris</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td id="confirm_product_name"></td>
+                                                    <td id="confirm_product_price"></td>
+                                                    <td>
+                                                        <img src="" id="confirm_product_img">
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Chilin kommer skickas till</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="confirm_address"></div>
+                                        <div id="confirm_zipcode"></div>
+                                        <div id="confirm_city"></div>
+
+
+                                    </div>
+                                </div>
+
+                                <form action="/charge" method="post">
+                                    <script id="stripe_script" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                            data-key="{{ key }}"
+                                            data-description="A Flask Charge"
+                                            data-amount= 10000
+                                            data-locale="auto"></script>
+                                </form>
                             </div>
-                            <div class="clearfix"></div>
                         </div>
-                    </form>
+                        <div class="clearfix"></div>
                 </div>
-            </section>
+                </form>
         </div>
+        </section>
     </div>
+    </div>
+
+
+
 {% endblock %}

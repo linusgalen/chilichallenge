@@ -27,10 +27,61 @@ $(document).ready(function () {
 
     });
 
-     $('input[type=radio][name=product_radio]').change(function() {
-        console.log(this.value);
-        $('#next1_button').show()
+    $('input[type=radio][name=product_radio]').change(function() {
+        // console.log(this.value);
+        $('#next1_button').show();
     });
+
+    //  $("#shipping_address_form :input").change(function() {
+    //    $("#myform").data("changed",true);
+    //    console.log('hej');
+    //});
+
+    $('#checkout_from').change(function(){
+        // console.log($('#checkout_from').serializeArray());
+        $('#checkout_from').v
+
+        var $inputs = $('#checkout_from :input');
+
+        // not sure if you wanted this, but I thought I'd add it.
+        // get an associative array of just the values.
+        var values = {};
+        $inputs.each(function() {
+            values[this.name] = $(this).val();
+        });
+
+        values['product_radio']=$("input[type='radio'][name=product_radio]:checked").val();
+        var product_id=values['product_radio'];
+        values['product_price']=$('#product_price_'+product_id).text();
+        values['product_img']=$('#product_img_'+product_id).attr('src');
+        values['product_description']=$('#product_description_'+product_id).text();
+        values['product_name']=$('#product_name_'+product_id).text();
+
+
+        $('#confirm_product_img').empty();
+        $('#confirm_product_price').empty();
+        $('#confirm_product_name').empty();
+        $('#confirm_address').empty();
+        $('#confirm_city').empty();
+        $('#confirm_zipcode').empty();
+
+
+
+        $('#confirm_product_img').append(values['product_img']);
+        $('#confirm_product_price').append(values['product_price']);
+        $('#confirm_product_name').append(values['product_name']);
+
+        $('#confirm_address').append(values['address']);
+        $('#confirm_zipcode').append(values['zipcode']);
+        $('#confirm_city').append(values['city']);
+
+        $('#stripe_script').attr('data-amount', values['product_price']);
+
+
+        console.log(values);
+    });
+
+
 
 });
 
