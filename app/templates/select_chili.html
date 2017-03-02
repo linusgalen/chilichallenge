@@ -2,19 +2,20 @@
 {% block nav %}
     {{super()}}
 {% endblock %}
-{% block content  %}
+{% block select %}
     <div class="row">
-        {% for product in product_list %}
-            <div class="col-xs-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="{{ product.imgurl }}" alt="...">
-                    <div class="caption">
-                        <h3>{{ product.name }}</h3>
-                        <p>{{ product.description }}</p>
-                        <p style="color: darkred" >Pris: {{ product.price }}</p>
-
-                        <p>
-                            <a href="#" class="btn btn-primary" role="button">Beställ</a>
+            {% for product in product_list %}
+                <div class="col-xs-6 col-md-3">
+                    <div class="thumbnail">
+                        <img src="{{ product.imgurl }}">
+                        <div class="caption">
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.description }}</p>
+                            <p style="color: darkred" >Pris: {{ product.price }}</p>
+                            <p>
+                                <label class="btn btn-primary" for="product_radio_{{ product.id }}">
+                                    <input type="radio" id="product_radio_{{ product.id }}" name="product_radio" value="{{ product.id }}" autocomplete="off" hidden> Välj
+                                </label>
                             <a data-toggle="modal" data-target="#{{ product}}" data-whatever="" class="btn btn-default" role="button">Mer info</a>
                         </p>
                     </div>
