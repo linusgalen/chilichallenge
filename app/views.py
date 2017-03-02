@@ -4,16 +4,12 @@ from flask_login import login_user, logout_user, current_user, login_required
 ## from models import User, Book, Contactpost
 from flask_login import LoginManager
 import json
-<<<<<<< HEAD
-from .forms import RegisterForm, LoginForm
+
 from .models import User, Product, Address, Challenge
-=======
-
-
 from .models import User, Product, UserHasUser
 from .forms import RegisterForm, LoginForm, AddressForm
-from .models import User, Product, Address
->>>>>>> e627893a8b7957e52f1978383508c9fe666c7daf
+
+
 
 @app.before_request
 def before_request():
