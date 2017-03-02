@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block nav %}
+    {{super()}}
+{% endblock %}
+{% block content  %}
+
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Bekräfta din order</h3>
+    </div>
+    <div class="panel-body">
+
+      <div>
+        <p>The .table class adds basic styling (light padding and only horizontal dividers) to a table:</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Artikel</th>
+              <th>Antal</th>
+              <th>Pris</th>
+              <th>Totalt pris</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Habanero</td>
+              <td>78</td>
+              <td>20kr</td>
+              <td>1560kr</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

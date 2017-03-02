@@ -9,13 +9,9 @@ import json
 #from .forms import UserForm
 from .models import User, Product
 import logging
-
 from .forms import RegisterForm, LoginForm
-
-
 from .models import User, Product, UserHasUser
 from .forms import RegisterForm, LoginForm, AddressForm
-
 from .models import User, Product, Address
 
 @app.before_request
@@ -163,3 +159,7 @@ def profile_page():
 
     return render_template('profile_page.html',
                            current_user=current_user)
+
+@app.route('/confirm')
+def confirm():
+    return render_template('checkout_layout.html')
