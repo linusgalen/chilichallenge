@@ -1,26 +1,11 @@
 {% extends "base.html" %}
-{% block nav %}
-    {{super()}}
-{% endblock %}
-{% block content  %}
-    <div class="row">
-        {% for product in product_list %}
-            <div class="col-xs-6 col-md-3">
-                <div class="thumbnail">
-                    <img src="{{ product.imgurl }}" alt="...">
-                    <div class="caption">
-                        <h3>{{ product.name }}</h3>
-                        <p>{{ product.description }}</p>
-                        <p style="color: darkred" >Pris: {{ product.price }}</p>
+{% block content %}
+{% for product in product_list %}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ product}}" data-whatever=""> {{ product.name }} </button>
 
-                        <p>
-                            <a href="#" class="btn btn-primary" role="button">Beställ</a>
-                            <a data-toggle="modal" data-target="#{{ product}}" data-whatever="" class="btn btn-default" role="button">Mer info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        <div class="modal fade" id="{{ product}}" tabindex="-1" role="dialog" aria-labelledby="{{ product}}ModalLabel">
+
+
+<div class="modal fade" id="{{ product}}" tabindex="-1" role="dialog" aria-labelledby="{{ product}}ModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -55,7 +40,5 @@
     </div>
   </div>
 </div>
-
-        {% endfor %}
-    </div>
+ {% endfor %}
 {% endblock %}
