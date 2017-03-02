@@ -5,11 +5,17 @@ from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
 import json
 
+
 from .forms import UserForm
 from .models import User, Product
 import logging
 
 from .forms import RegisterForm, LoginForm
+
+
+from .models import User, Product, UserHasUser
+from .forms import RegisterForm, LoginForm, AddressForm
+
 from .models import User, Product, Address
 
 @app.before_request
@@ -86,9 +92,9 @@ def register():
     return render_template('register.html', form=form)
 
 
-@app.route('/checkout')
+@app.route('/checkout1')
 #an input parameter to this function MUST be some kind of order ID
-def checkout():
+def checkout1():
     logging.warning("hej") #just testing som stuff.
 
     amount = 1000
@@ -100,6 +106,7 @@ def checkout():
 
 @app.route('/charge', methods=['POST'])
 def charge():
+
     # Amount in cents
     amount = 10000
     username = g.user.username
@@ -122,10 +129,40 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 @app.route('/select', methods=["GET"])
-def select_chili():
+def select_friend():
     product_list = Product.query.all()
     return render_template('select_chili.html',
                            product_list=product_list)
+
+
+
+@app.route('/select_friend', methods=["GET", "POST"])
+def select_chili():
+    address_form=AddressForm()
+    #TODO: get global user and get the friends
+    #friend_list=UserHasUser.
+    if address_form.validate_on_submit():
+        redirect('/index')
+
+    return render_template('select_friend.html',
+                           adress_form=address_form)
+
+@app.route('/checkout', methods=["GET", "POST"])
+def checkout():
+    product_list = Product.query.all()
+    address_form=AddressForm()
+    address_form.product_id.choices=[(product.id, 'Välj') for product in product_list]
+
+    if 'product_radio' in request.form:
+        selected_product=request.form['product_radio']
+        print(selected_product)
+
+
+
+
+    return render_template('checkout_process.html',
+                           product_list=product_list,
+                           adress_form=address_form)
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
