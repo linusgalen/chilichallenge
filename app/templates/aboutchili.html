@@ -1,9 +1,6 @@
 {% extends "base.html" %}
-{% block content %}
+{% block about %}
 {% for product in product_list %}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ product}}" data-whatever=""> {{ product.name }} </button>
-
-
 
 <div class="modal fade" id="{{ product}}" tabindex="-1" role="dialog" aria-labelledby="{{ product}}ModalLabel">
   <div class="modal-dialog" role="document">
