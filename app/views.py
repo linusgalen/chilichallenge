@@ -1,12 +1,11 @@
 from app import app, db, models
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
-## from models import User, Book, Contactpost
 from flask_login import LoginManager
 import json
+from stripe import api_key
 
-from .models import User, Product, Address, Challenge
-from .models import User, Product, UserHasUser
+from .models import User, Product, UserHasUser, Address, Challenge
 from .forms import RegisterForm, LoginForm, AddressForm
 
 
@@ -58,7 +57,7 @@ def login():
 
 
 # else:
-#flash('Fel användarnamn eller lösenord')
+#flash('Fel anvandarnamn eller losenord')
 #return redirect(url_for('login'))
 
 
@@ -85,6 +84,31 @@ def register():
     return render_template('register.html', form=form)
 
 
+
+@app.route('/charge', methods=['POST'])
+def charge():
+
+    # Amount in cents
+    amount = 10000
+    username = g.user.username
+
+    customer = stripe.Customer.create(
+        email='customer@example.com',
+        source=request.form['stripeToken']
+    )
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=amount,
+        currency='usd',
+        description='Flask Charge'
+    )
+
+    return render_template('charge.html', amount=amount)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 @app.route('/select', methods=["GET"])
 def select_friend():
     product_list = Product.query.all()
@@ -108,12 +132,11 @@ def select_chili():
 def checkout():
     product_list = Product.query.all()
     address_form=AddressForm()
-    address_form.product_id.choices=[(product.id, 'Välj') for product in product_list]
+    address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
 
     if 'product_radio' in request.form:
         selected_product=request.form['product_radio']
         print(selected_product)
-
 
 
 
@@ -134,7 +157,13 @@ def profile_page():
     return render_template('profile_page.html',
                            current_user = g.user,
                            current_address = current_address,
-                           challenge_list = challenge_list)
+                           challenge_list = challenge_list,
+                           key=api_key)
+
+
+@app.route('/confirm')
+def confirm():
+    return render_template('checkout_layout.html')
 
 
 @app.route('/aboutchili', methods=["GET"])
@@ -148,5 +177,4 @@ def aboutchili():
 def product(product_id):
     product =db.session.query(Product).get(product_id).seralize
     return jsonify(product)
-
 

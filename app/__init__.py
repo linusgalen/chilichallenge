@@ -4,6 +4,15 @@ from flask_basicauth import BasicAuth
 from flask_admin import Admin
 from flask_admin.contrib import sqla
 from flask_login import LoginManager
+import os
+import stripe
+
+stripe_keys = {
+  'secret_key': 'pk_test_6pRNASCoBOKtIshFeQd4XMUh', #os.environ['SECRET_KEY'],
+  'publishable_key': 'sk_test_BQokikJOvBiI2HlWgH4olfQ2' #os.environ['PUBLISHABLE_KEY']
+}
+
+stripe.api_key = stripe_keys['secret_key']
 
 app = Flask(__name__)
 app.config.from_object('config')
