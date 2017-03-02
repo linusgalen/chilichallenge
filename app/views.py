@@ -66,7 +66,7 @@ def login():
 def signout():
     logout_user()
 
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -160,6 +160,21 @@ def profile_page():
                            challenge_list = challenge_list,
                            key=api_key)
 
+
 @app.route('/confirm')
 def confirm():
     return render_template('checkout_layout.html')
+
+
+@app.route('/aboutchili', methods=["GET"])
+def aboutchili():
+    product_list = Product.query.all()
+    return render_template('aboutchili.html',
+                           product_list=product_list)
+
+
+@app.route('/aboutchili/<int:product_id>')
+def product(product_id):
+    product =db.session.query(Product).get(product_id).seralize
+    return jsonify(product)
+
