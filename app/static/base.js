@@ -2,19 +2,8 @@
 
 
 $(document).ready(function() {
-    $(".navbar").hide();
 
-    $(function () {
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 50) {
-                $('.navbar').fadeIn();
-            } else {
-                $('.navbar').fadeOut();
-            }
-        });
-    });
-
-    $('body').scrollspy({target: ".navbar", offset: 50});
+    $('body').scrollspy({target: ".navbar-me", offset: 50});
 
     $("#thenavbar a").on('click', function (event) {
         if (this.hash !== "") {
@@ -27,4 +16,13 @@ $(document).ready(function() {
             });
         }
     });
+});
+
+
+$(window).scroll(function() {
+    if($(this).scrollTop()>50) {
+        $( ".navbar-me" ).addClass("fixed-me");
+    } else {
+        $( ".navbar-me" ).removeClass("fixed-me");
+    }
 });
