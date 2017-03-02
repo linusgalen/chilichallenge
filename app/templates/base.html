@@ -60,7 +60,12 @@
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li > <a href="#">Logga In</a> </li>
+                        {% if g.user.is_authenticated %}
+                    <li> <a href="profile_page.html"></a>{{ g.user.username }} </li>
+                {% else %}
+                    <li > <a href="#">Logga In</a> </li>
+
+                {% endif %}
                     </ul>
 
                 </div>
