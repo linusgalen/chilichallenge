@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 {% for product in product_list %}
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever=""> {{ product.name }} </button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{ product}}" data-whatever=""> {{ product.name }} </button>
 
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+<div class="modal fade" id="{{ product}}" tabindex="-1" role="dialog" aria-labelledby="{{ product}}ModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="exampleModalLabel">{{ product.name }}</h4>
+        <h4 class="modal-title" id="{{ product}}ModalLabel">{{ product.name }}</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" id="{{ product}}">
         <form>
+            <div class="thumbnail">
             {% if product.imgurl %}
-                {{ product.imgurl }}
+                <img src="{{ product.imgurl }}" alt="HTML5 Icon">
             {% endif %}
 
             {% if product.description %}
@@ -27,10 +28,10 @@
 
             {% if product %}
                 <p>
-                {{ product.price }}
+                {{ product.price }}:-
                 </p>
             {% endif %}
-
+            </div>
         </form>
       </div>
       <div class="modal-footer">
@@ -39,5 +40,5 @@
     </div>
   </div>
 </div>
-{% endfor %}
+ {% endfor %}
 {% endblock %}
