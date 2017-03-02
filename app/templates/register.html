@@ -19,8 +19,16 @@
                 <p>
 
                 <div class="col-sm-10">
-                    {{ form.name (size=40, placeholder="Namn", class="form-control") }}
-                    {% for error in form.name.errors %}
+                    {{ form.first_name (size=40, placeholder="Förnamn", class="form-control") }}
+                    {% for error in form.first_name.errors %}
+                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
+                        <span style="color: red;">{{ error }} </span>
+                    {% endfor %}<br><br>
+                </div>
+
+                <div class="col-sm-10">
+                    {{ form.last_name (size=40, placeholder="Efternamn", class="form-control") }}
+                    {% for error in form.last_name.errors %}
                         <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
                         <span style="color: red;">{{ error }} </span>
                     {% endfor %}<br><br>
@@ -36,8 +44,8 @@
                 </div>
 
                 <div class="col-sm-10">
-                    {{ form.zipcode (size=10, maxlength="5", placeholder="Postnummer", class="form-control") }}
-                    {% for error in form.zipcode.errors %}
+                    {{ form.zip (size=10, maxlength="5", placeholder="Postnummer", class="form-control") }}
+                    {% for error in form.zip.errors %}
                         <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
                         <span style="color: red;">{{ error }} </span>
                     {% endfor %}<br><br>
