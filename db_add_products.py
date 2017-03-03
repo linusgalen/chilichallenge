@@ -12,7 +12,7 @@ product_list=[
     },
     {
         'name': 'Chili el medio',
-        'description': 'Den har chilin kommer ifran har plockats med karlek och kommer ge en stabil hetta i munnen',
+        'description': 'Den har chilin kommer ifran har plockats med karlek och kommer ge en stabil hetta i munnen. Dess ursprung fran Hotduras ger den extra touchen av sydamerikansk fyllighet.',
         'imgurl': 'https://upload.wikimedia.org/wikipedia/commons/9/98/Red_Pepper_-_on_white.jpg',
         'price': 69
     },
