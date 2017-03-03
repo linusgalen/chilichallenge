@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "base.html" %}
 {% block content %}
-  <h2>Thanks, you paid <strong>{{ amount }}</strong>!</h2>
+  <h2>Thanks, you paid <strong>{{ amount/100 }}</strong>!</h2>
 {% endblock %}

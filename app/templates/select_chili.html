@@ -1,18 +1,14 @@
 {% extends "aboutchili.html" %}
-{% block nav %}
-    {{super()}}
-{% endblock nav %}
-{% block content %}
     {% block select %}
     <div class="row">
         {% for product in product_list %}
             <div class="col-xs-6 col-md-3">
                 <div class="thumbnail">
-                    <img src="{{ product.imgurl }}" >
+                    <img id="product_img_{{ product.id }}" src="{{ product.imgurl }}" >
                     <div class="caption">
-                        <h3>{{ product.name }}</h3>
+                        <h3 id="product_name_{{ product.id }}">{{ product.name }}</h3>
 {#                        <p>{{ product.description }}</p>#}
-                        <p style="color: darkred" >Pris: {{ product.price }}</p>
+                        <p id="product_price_{{ product.id }}" style="color: darkred" >Pris: {{ product.price }}</p>
 
                         <p>
                             <label class="btn btn-primary" for="product_radio_{{ product.id }}">
@@ -23,41 +19,7 @@
                     </div>
                 </div>
             </div>
-{#            <div class="modal fade" id="{{ product}}" tabindex="-1" role="dialog" aria-labelledby="{{ product}}ModalLabel">#}
-{#                <div class="modal-dialog" role="document">#}
-{#    <div class="modal-content">#}
-{#      <div class="modal-header">#}
-{#        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
-{#        <h4 class="modal-title" id="{{ product}}ModalLabel">{{ product.name }}</h4>#}
-{#      </div>#}
-{#      <div class="modal-body" id="{{ product}}">#}
-{#        <form>#}
-{#            <div class="thumbnail">#}
-{#            {% if product.imgurl %}#}
-{#                <img src="{{ product.imgurl }}">#}
-{#            {% endif %}#}
-{##}
-{#            {% if product.description %}#}
-{#                <p>#}
-{#                {{ product.description }}#}
-{#                </p>#}
-{#            {% endif %}#}
-{##}
-{##}
-{#            {% if product %}#}
-{#                <p>#}
-{#                {{ product.price }}:-#}
-{#                </p>#}
-{#            {% endif %}#}
-{#            </div>#}
-{#        </form>#}
-{#      </div>#}
-{#      <div class="modal-footer">#}
-{#        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>#}
-{#      </div>#}
-{#    </div>#}
-{#  </div>#}
-{#</div>#}
+
             {% block about %}
                 {{ super () }}
             {%  endblock about %}
@@ -65,4 +27,3 @@
         {% endfor %}
     </div>
 {% endblock select %}
-{% endblock content %}
