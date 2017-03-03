@@ -149,9 +149,6 @@ def checkout():
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
 
-    # if load_user!=None:
-    #     return redirect (url_for('login'))
-    # else:
     current_address = Address.query.filter_by(id = g.user.address_id).first();
     challenge_list = Challenge.query.filter_by(user_id = g.user.id).all();
 
