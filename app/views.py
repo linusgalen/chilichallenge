@@ -94,7 +94,7 @@ def charge():
 
     # Amount in cents
     amount = 10000
-    username = g.user.username
+    #username = g.user.username
 
     customer = stripe.Customer.create(
         email='customer@example.com',
@@ -113,11 +113,6 @@ def charge():
 if __name__ == '__main__':
     app.run(debug=True)
 
-@app.route('/select', methods=["GET"])
-def select_friend():
-    product_list = Product.query.all()
-    return render_template('select_chili.html',
-                           product_list=product_list)
 
 
 
