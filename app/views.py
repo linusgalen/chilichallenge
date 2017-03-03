@@ -1,15 +1,17 @@
 # coding=utf-8
 
+from OpenSSL import SSL
+
 from app import app, db, models
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
 import json
+import stripe
 from stripe import api_key
 
 from .models import User, Product, UserHasUser, Address, Challenge
 from .forms import RegisterForm, LoginForm, AddressForm
-
 
 
 @app.before_request
@@ -135,6 +137,7 @@ def checkout():
     product_list = Product.query.all()
     address_form=AddressForm()
     address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
+    key = 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu'
 
     if 'product_radio' in request.form:
         selected_product=request.form['product_radio']
@@ -144,7 +147,8 @@ def checkout():
 
     return render_template('checkout_process.html',
                            product_list=product_list,
-                           adress_form=address_form)
+                           adress_form=address_form,
+                           key=key)
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():

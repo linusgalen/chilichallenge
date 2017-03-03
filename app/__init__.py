@@ -8,8 +8,8 @@ import os
 import stripe
 
 stripe_keys = {
-  'secret_key': 'pk_test_6pRNASCoBOKtIshFeQd4XMUh', #os.environ['SECRET_KEY'],
-  'publishable_key': 'sk_test_BQokikJOvBiI2HlWgH4olfQ2' #os.environ['PUBLISHABLE_KEY']
+  'secret_key': 'sk_test_xiZrTPRhV7otP7ZjRE0FOK2Z', #os.environ['SECRET_KEY'],
+  'publishable_key': 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu' #os.environ['PUBLISHABLE_KEY']
 }
 
 stripe.api_key = stripe_keys['secret_key']
