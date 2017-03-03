@@ -1,0 +1,68 @@
+
+{% extends "base.html" %}
+
+{% block nav %}
+    {{super()}}
+{% endblock %}
+
+{% block foot %}
+    {{ super()}}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <h2>Välkommen till din profilsida!</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Användarnamn</th>
+                <th>Adress</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>{{ current_user.email }}</td>
+                    <td> {{ current_user.username }}</td>
+                    <td> {{ current_address.address }}, {{ current_address.zip }} {{ current_address.city }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+    <p>
+        <button class="btn btn-large btn-primary" type="button">Ändra uppgifter</button>
+    </p>
+
+    </div>
+
+
+    <div class="container">
+        <h2>Dina heta ordrar</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Namn</th>
+                <th>Produkt</th>
+                <th>Pris</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for challenge in challenge_list %}
+                <tr>
+                    <td>{{challenge.datetime}}</td>
+                    <td> {{ challenge.address.first_name }} {{ challenge.address.last_name }}</td>
+                    <td>{{challenge.product.name}} </td>
+                    <td>{{challenge.product.price}} </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
+

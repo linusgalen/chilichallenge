@@ -10,88 +10,81 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/base.css">
-
-
+    <link rel="stylesheet" href="/static/checkout_process.css">
     <!-- Latest compiled and minified JavaScript -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+    <!-- Our scripts -->
+    <script src="{{url_for('static', filename='checkout_process.js')}}"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
     <![endif]-->
-
-
-    <style>
-        body {
-            position: relative;
-        }
-
-        #Hem {padding-top:50px;height:700px;color: #fff; background-color: #ff8a84;}
-        #Om {padding-top:50px;height:700px;color: #fff; background-color: #eae5d0;}
-
-    </style>
-
 </head>
-
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 {% block nav %}
-
-<body data-spy = "scroll" data-target = ".navbar" data-offset = "50">
-
-<nav class="navbar navbar-default navbar-fixed-top" id="navbar">
+    <body data-spy = "scroll" data-target = ".navbar" data-offset = "50">
+    <section class="navbar-info">
+    <nav class="navbar navbar-default navbar-me">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=
-                        "#bs-example-navbar-collapse-1" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed menu-collapsed-button" data-toggle="collapse" data-target=
+                        "#navbar-primary-collapse" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-
                 </button>
                 <a class="navbar-brand" href="#">ChiliChallange</a>
             </div>
             <div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="collapse navbar-collapse header-right-menu" id="navbar-primary-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="#Hem">Hem</a></li>
-                        <li><a href="#Om">Om</a></li>
+                        <li><a href="#home" id="test">Hem</a></li>
+                        <li><a href="#about" id="test">Om</a></li>
                     </ul>
-
                     <ul class="nav navbar-nav navbar-right">
-                        <li > <a href="#">Logga In</a> </li>
+                        {% if g.user.is_authenticated %}
+                    <li> <a href="/profile" id="test">{{ g.user.username }} </a></li>
+                      <li> <a href="/signout" id="test">Logga ut </a></li>
+                {% else %}
+                     <li > <a href="/register" id="test">Registrera dig</a> </li>
+                    <li > <a href="/login" id="test">Logga In</a> </li>
+                {% endif %}
                     </ul>
-
-                </div><!-- /.navbar-collapse -->
+                </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </nav>
-
-
+    </section>
 {% endblock %}
-
-<div id="Hem" class="container-fluid">
-    <h1>Hem testing testing</h1>
-    <p>HEJEHEJEHJJEJEHEHEH
-    Gåt det att scrollaaaaaa? </p>
-</div>
-
-<div id="Om" class="container-fluid">
-    <h1>Om testing testing</h1>
-    <p>HEJEHEJEHJJEJEHEHEH
-    Gåt det att scrollaaaaaa? </p>
-</div>
-
 <div class="content">
-
     {% block content %}
-
     {% endblock %}
-
 </div>
-
+{% block foot %}
+<div id="the_end" class="containter-fluid">
+    <h2 style="text-align: center">THIS IS THE END BRO</h2>
+    <p>   </p>
+    <p style="text-align: center"> Längst ned på sidan innehåll. osv osv osv osv. </p>
+    <p>    </p>
+    <p style="text-align: center"> Copyright ChiliChallange.</p>
+</div>
+{% endblock %}
+<script src="../static/base.js"></script>
 </body>
-
 </html>

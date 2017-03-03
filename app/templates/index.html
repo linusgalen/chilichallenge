@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 {% block nav %}
-{{super()}}
+    {{super()}}
 {% endblock %}
+
+{% block foot %}
+    {{ super()}}
+{% endblock %}
+
 
 {% block content %}
 
-<div class="embed-responsive embed-responsive-16by9">
-  <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/7MniRndBkCU"></iframe>
-</div>
+    <div id="home" class="container-fluid">
+{#        <img id=chili_img src="http://wonderopolis.org/wp-content/uploads/2010/11/Wonder-50-Chili-Pepper-Static-Image.jpg"></div>#}
+        <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
+    </div>
+
+    <div id="about" class="container-fluid">
+        <h1>OM OSS</h1>
+    </div>
+
 
 {% endblock %}

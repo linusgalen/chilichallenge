@@ -6,6 +6,7 @@
 
 
 ### ingore idea-map ###
+
 .idea/
 .idea/*
 
