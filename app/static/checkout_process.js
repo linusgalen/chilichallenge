@@ -27,15 +27,25 @@ $(document).ready(function () {
 
     });
 
-    $('input[type=radio][name=product_radio]').change(function() {
-        // console.log(this.value);
+    $('input[type=radio][name=product_radio]').change(function(e) {
+        var selected_product=$("input[type='radio'][name=product_radio]:checked").val();
+        $( "#stripe2" ).empty();
+        $.ajax({
+            type: "POST",
+            url: 'loadprice',
+            data: JSON.stringify(selected_product),
+            //success: success,
+            contentType: "application/json"
+           // dataType: 'json'
+        }).done(function( html ) {
+            $( "#stripe2" ).append( html );
+        });
+
+
         $('#next1_button').show();
     });
 
-    //  $("#shipping_address_form :input").change(function() {
-    //    $("#myform").data("changed",true);
-    //    console.log('hej');
-    //});
+
 
     $('#checkout_from').change(function(){
         // console.log($('#checkout_from').serializeArray());
@@ -70,15 +80,15 @@ $(document).ready(function () {
         $('#confirm_product_img').append(values['product_img']);
         $('#confirm_product_price').append(values['product_price']);
         $('#confirm_product_name').append(values['product_name']);
-
         $('#confirm_address').append(values['address']);
         $('#confirm_zipcode').append(values['zipcode']);
         $('#confirm_city').append(values['city']);
 
-        $('#stripe_script').attr('data-amount', values['product_price']);
+
+        $('#stripe_script').attr('data-amount', 50000);
+        $('#stripe_script').attr('data-description', 'betalning');
 
 
-        console.log(values);
     });
 
 

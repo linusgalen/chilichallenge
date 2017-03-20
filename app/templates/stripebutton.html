@@ -1,0 +1,8 @@
+<form action="/charge" method="post">
+    <script id="stripe_script" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ key }}"
+            data-description="Betalning"
+            data-amount="{{ amount }}"
+            data-currency="SEK"
+            data-locale="auto"></script>
+</form>
