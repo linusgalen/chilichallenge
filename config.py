@@ -1,8 +1,27 @@
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-WTF_CSRF_ENABLED = True
-SECRET_KEY = '18b*&41m!kvg3r1ydlg%(5q-8z_auzxc#v+0ev@&syclve@qim'
+class Config(object):
+    DEBUG = False
+    TESTING = False
+    CSRF_ENABLED = True
+    WTF_CSRF_ENABLED = True
+    SECRET_KEY = '18b*&41m!kvg3r1ydlg%(5q-8z_auzxc#v+0ev@&syclve@qim'
+    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
 
-SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
-SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+class ProductionConfig(Config):
+    DEBUG = False
+
+
+class StagingConfig(Config):
+    DEVELOPMENT = True
+    DEBUG = True
+
+
+class DevelopmentConfig(Config):
+    DEVELOPMENT = True
+    DEBUG = True
+
+
+class TestingConfig(Config):
+    TESTING = True
