@@ -50,11 +50,11 @@ def login():
             return redirect(url_for('index'))
         else:
             flash("Username or password incorrect!")
-            return render_template('login.html',
+            return render_template('login_validation.html',
                                    title='Sign In',
                                    form=form)
 
-    return render_template('login.html',
+    return render_template('login_validation.html',
                        title='Logga in',
                        form=form)
 # if user.is_correct_password(password):
