@@ -123,7 +123,7 @@ def charge():
         email=email
     )
     db.session.add(new_address)
-
+    db.session.commit()
 
     #Make sure challenge_code is unique
     flag=True
@@ -131,9 +131,11 @@ def charge():
         length=5
         challenge_code=''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(length))
         test_challenge = Challenge.query.filter_by(challenge_code=challenge_code).first()
-        if test_challenge is not None:
+        if test_challenge is None:
             flag=False
 
+
+    print(challenge_code)
 
     new_challenge=Challenge(
         message=message,
@@ -142,7 +144,8 @@ def charge():
         datetime=datetime.now(),
         challenge_code=challenge_code
     )
-
+    db.session.add(new_challenge)
+    db.session.commit()
 
     amount=int(bought_product.price)*100
 
@@ -158,11 +161,12 @@ def charge():
         description=bought_product.name
     )
 
-
+    #TODO Send confirmation Email
 
     return render_template('charge.html',
                            email=email,
-                           product=bought_product)
+                           product=bought_product,
+                           address=new_address)
 
 
 

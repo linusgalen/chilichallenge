@@ -156,9 +156,7 @@ $(document).ready(function () {
         $('#checkout_from').v
 
         var $inputs = $('#checkout_from :input');
-
-
-
+        
 
         // not sure if you wanted this, but I thought I'd add it.
         // get an associative array of just the values.
