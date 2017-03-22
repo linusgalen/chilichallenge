@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+{% block content %}
+  <body>
+
+<div class="container">
+  <h2>Utmanad</h2>
+  <form action="" id="confirm_code" name="confirm_code" method="POST">
+    <div class="form-group"  >
+        <label for="email">Skriv koden du har fått via utmaningen:</label>
+      <input type="text" class="form-control" id="generated_code" name="generated_code">
+    </div>
+      <div class="form-group">
+      <label for="order">ordernummer</label>
+      <input type="number" class="form-control" id="order" name="order">
+    </div>
+  </form>
+
+   <input type="submit" class="btn btn-primary" value="Se meddelande"> </input>
+</div>
+
+</body>
+    <script>
+        $(document).ready(function () {
+
+            $('#confirm_code').validate({ // initialize the plugin
+                rules: {
+                    generated_code: {
+                        required: true,
+                        email: true
+                    },
+                    order: {
+                        required: true,
+                        minlength: 5
+                    }
+            },
+            submitHandler: function (form) { // for demo
+                alert('valid form submitted'); // for demo
+                return false; // for demo
+            }
+            });
+
+        });
+    </script>
+{#    <script src="../static/been_challenged.js"></script>#}
+{%endblock %}

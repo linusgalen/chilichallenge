@@ -175,3 +175,9 @@ def aboutchili():
 def product(product_id):
     product =db.session.query(Product).get(product_id).seralize
     return jsonify(product)
+
+@app.route('/challenged', methods =["GET", "POST"])
+def challenged():
+    if request.method == 'POST':
+        return redirect(url_for('index'))
+    return render_template('been_challenged.html')
