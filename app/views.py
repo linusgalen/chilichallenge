@@ -105,6 +105,8 @@ def charge():
 
     bought_product=db.session.query(Product).get(product_id)
 
+
+
     amount=int(bought_product.price)*100
 
     customer = stripe.Customer.create(
@@ -118,6 +120,7 @@ def charge():
         currency='SEK',
         description=bought_product.name
     )
+    print('Ture:?'+charge.paied)
 
     return render_template('charge.html',
                            email=email,
