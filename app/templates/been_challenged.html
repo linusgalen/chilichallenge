@@ -16,13 +16,32 @@
       <label for="order">ordernummer</label>
       <input type="number" class="form-control" id="order" name="order">
     </div>
-    <button type="submit" class="btn btn-primary"> Se meddelande </button>
+    <button type="submit" class="btn btn-primary" name="message_button"> Se meddelande </button>
   </form>
 
 
 </div>
 
-</body>
+<div class="container"  >
+    <div class="alert alert-success" role="alert" name="message" id="message">
+        <p>{{ message }}
+        </p>
+    </div>
+</div>
 
+</body>
+<script>
+      $(document).ready(function(){
+
+        $("#message").hide();
+
+
+        $("#message_button").click(function() {
+          $("#confirm_code").hide();
+          $("#message").show();
+        });
+
+      });
+      </script>
     <script src="../static/been_challenged.js"></script>
 {%endblock %}
