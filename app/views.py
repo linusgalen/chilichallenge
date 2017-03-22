@@ -98,27 +98,32 @@ def register():
 
 @app.route('/charge', methods=['POST'])
 def charge():
-    # Amount in cents
-    amount = 10000
-    # username = g.user.username
 
-    token_form=request.form['stripeToken']
+    token_id = request.form['tokenId']
+    email=request.form['email']
+    product_id=request.form['productId']
 
-    token_form.
+    bought_product=db.session.query(Product).get(product_id)
+
+    amount=int(bought_product.price)*100
+
     customer = stripe.Customer.create(
-        email='customer@example.com',
-        source=request.form['stripeToken']
-
+        email=email,
+        source=token_id
     )
 
     charge = stripe.Charge.create(
         customer=customer.id,
         amount=amount,
-        currency='usd',
-        description='Flask Charge'
+        currency='SEK',
+        description=bought_product.name
     )
 
-    return render_template('charge.html', amount=amount)
+    return render_template('charge.html',
+                           email=email,
+                           product=bought_product)
+
+
 
 
 if __name__ == '__main__':
@@ -184,16 +189,4 @@ def product(product_id):
     return jsonify(product)
 
 
-@app.route('/loadprice', methods=["POST"])
-def selected_product():
-    json_content = request.get_json(silent=True)
-    product_id=json_content
 
-    product=db.session.query(Product).get(product_id)
-
-    amount=int(product.price)*int('100') #convert to cents
-    key = stripe_keys['publishable_key']
-
-    return render_template('stripebutton.html',
-                           key=key,
-                           amount=amount)

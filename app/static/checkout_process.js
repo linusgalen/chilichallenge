@@ -3,6 +3,9 @@ $(document).ready(function () {
     //Initialize tooltips
     $('.nav-tabs > li a[title]').tooltip();
 
+
+
+
     //Wizard
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
 
@@ -27,20 +30,81 @@ $(document).ready(function () {
 
     });
 
-    $('input[type=radio][name=product_radio]').change(function(e) {
-        var selected_product=$("input[type='radio'][name=product_radio]:checked").val();
-        $( "#stripe2" ).empty();
-        $.ajax({
-            type: "POST",
-            url: 'loadprice',
-            data: JSON.stringify(selected_product),
-            //success: success,
-            contentType: "application/json"
-           // dataType: 'json'
-        }).done(function( html ) {
-            $( "#stripe2" ).append( html );
-        });
 
+    function getCurrentProductId(){
+        return product_id=$("input[type='radio'][name=product_radio]:checked").val();
+    }
+
+    function getAmount() {
+        var productId=getCurrentProductId();
+        return parseInt($('#product_price_'+productId).text().replace(/[^0-9\.]/g, ''), 10)*100;
+    }
+
+    //Stripe Handler
+    var handler = StripeCheckout.configure({
+        key: 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu',
+        image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+        locale: 'auto',
+        token: function(token) {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+
+            var util = {};
+            util.post = function(url, fields) {
+                var $form = $('<form>', {
+                    action: url,
+                    method: 'post'
+                });
+                $.each(fields, function(key, val) {
+                    $('<input>').attr({
+                        type: "hidden",
+                        name: key,
+                        value: val
+                    }).appendTo($form);
+                });
+                $form.appendTo('body').submit();
+            };
+
+            util.post('/charge', {tokenId: token.id, email: token.email, productId:getCurrentProductId()});
+
+            var jsonData=JSON.stringify({
+                tokenId:token.id,
+                email:token.email,
+                productId:getCurrentProductId()
+            });
+
+            console.log(jsonData);
+
+            // $.ajax({
+            //     dataType: "json",
+            //     contentType: 'application/json',
+            //     method: "POST",
+            //     url: "/charge",
+            //     data: jsonData
+            // })
+
+        }
+    });
+
+
+
+
+    $('#customButton').click(function(e) {
+        // Open Checkout with further options:
+        handler.open({
+            name: 'Stripe Betalning',
+            description: 'Chilichallenge',
+            allowRememberMe: false,
+            currency:'SEK',
+            amount:getAmount()
+        });
+        e.preventDefault();
+    });
+
+
+
+
+    $('input[type=radio][name=product_radio]').change(function(e) {
 
         $('#next1_button').show();
     });
@@ -62,7 +126,7 @@ $(document).ready(function () {
 
         values['product_radio']=$("input[type='radio'][name=product_radio]:checked").val();
         var product_id=values['product_radio'];
-        values['product_price']=$('#product_price_'+product_id).text();
+        values['product_price']=parseInt($('#product_price_'+product_id).text().replace(/[^0-9\.]/g, ''), 10);
         values['product_img']=$('#product_img_'+product_id).attr('src');
         values['product_description']=$('#product_description_'+product_id).text();
         values['product_name']=$('#product_name_'+product_id).text();
@@ -85,10 +149,17 @@ $(document).ready(function () {
         $('#confirm_city').append(values['city']);
 
 
-        $('#stripe_script').attr('data-amount', 50000);
-        $('#stripe_script').attr('data-description', 'betalning');
 
 
+    });
+
+
+
+
+
+// Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+        handler.close();
     });
 
 
