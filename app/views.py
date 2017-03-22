@@ -178,17 +178,28 @@ def product(product_id):
 
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
+
     if request.method == 'POST':
         challenge_code = request.form['generated_code']
+        if challenge_code =='':
+            flash('ingen kod')
+            return render_template('been_challenged.html')
         order_number = request.form['order']
+        if order_number =='':
+            flash('ingen order')
+            return render_template('been_challenged.html')
+
         challengemessage = Challenge.query.filter_by(challenge_code=challenge_code).first()
-        ordertest = Order.query.filter_by(challenge_id=challengemessage.id).first()
         if challengemessage is None:
             flash('finns inget meddelande')
-            return render_template('been_challeged.html')
+            return render_template('been_challenged.html')
+        ordertest = Order.query.filter_by(challenge_id=challengemessage.id).first()
+
         if ordertest is None:
             flash('det finns ingen order')
             return render_template('been_challenged.html')
         message = challengemessage.message
-        return render_template('been_challenged.html',message)
-    return render_template('been_challenged.html')
+        return render_template('been_challenged.html', message=message)
+    else:
+        message = ""
+    return render_template('been_challenged.html', message=message)

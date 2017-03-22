@@ -23,25 +23,26 @@
 </div>
 
 <div class="container"  >
-    <div class="alert alert-success" role="alert" name="message" id="message">
+    <div class="alert alert-success" role="alert" name="message" id="message_container">
         <p>{{ message }}
         </p>
     </div>
 </div>
 
 </body>
-<script>
-      $(document).ready(function(){
-
-        $("#message").hide();
-
-
-        $("#message_button").click(function() {
-          $("#confirm_code").hide();
-          $("#message").show();
-        });
-
-      });
-      </script>
+{#<script>#}
+{#      $(document).ready(function(){#}
+{##}
+{#        $("#message_container").hide();#}
+{#        $("#confirm_code").show();#}
+{##}
+{##}
+{#        $("#message_button").click(function() {#}
+{#          $("#confirm_code").hide();#}
+{#          $("#message_container").show();#}
+{#        });#}
+{##}
+{#      });#}
+{#      </script>#}
     <script src="../static/been_challenged.js"></script>
 {%endblock %}
