@@ -106,7 +106,7 @@
                         <div class="tab-pane" role="tabpanel" id="step3">
                             <h3>Step 3</h3>
                             <div class="container center_div">
-                                <form class="form-inline" action="" method="post" name="personal_message">
+                                <form class="form-inline" action="" method="post" name="personal_message" id="checkout_message">
                                     {{ adress_form.message (placeholder="Personligt meddelande", class="col-xs-12 ", rows="5") }}
                                     {% for error in adress_form.message.errors %}
                                         <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
