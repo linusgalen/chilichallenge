@@ -109,11 +109,13 @@ class Challenge(db.Model):
     address_id = db.Column(
         db.Integer, db.ForeignKey("address.id", onupdate="CASCADE", ondelete="CASCADE")
     )
+    challenge_code = db.Column(db.String(10))
 
     address = db.relationship("Address", back_populates="challenge")
     user = db.relationship("User", back_populates="challenge")
     product = db.relationship("Product", back_populates="challenge")
     order = db.relationship("Order")
+
 
     def __repr__(self):
         return str(self.id)
@@ -156,7 +158,3 @@ class Address(db.Model):
 
     def __repr__(self):
         return str(self.id)
-
-
-
-

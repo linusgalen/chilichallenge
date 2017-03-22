@@ -179,5 +179,7 @@ def product(product_id):
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
     if request.method == 'POST':
-        return redirect(url_for('index'))
+
+        message = "hej hopp"
+        return render_template('been_challenged.html', message)
     return render_template('been_challenged.html')
