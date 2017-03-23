@@ -1,26 +1,4 @@
 
-/*#thenavbar{*/
-    /*background-color: transparent;*/
-    /*border: 0px;*/
-/*}*/
-
-/*#test {*/
-     /*opacity: 1;*/
-/*}*/
-
-/*body {*/
-    /*position: relative;*/
-/*}*/
-
-
-
-
-
-#chl_btn{
-    margin-top: 250px;
-    border-radius: 25px;
-}
-
 #home {
     padding-top: 50px;
     height: 700px;
@@ -35,12 +13,21 @@
     background-color: #eae5d0;
 }
 
+#chl_btn{
+    margin-top: 250px;
+    border-radius: 25px;
+}
 
+#the_end {
+    height: 200px;
+    background-color: #0000;
+    text-align: center
+}
 
 body{
     margin: 0px;
     padding: 0px;
-    min-height: 2500px;
+    /*min-height: 2500px;*/
 
 }
 .navbar-info {
