@@ -4,7 +4,7 @@
 
 {% block content %}
   <body>
-
+{% if showform %}
 <div class="container">
   <h2>Utmanad</h2>
   <form action="" id="confirm_code" name="confirm_code" method="POST">
@@ -18,17 +18,17 @@
     </div>
     <button type="submit" class="btn btn-primary" name="message_button"> Se meddelande </button>
   </form>
-
+{% endif %}
 
 </div>
-
-<div class="container"  >
-    <div class="alert alert-success" role="alert" name="message" id="message_container">
-        <p>{{ message }}
-        </p>
+{% if message %}
+    <div class="container"  >
+        <div class="alert alert-success" role="alert" name="message" id="message_container">
+            <p>{{ message }}
+            </p>
+        </div>
     </div>
-</div>
-
+{% endif %}
 </body>
 {#<script>#}
 {#      $(document).ready(function(){#}

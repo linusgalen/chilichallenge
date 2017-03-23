@@ -199,7 +199,9 @@ def challenged():
             flash('det finns ingen order')
             return render_template('been_challenged.html')
         message = challengemessage.message
-        return render_template('been_challenged.html', message=message)
+        showform = False
+        return render_template('been_challenged.html', message=message, showform=showform)
     else:
         message = ""
-    return render_template('been_challenged.html', message=message)
+        showform = True
+    return render_template('been_challenged.html', message=message, showform=showform)
