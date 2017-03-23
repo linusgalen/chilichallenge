@@ -17,6 +17,8 @@ stripe.api_key = stripe_keys['secret_key']
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
+app.config.from_object('config.ProductionConfig')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['BASIC_AUTH_USERNAME'] = 'admin'
 app.config['BASIC_AUTH_PASSWORD'] = 'admin'
