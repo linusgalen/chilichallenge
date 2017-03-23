@@ -17,17 +17,15 @@ $(document).ready(function() {
         }
     });
 
-    $("#loginUsername").change(function(){
+    /*$("#loginUsername").change(function(){
         $.ajax({
             method: "POST",
             url: "/usernameCheck",
-            data: JSON.stringify({
-            $("loginUsername").val()
-            })
+            data:$("loginUsername").val()
         }).done(function( msg ) {
             alert( "Data Saved: " + msg );
         });
-    });
+    });*/
 });
 
 

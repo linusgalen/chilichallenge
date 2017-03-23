@@ -18,7 +18,6 @@ from .forms import RegisterForm, AddressForm
 def before_request():
     g.user = current_user
 
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -39,44 +38,23 @@ def login():
         return redirect(url_for('index'))
     if request.method == 'GET':
         return render_template('login_validation.html')
-    username = request.form['username']
-    password = request.form['password']
-    user = User.query.filter_by(username=username, password=password).first()
+    user = User.query.filter_by(username = request.form['username'], password = request.form['password']).first()
     if user is None:
-        flash("Username or password incorrect!")
+        flash("Användarnamn eller lösenord är fel!")
         return redirect(url_for('login'))
     login_user(user)
     flash('Logged in successfully', 'success')
     return redirect(url_for('index'))
 
-
-@app.route('/usernameCheck', methods=["GET", "POST"])
-def usernameCheck():
-    username = request.get_json(silent=True)
-    print(username)
-    user = User.query.filter_by(username=username).first()
-    if user is None:
-        return "Användarnamnet finns inte"
-    return "..."
-
-    # if user is not None:
-    #     login_user(user)
-    #     flash('Logged in successfully.')
-    #     #session['remember_me'] = form.remember_me.data
-    #     return redirect(url_for('index'))
-    # else:
-    #     flash("Username or password incorrect!")
-    #     return render_template('login_validation.html',
-    #                            title='Sign In')
-
-#    return render_template('login_validation.html',
-#                       title='Logga in')
-# if user.is_correct_password(password):
-
-
-# else:
-#flash('Fel anvandarnamn eller losenord')
-#return redirect(url_for('login'))
+#Denna kod används inte, men har inte tagits bort ifall något liknande ska skrivas
+# @app.route('/usernameCheck', methods=["GET", "POST"])
+# def usernameCheck():
+#     username = request.data
+#     print(username)
+#     user = User.query.filter_by(username=username).first()
+#     if user is None:
+#         return "Användarnamnet finns inte"
+#     return "..."
 
 
 
@@ -88,18 +66,27 @@ def signout():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
-    form =RegisterForm()
-    if form.validate_on_submit():
-        address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data, zip=form.zip.data, city=form.city.data , email=form.email.data)
-        db.session.add(address)
-        db.session.commit()
-        user = User(username=form.username.data, password=form.password.data, email=form.email.data, address_id=address.id )
-        db.session.add(user)
-        db.session.commit()
+    if request.method == 'GET':
+        return render_template('register.html')
 
-        return redirect(url_for('index'))
+    #address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data, zip=form.zip.data, city=form.city.data , email=form.email.data)
+    #db.session.add(address)
+    #db.session.commit()
+    username = request.form['username']
+    userCheck = User.query.filter_by(username = username).first()
+    if userCheck is not None:
+        flash("Användarnamnet finns redan")
+        return redirect(url_for('register'))
+    email = request.form['email']
+    emailCheck = User.query.filter_by(email = email).first()
+    if emailCheck is not None:
+        flash("Emailen finns redan")
+        return redirect(url_for('register'))
+    user = User(username=username, password=request.form['password'], email=email)
+    db.session.add(user)
+    db.session.commit()
 
-    return render_template('register.html', form=form)
+    return redirect(url_for('index'))
 
 
 
@@ -162,13 +149,13 @@ def checkout():
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
 
-    current_address = Address.query.filter_by(id = g.user.address_id).first();
+    # current_address = Address.query.filter_by(id = g.user.address_id).first();
     challenge_list = Challenge.query.filter_by(user_id = g.user.id).all();
 
 
     return render_template('profile_page.html',
                            current_user = g.user,
-                           current_address = current_address,
+                           # current_address = current_address,
                            challenge_list = challenge_list,
                            key=api_key)
 
