@@ -17,9 +17,17 @@ $(document).ready(function() {
         }
     });
 
-    
-
-
+    $("#loginUsername").change(function(){
+        $.ajax({
+            method: "POST",
+            url: "/usernameCheck",
+            data: JSON.stringify({
+            $("loginUsername").val()
+            })
+        }).done(function( msg ) {
+            alert( "Data Saved: " + msg );
+        });
+    });
 });
 
 
@@ -30,3 +38,5 @@ $(window).scroll(function() {
         $( ".navbar-me" ).removeClass("fixed-me");
     }
 });
+
+

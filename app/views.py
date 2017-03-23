@@ -11,7 +11,7 @@ import stripe
 from stripe import api_key
 
 from .models import User, Product, UserHasUser, Address, Challenge
-from .forms import RegisterForm, LoginForm, AddressForm
+from .forms import RegisterForm, AddressForm
 
 
 @app.before_request
@@ -37,26 +37,40 @@ def load_user(id):
 def login():
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username, password=password).first()
+    if request.method == 'GET':
+        return render_template('login_validation.html')
+    username = request.form['username']
+    password = request.form['password']
+    user = User.query.filter_by(username=username, password=password).first()
+    if user is None:
+        flash("Username or password incorrect!")
+        return redirect(url_for('login'))
+    login_user(user)
+    flash('Logged in successfully', 'success')
+    return redirect(url_for('index'))
 
-        if user is not None:
-            login_user(user)
-            flash('Logged in successfully.')
-            session['remember_me'] = form.remember_me.data
-            return redirect(url_for('index'))
-        else:
-            flash("Username or password incorrect!")
-            return render_template('login_validation.html',
-                                   title='Sign In',
-                                   form=form)
 
-    return render_template('login_validation.html',
-                       title='Logga in',
-                       form=form)
+@app.route('/usernameCheck', methods=["GET", "POST"])
+def usernameCheck():
+    username = request.get_json(silent=True)
+    print(username)
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        return "Användarnamnet finns inte"
+    return "..."
+
+    # if user is not None:
+    #     login_user(user)
+    #     flash('Logged in successfully.')
+    #     #session['remember_me'] = form.remember_me.data
+    #     return redirect(url_for('index'))
+    # else:
+    #     flash("Username or password incorrect!")
+    #     return render_template('login_validation.html',
+    #                            title='Sign In')
+
+#    return render_template('login_validation.html',
+#                       title='Logga in')
 # if user.is_correct_password(password):
 
 

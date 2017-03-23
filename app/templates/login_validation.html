@@ -1,30 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-     {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-        {% for message in messages %}
-            <li>{{ message }} </li>
-        {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
 
-    <div class="container center_div">
-        <form data-toggle="validator" role="form">
-            <div class="form-group">
-                <label for="username" class="control-label">Användarnamn</label>
-                <input type="text" class="form-control" id="username" placeholder="Användarnamn" required>
-            </div>
-            <div class="form-group">
-                <label for="password" class="control-label">Lösenord</label>
-                <input type="password" class="form-control" id="password" placeholder="Lösenord" required>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+<div class="container center_div">
+    <form data-toggle="validator" role="form" method="post">
+        <div class="form-group">
+            <label for="loginUsername" class="control-label">Användarnamn</label>
+            <input type="text" class="form-control" name="username" id="loginUsername" placeholder="Användarnamn" required>
+        </div>
+        <div class="form-group">
+            <label for="loginPassword" class="control-label">Lösenord</label>
+            <input type="password" class="form-control" name="password" id="loginPassword" placeholder="Lösenord" required>
+        </div>
+        <div class="checkbox">
+        <input type="checkbox" id="remeber_me" name="remeber_me"> Remember me
     </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
 
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
 {% endblock %}
