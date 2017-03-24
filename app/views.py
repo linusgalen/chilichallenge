@@ -2,7 +2,7 @@
 
 from OpenSSL import SSL
 
-from app import app, db, models
+from app import app, db, models, mail
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
@@ -12,7 +12,7 @@ from stripe import api_key
 
 from .models import User, Product, UserHasUser, Address, Challenge
 from .forms import RegisterForm, LoginForm, AddressForm
-
+from flask_mail import Message
 
 @app.before_request
 def before_request():
@@ -175,3 +175,10 @@ def aboutchili():
 def product(product_id):
     product =db.session.query(Product).get(product_id).seralize
     return jsonify(product)
+
+@app.route("/mailing")
+def mailing():
+   msg = Message('Hello', sender = 'chilichallengeinfo@gmail.com', recipients = ['trouvejohanna@gmail.com'])
+   msg.body = "This is the email body"
+   mail.send(msg)
+   return "Sent"
