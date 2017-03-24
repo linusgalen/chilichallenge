@@ -2,11 +2,7 @@
 import random
 import string
 
-<<<<<<< HEAD
-from app import app, db, models, mail
-=======
-from app import app, db, models, stripe_keys
->>>>>>> d1f71e116676280e0dc9978514c18a2aec4c86ec
+from app import app, db, models, stripe_keys, mail, emails
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
@@ -16,7 +12,7 @@ from stripe import api_key
 from datetime import datetime
 from .models import User, Product, UserHasUser, Address, Challenge
 from .forms import RegisterForm, LoginForm, AddressForm
-from flask_mail import Message
+
 
 @app.before_request
 def before_request():
@@ -166,7 +162,8 @@ def charge():
         description=bought_product.name
     )
 
-    #TODO Send confirmation Email
+    emails.mail_payment_confirmation(email, first_name, message)
+
 
     return render_template('charge.html',
                            email=email,
@@ -238,14 +235,9 @@ def product(product_id):
     product = db.session.query(Product).get(product_id).seralize
     return jsonify(product)
 
-<<<<<<< HEAD
+
 @app.route("/mailing")
 def mailing():
-   msg = Message('Hello', sender = 'chilichallengeinfo@gmail.com', recipients = ['trouvejohanna@gmail.com'])
-   msg.body = "This is the email body"
-   mail.send(msg)
-   return "Sent"
-=======
 
+   return emails.mail_payment_confirmation('trouvejohanna@gmail.com', 'Oskar', "TJENARE")
 
->>>>>>> d1f71e116676280e0dc9978514c18a2aec4c86ec
