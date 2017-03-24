@@ -132,6 +132,9 @@ def select_chili():
 def checkout():
     product_list = Product.query.all()
     address_form=AddressForm()
+
+    # first_name = request.form['first_name']
+
     address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
     key = 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu'
 

@@ -58,71 +58,84 @@
                             </div>
                             <div class="tab-pane" role="tabpanel" id="step2">
                                 <h3>Step 2</h3>
-                                <div class="container center_div">
-                                    <h1 class="col-sm-10">Skriv in vem som ska få utmaningen</h1>
+                                <div class= "col-xs-12" "col-lg-4" "col-md-4">
+                                    <h1>Skriv in vem som ska få utmaningen</h1>
 
-                                    {{ adress_form.hidden_tag() }}
+                                    <form data-toggle="validator" role="form" method="post">
 
-                                    <div class="col-sm-10">
-                                        {{ adress_form.email (size=20, placeholder="Din email för kvitto", class="form-control", id="checkout_email") }}
-                                        {% for error in adress_form.email.errors %}
-                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                            <span style="color: red;">{{ error }} </span>
-                                        {% endfor %}<br><br>
-                                    </div>
+                                        <div class="form-group">
+                                          <label for="first_name" class="control-label">Förnamn</label>
+                                          <input type="text"
+                                          class="form-control"
+                                          name="first_name"
+                                          placeholder="Förnamn"
+                                          data-required-error="Måste vara ett hett namn"
+                                          data-error="Gör om gör rätt" required>
+                                          <div class="help-block with-errors"></div>
+                                        </div>
 
-                                    <div class="col-sm-10">
-                                        {{ adress_form.first_name (size=20, placeholder="Förnamn", class="form-control", id="checkout_first_name") }}
-                                        {% for error in adress_form.first_name.errors %}
-                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                            <span style="color: red;">{{ error }} </span>
-                                        {% endfor %}<br><br>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        {{ adress_form.last_name (size=40, placeholder="Efternamn", class="form-control", id="checkout_last_name") }}
-                                        {% for error in adress_form.last_name.errors %}
-                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                            <span style="color: red;">{{ error }} </span>
-                                        {% endfor %}<br><br>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        {{ adress_form.address (size=40, placeholder="Gatuadress", class="form-control", id="checkout_address") }}
-                                        {% for error in adress_form.address.errors %}
-                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                            <span style="color: red;">{{ error }} </span>
-                                        {% endfor %}<br><br>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        {{ adress_form.zipcode (size=40, placeholder="Postnummer", class="form-control", type="number", maxlength="5", id="checkout_zip") }}
-                                        {% for error in adress_form.zipcode.errors %}
-                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                            <span style="color: red;">{{ error }} </span>
-                                        {% endfor %}<br><br>
-                                    </div>
-                                    <div class="col-sm-10">
-                                        {{ adress_form.city (size=40, placeholder="Stad", class="form-control", id="checkout_city") }}
-                                        {% for error in adress_form.city.errors %}
-                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                            <span style="color: red;">{{ error }} </span>
-                                        {% endfor %}<br><br>
-                                    </div>
-                                </div>
+                                        <div class="form-group">
+                                          <label for="last_name" class="control-label">Efternamn</label>
+                                          <input type="text"
+                                          class="form-control"
+                                          name="last_name"
+                                          placeholder="Efternamn"
+                                          data-required-error="Måste finnas efternamn"
+                                          data-error="Syntax error!" required>
+                                          <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="street_address" class="control-label">Gatuadress</label>
+                                          <input type="text" class="form-control"
+                                          name="street_address"
+                                          placeholder="Gatuadress"
+                                          data-required-error="Skriv en het mail"
+                                          data-error="Måste finnas" required>
+                                          <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="zipcode" class="control-label">Postnummer</label>
+                                          <input
+                                          class="form-control"
+                                          name="zipcode"
+                                          placeholder="Postnummer"
+                                          data-required-error="Kan inte vara tomt"
+                                          pattern="[0-9]{5}"
+                                          data-error="Måste vara ett postnummer" required>
+                                          <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                          <label for="city" class="control-label">Stad</label>
+                                          <input
+                                          class="form-control"
+                                          name="city"
+                                          placeholder="Stad"
+                                          data-required-error="Kan inte vara tomt"
+                                          type="text"
+                                          data-error="Syntax chili" required>
+                                          <div class="help-block with-errors"></div>
+                                        </div>
+
+                                        <div class="col-sm-10">
+                                          <p><input type="submit" value="Till betalning" class="btn btn-default"></p>
+                                        </div>
+                                      </form>
+
 
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-default prev-step">Föregående</button></li>
                                     <li><button type="button" class="btn btn-primary next-step">Nästa</button></li>
                                 </ul>
                             </div>
+                          </div>
                             <div class="tab-pane" role="tabpanel" id="step3">
                                 <h3>Step 3</h3>
-                                <div class="container center_div">
-                                    <form class="form-inline" action="" method="post" name="personal_message">
-                                        {{ adress_form.message (placeholder="Personligt meddelande", class="col-xs-12 ", rows="5") }}
-                                        {% for error in adress_form.message.errors %}
-                                            <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                                            <span style="color: red;">{{ error }} </span>
-                                        {% endfor %}
-                                        <br><br>
+                                <div class="container-fluid">
+                                    <form data-toggle="validator" role="form" method="post">
+                                      
                                     </form>
                                 </div>
                                 <ul class="list-inline pull-right">
