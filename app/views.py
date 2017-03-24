@@ -147,6 +147,7 @@ def charge():
     db.session.add(new_challenge)
     db.session.commit()
 
+
     amount=int(bought_product.price)*100
 
     customer = stripe.Customer.create(
