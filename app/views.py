@@ -1,6 +1,6 @@
 # coding=utf-8
-
-from OpenSSL import SSL
+import random
+import string
 
 <<<<<<< HEAD
 from app import app, db, models, mail
@@ -13,7 +13,7 @@ from flask_login import LoginManager
 import json
 import stripe
 from stripe import api_key
-
+from datetime import datetime
 from .models import User, Product, UserHasUser, Address, Challenge
 from .forms import RegisterForm, LoginForm, AddressForm
 from flask_mail import Message
@@ -107,8 +107,49 @@ def charge():
     email=request.form['email']
     product_id=request.form['productId']
 
+    #Address
+    first_name=request.form['firstName']
+    last_name=request.form['lastName']
+    address=request.form['address']
+    city=request.form['city']
+    zip=request.form['zip']
+    message=request.form['message']
+
+
     bought_product=db.session.query(Product).get(product_id)
 
+    new_address=Address(
+        zip=zip,
+        last_name=last_name,
+        first_name=first_name,
+        city=city,
+        address=address,
+        email=email
+    )
+    db.session.add(new_address)
+    db.session.commit()
+
+    #Make sure challenge_code is unique
+    flag=True
+    while flag:
+        length=5
+        challenge_code=''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(length))
+        test_challenge = Challenge.query.filter_by(challenge_code=challenge_code).first()
+        if test_challenge is None:
+            flag=False
+
+
+    print(challenge_code)
+
+    new_challenge=Challenge(
+        message=message,
+        address_id=new_address.id,
+        product_id=product_id,
+        datetime=datetime.now(),
+        challenge_code=challenge_code
+    )
+    db.session.add(new_challenge)
+    db.session.commit()
 
 
     amount=int(bought_product.price)*100
@@ -124,11 +165,13 @@ def charge():
         currency='SEK',
         description=bought_product.name
     )
-    print('Ture:?'+charge.paied)
+
+    #TODO Send confirmation Email
 
     return render_template('charge.html',
                            email=email,
-                           product=bought_product)
+                           product=bought_product,
+                           address=new_address)
 
 
 
