@@ -35,9 +35,35 @@ $(document).ready(function () {
         return product_id=$("input[type='radio'][name=product_radio]:checked").val();
     }
 
+
     function getAmount() {
         var productId=getCurrentProductId();
         return parseInt($('#product_price_'+productId).text().replace(/[^0-9\.]/g, ''), 10)*100;
+    }
+
+
+    function getFirstName(){
+        return $('#checkout_first_name').val()
+    }
+
+    function getLastName(){
+        return $('#checkout_last_name').val()
+    }
+
+    function getZip(){
+        return $('#checkout_zip').val()
+    }
+
+    function getAddress(){
+        return $('#checkout_address').val();
+    }
+
+    function getCity(){
+        return $('#checkout_city').val();
+    }
+
+    function getMessage(){
+        return $('#checkout_message').val();
     }
 
     //Stripe Handler
@@ -49,13 +75,15 @@ $(document).ready(function () {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
 
+
+            //Function for create a hidden from that submits and sends data to server
             var util = {};
-            util.post = function(url, fields) {
+            util.post = function (url, fields) {
                 var $form = $('<form>', {
                     action: url,
                     method: 'post'
                 });
-                $.each(fields, function(key, val) {
+                $.each(fields, function (key, val) {
                     $('<input>').attr({
                         type: "hidden",
                         name: key,
@@ -65,15 +93,27 @@ $(document).ready(function () {
                 $form.appendTo('body').submit();
             };
 
-            util.post('/charge', {tokenId: token.id, email: token.email, productId:getCurrentProductId()});
-
-            var jsonData=JSON.stringify({
-                tokenId:token.id,
-                email:token.email,
-                productId:getCurrentProductId()
+            //Excecute form submit
+            util.post('/charge', {
+                tokenId: token.id,
+                email: token.email,
+                productId: getCurrentProductId(),
+                address: getAddress(),
+                zip: getZip(),
+                city: getCity(),
+                firstName: getFirstName(),
+                lastName: getLastName(),
+                message: getMessage()
             });
 
-            console.log(jsonData);
+
+            //  var jsonData=JSON.stringify({
+            //     tokenId:token.id,
+            //     email:token.email,
+            //     productId:getCurrentProductId()
+            // });
+
+            //console.log(jsonData);
 
             // $.ajax({
             //     dataType: "json",
@@ -112,10 +152,10 @@ $(document).ready(function () {
 
 
     $('#checkout_from').change(function(){
-        // console.log($('#checkout_from').serializeArray());
         $('#checkout_from').v
 
         var $inputs = $('#checkout_from :input');
+
 
         // not sure if you wanted this, but I thought I'd add it.
         // get an associative array of just the values.
@@ -147,7 +187,6 @@ $(document).ready(function () {
         $('#confirm_address').append(values['address']);
         $('#confirm_zipcode').append(values['zipcode']);
         $('#confirm_city').append(values['city']);
-
 
 
 
