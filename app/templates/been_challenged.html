@@ -3,76 +3,81 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
 {% block content %}
-  <body>
-{% if showform %}
-<div class="container">
-  <h2>Utmanad</h2>
-  <form action="" id="confirm_code" name="confirm_code" method="POST">
-    <div class="form-group"  >
-        <div class = "col-xs-3">
-          <label for="email">Skriv koden du har fått via utmaningen:</label>
-          <input type="text" class="form-control" placeholder = "kod" id="generated_code" name="generated_code">
-          <br>
-          <button type="submit" class="btn btn-primary" name="message_button"> Se meddelande </button>
-        </div>
-    </div>
-  </form>
-{% endif %}
+    <body>
+    {% if showform %}
+        <div class="container">
+        <h2>Utmanad</h2>
+        <form action="" id="confirm_code" name="confirm_code" method="POST">
+            <div class="form-group"  >
+                <div class = "col-xs-3">
+                    <label for="email">Skriv koden du har fått via utmaningen:</label>
+                    <input type="text" class="form-control" placeholder = "kod" id="generated_code" name="generated_code">
+                    <br>
+                    <button type="submit" class="btn btn-primary" name="message_button"> Se meddelande </button>
+                </div>
+            </div>
+        </form>
+    {% endif %}
 
-</div>
-{% if message %}
-    <div class="container"  >
-        <div class="alert alert-success" role="alert" name="message" id="message_container">
-            <p>{{ message }}
-            </p>
-        </div>
     </div>
-    <br>
-    <form class="form-horizontal" role="form" method="post" action="index.php">
+    {% if message %}
+        <form class="form-horizontal" role="form" method="post" action="index.php">
+            <div class="form-group">
+                <label for="message" class="col-sm-2 control-label">Meddelande</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        <div class="well col-sm-7">
+                        {{message}}
+                        </div>
+                    </p>
+                    <!-- <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value=""> -->
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        {{email}}
+                    </p>
+                    <!-- <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value=""> -->
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message" class="col-sm-2 control-label">Message</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="4" name="message"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-6 col-sm-offset-2">
+                    <input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
+                </div>
+            </div>
+            <br>
 
-    	<div class="form-group">
-    		<label for="email" class="col-sm-2 control-label">Email</label>
-    		<div class="col-sm-10">
-          <p class="form-control-static">
-            {{email}}
-          </p>
-    			<!-- <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value=""> -->
-    		</div>
-    	</div>
-    	<div class="form-group">
-    		<label for="message" class="col-sm-2 control-label">Message</label>
-    		<div class="col-sm-10">
-    			<textarea class="form-control" rows="4" name="message"></textarea>
-    		</div>
-    	</div>
-    	<div class="form-group">
-    		<div class="col-sm-10 col-sm-offset-2">
-    			<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary">
-    		</div>
-    	</div>
-      <br>
-      <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
-    	<div class="form-group">
-    		<div class="col-sm-10 col-sm-offset-2">
-    			<! Will be used to display an alert to the user>
-    		</div>
-    	</div>
-    </form>
-{% endif %}
-</body>
-{#<script>#}
-{#      $(document).ready(function(){#}
-{##}
-{#        $("#message_container").hide();#}
-{#        $("#confirm_code").show();#}
-{##}
-{##}
-{#        $("#message_button").click(function() {#}
-{#          $("#confirm_code").hide();#}
-{#          $("#message_container").show();#}
-{#        });#}
-{##}
-{#      });#}
-{#      </script>#}
+            <div class="form-group">
+                <div class="col-sm-10">
+                    <! Will be used to display an alert to the user>
+                </div>
+            </div>
+        </form>
+        <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
+    {% endif %}
+    </body>
+    {#<script>#}
+    {#      $(document).ready(function(){#}
+    {##}
+    {#        $("#message_container").hide();#}
+    {#        $("#confirm_code").show();#}
+    {##}
+    {##}
+    {#        $("#message_button").click(function() {#}
+    {#          $("#confirm_code").hide();#}
+    {#          $("#message_container").show();#}
+    {#        });#}
+    {##}
+    {#      });#}
+    {#      </script>#}
     <script src="../static/been_challenged.js"></script>
 {%endblock %}
