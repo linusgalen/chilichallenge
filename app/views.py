@@ -178,8 +178,10 @@ def product(product_id):
 
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
+    incrementer = 0
 
     if request.method == 'POST':
+        incrementer = incrementer + 1
         challenge_code = request.form['generated_code']
         if challenge_code =='':
             flash('ingen kod')
@@ -196,6 +198,11 @@ def challenged():
             flash('finns inget meddelande')
             showform = True
             return render_template('been_challenged.html', showform = showform)
+        if incrementer > 1:
+            ans_message = request.form['answer_message']
+        #if answer_message != '':
+        #    flash('hahshdahsdh ajjajaja ja')
+        #    return render_template('been_challenged.html')
 
         #ordertest = Order.query.filter_by(challenge_id=challengemessage.id).first()
 
