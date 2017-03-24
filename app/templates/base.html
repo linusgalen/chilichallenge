@@ -18,6 +18,10 @@
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
+
+    <!-- External Stripe script -->
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
     <!-- Our scripts -->
     <script src="{{url_for('static', filename='checkout_process.js')}}"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -39,37 +43,37 @@
 {% block nav %}
     <body data-spy = "scroll" data-target = ".navbar" data-offset = "50">
     <section class="navbar-info">
-    <nav class="navbar navbar-default navbar-me">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed menu-collapsed-button" data-toggle="collapse" data-target=
-                        "#navbar-primary-collapse" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="./">ChiliChallange</a>
-            </div>
-            <div>
-                <div class="collapse navbar-collapse header-right-menu" id="navbar-primary-collapse-test">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/index#home">Hem</a></li>
-                        <li><a href="/index#about">Om</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if g.user.is_authenticated %}
-                    <li> <a href="/profile" id="test">{{ g.user.username }} </a></li>
-                      <li> <a href="/signout" id="test">Logga ut </a></li>
-                {% else %}
-                     <li > <a href="/register" id="test">Registrera dig</a> </li>
-                    <li > <a href="/login" id="test">Logga In</a> </li>
-                {% endif %}
-                    </ul>
+        <nav class="navbar navbar-default navbar-me">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed menu-collapsed-button" data-toggle="collapse" data-target=
+                            "#navbar-primary-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="./">ChiliChallange</a>
+                </div>
+                <div>
+                    <div class="collapse navbar-collapse header-right-menu" id="navbar-primary-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#home" id="test">Hem</a></li>
+                            <li><a href="#about" id="test">Om</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if g.user.is_authenticated %}
+                                <li> <a href="/profile" id="test">{{ g.user.username }} </a></li>
+                                <li> <a href="/signout" id="test">Logga ut </a></li>
+                            {% else %}
+                                <li > <a href="/register" id="test">Registrera dig</a> </li>
+                                <li > <a href="/login" id="test">Logga In</a> </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     </section>
 {% endblock %}
 <div class="content">
@@ -77,9 +81,9 @@
     {% endblock %}
 </div>
 {% block foot %}
-<div id="the_end" class="containter-fluid">
-    <p style="text-align: center"> Copyright ChiliChallange.</p>
-</div>
+    <div id="the_end" class="containter-fluid">
+        <p style="text-align: center"> Copyright ChiliChallange.</p>
+    </div>
 {% endblock %}
 <script src="../static/base.js"></script>
 </body>

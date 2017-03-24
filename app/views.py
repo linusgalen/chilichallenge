@@ -2,7 +2,11 @@
 
 from OpenSSL import SSL
 
+<<<<<<< HEAD
 from app import app, db, models, mail
+=======
+from app import app, db, models, stripe_keys
+>>>>>>> d1f71e116676280e0dc9978514c18a2aec4c86ec
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
@@ -28,6 +32,8 @@ def index():
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -55,14 +61,16 @@ def login():
                                    form=form)
 
     return render_template('login.html',
-                       title='Logga in',
-                       form=form)
+                           title='Logga in',
+                           form=form)
+
+
 # if user.is_correct_password(password):
 
 
 # else:
-#flash('Fel anvandarnamn eller losenord')
-#return redirect(url_for('login'))
+# flash('Fel anvandarnamn eller losenord')
+# return redirect(url_for('login'))
 
 
 
@@ -72,14 +80,18 @@ def signout():
 
     return redirect(url_for('index'))
 
+
 @app.route('/register', methods=["GET", "POST"])
 def register():
-    form =RegisterForm()
+    form = RegisterForm()
+
     if form.validate_on_submit():
-        address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data, zip=form.zip.data, city=form.city.data , email=form.email.data)
+        address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data,
+                          zip=form.zip.data, city=form.city.data, email=form.email.data)
         db.session.add(address)
         db.session.commit()
-        user = User(username=form.username.data, password=form.password.data, email=form.email.data, address_id=address.id )
+        user = User(username=form.username.data, password=form.password.data, email=form.email.data,
+                    address_id=address.id)
         db.session.add(user)
         db.session.commit()
 
@@ -88,74 +100,81 @@ def register():
     return render_template('register.html', form=form)
 
 
-
 @app.route('/charge', methods=['POST'])
 def charge():
 
-    # Amount in cents
-    amount = 10000
-    #username = g.user.username
+    token_id = request.form['tokenId']
+    email=request.form['email']
+    product_id=request.form['productId']
+
+    bought_product=db.session.query(Product).get(product_id)
+
+
+
+    amount=int(bought_product.price)*100
 
     customer = stripe.Customer.create(
-        email='customer@example.com',
-        source=request.form['stripeToken']
+        email=email,
+        source=token_id
     )
 
     charge = stripe.Charge.create(
         customer=customer.id,
         amount=amount,
-        currency='usd',
-        description='Flask Charge'
+        currency='SEK',
+        description=bought_product.name
     )
+    print('Ture:?'+charge.paied)
 
-    return render_template('charge.html', amount=amount)
+    return render_template('charge.html',
+                           email=email,
+                           product=bought_product)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
 
 
-
-
 @app.route('/select_friend', methods=["GET", "POST"])
 def select_chili():
-    address_form=AddressForm()
-    #TODO: get global user and get the friends
-    #friend_list=UserHasUser.
+    address_form = AddressForm()
+    # TODO: get global user and get the friends
+    # friend_list=UserHasUser.
     if address_form.validate_on_submit():
         redirect('/index')
 
     return render_template('select_friend.html',
                            adress_form=address_form)
 
+
 @app.route('/checkout', methods=["GET", "POST"])
 def checkout():
     product_list = Product.query.all()
-    address_form=AddressForm()
-    address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
+    address_form = AddressForm()
+    address_form.product_id.choices = [(product.id, 'Valj') for product in product_list]
     key = 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu'
 
     if 'product_radio' in request.form:
-        selected_product=request.form['product_radio']
+        selected_product = request.form['product_radio']
         print(selected_product)
-
-
 
     return render_template('checkout_process.html',
                            product_list=product_list,
                            adress_form=address_form,
                            key=key)
 
+
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
-
-    current_address = Address.query.filter_by(id = g.user.address_id).first();
-    challenge_list = Challenge.query.filter_by(user_id = g.user.id).all();
-
+    current_address = Address.query.filter_by(id=g.user.address_id).first();
+    challenge_list = Challenge.query.filter_by(user_id=g.user.id).all();
 
     return render_template('profile_page.html',
-                           current_user = g.user,
-                           current_address = current_address,
-                           challenge_list = challenge_list,
+                           current_user=g.user,
+                           current_address=current_address,
+                           challenge_list=challenge_list,
                            key=api_key)
 
 
@@ -173,12 +192,17 @@ def aboutchili():
 
 @app.route('/aboutchili/<int:product_id>')
 def product(product_id):
-    product =db.session.query(Product).get(product_id).seralize
+    product = db.session.query(Product).get(product_id).seralize
     return jsonify(product)
 
+<<<<<<< HEAD
 @app.route("/mailing")
 def mailing():
    msg = Message('Hello', sender = 'chilichallengeinfo@gmail.com', recipients = ['trouvejohanna@gmail.com'])
    msg.body = "This is the email body"
    mail.send(msg)
    return "Sent"
+=======
+
+
+>>>>>>> d1f71e116676280e0dc9978514c18a2aec4c86ec
