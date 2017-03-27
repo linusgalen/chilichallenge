@@ -87,6 +87,9 @@ def register():
 
     return render_template('register.html', form=form)
 
+@app.route('/aboutcc', methods=['GET'])
+def yolo():
+    return render_template('aboutCC.html')
 
 
 @app.route('/charge', methods=['POST'])
