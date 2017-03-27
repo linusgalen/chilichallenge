@@ -236,3 +236,6 @@ def product(product_id):
 
 
 
+@app.route('/social', methods=["GET"])
+def social():
+    return render_template('socialmedia.html')
