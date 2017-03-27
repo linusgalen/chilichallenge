@@ -2,7 +2,7 @@
 import random
 import string
 
-from app import app, db, models, stripe_keys
+from app import app, db, models, stripe_keys, mail, emails
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
@@ -162,7 +162,8 @@ def charge():
         description=bought_product.name
     )
 
-    #TODO Send confirmation Email
+    emails.mail_payment_confirmation(email, first_name, message, new_address)
+
 
     return render_template('charge.html',
                            email=email,
@@ -235,4 +236,8 @@ def product(product_id):
     return jsonify(product)
 
 
+@app.route("/mailing")
+def mailing():
+
+   return emails.mail_payment_confirmation('trouvejohanna@gmail.com', 'Oskar', "TJENARE")
 
