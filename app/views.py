@@ -131,11 +131,21 @@ def select_chili():
 @app.route('/checkout', methods=["GET", "POST"])
 def checkout():
     product_list = Product.query.all()
-    address_form=AddressForm()
+    # address_form=AddressForm()
 
-    # first_name = request.form['first_name']
+    if 'first_name' in request.form:
+        first_name = request.form['first_name']
 
-    address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
+    if 'last_name' in request.form:
+        last_name = request.form['last_name']
+
+    if 'street_address' in request.form:
+        street_address = request.form['street_address']
+
+    if 'zipcode' in request.form:
+        zipcode = request.form['zipcode']
+
+    # address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
     key = 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu'
 
     if 'product_radio' in request.form:
@@ -146,7 +156,7 @@ def checkout():
 
     return render_template('checkout_process.html',
                            product_list=product_list,
-                           adress_form=address_form,
+                           #adress_form=address_form,
                            key=key)
 
 @app.route('/profile', methods=["GET", "POST"])
