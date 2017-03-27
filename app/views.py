@@ -15,7 +15,7 @@ from .models import User, Product, UserHasUser, Address, Challenge, Order
 
 from datetime import datetime
 from .models import User, Product, UserHasUser, Address, Challenge
->>>>>>> 4ec5c7e295dcdd47e8e121af9d939e346d80badf
+
 from .forms import RegisterForm, LoginForm, AddressForm
 
 
