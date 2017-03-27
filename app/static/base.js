@@ -1,6 +1,5 @@
 
 
-
 $(document).ready(function() {
 
     $('body').scrollspy({target: ".navbar-me", offset: 50});
@@ -16,10 +15,6 @@ $(document).ready(function() {
             });
         }
     });
-
-    
-
-
 });
 
 

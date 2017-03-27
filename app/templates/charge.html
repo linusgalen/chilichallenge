@@ -1,4 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>Thanks, you paid <strong>{{ amount/100 }}</strong>!</h2>
-{% endblock %}
+
+
+    <div class="page-header">
+        <h1 class="success">Tack för ditt Köp!</h1>
+    </div>
+    <p>Ett bekräftelsemail har skickats till: <strong>{{ email }}</strong></p>
+    <p>En <strong>{{ product.name }}</strong> kommer såsmåninngom trilla ner i brevlådan hos <strong>{{ address.first_name }} {{ address.last_name }}</strong>.</p>
+    <p>{{ address.first_name }} {{ address.last_name }} bli även ombedd att dokumentera händelseförloppet av denna heta ärofyllda utnamningen och en videolänk kommer då att dyka upp i din mail</p>
+    <a class="btn btn-primary btn-large" href="{{ url_for('index') }}">Till Startsidan</a>
+
+{% endblock %}
+

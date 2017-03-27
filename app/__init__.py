@@ -6,6 +6,7 @@ from flask_admin.contrib import sqla
 from flask_login import LoginManager
 import os
 import stripe
+from flask_mail import Mail
 
 stripe_keys = {
   'secret_key': 'sk_test_xiZrTPRhV7otP7ZjRE0FOK2Z', #os.environ['SECRET_KEY'],
@@ -17,11 +18,22 @@ stripe.api_key = stripe_keys['secret_key']
 app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
+app.config.from_object('config.ProductionConfig')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 app.config['BASIC_AUTH_USERNAME'] = 'admin'
 app.config['BASIC_AUTH_PASSWORD'] = 'admin'
 
 basic_auth = BasicAuth(app)
+
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'chilichallengeinfo@gmail.com'
+app.config['MAIL_PASSWORD'] = 'hethetare'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 from app import views, models
 from app.models import User, Challenge, Address, Order, Product, UserHasUser

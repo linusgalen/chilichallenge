@@ -21,4 +21,8 @@ Tempita==0.5.2
 Werkzeug==0.11.15
 WTForms==2.1
 stripe
-pyOpenSSL
+gunicorn==19.6.0
+psycopg2
+Flask-Script
+Flask-Migrate==1.8.0
+Flask-Mail
