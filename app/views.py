@@ -162,7 +162,7 @@ def charge():
         description=bought_product.name
     )
 
-    emails.mail_payment_confirmation(email, first_name, message)
+    emails.mail_payment_confirmation(email, first_name, message, new_address)
 
 
     return render_template('charge.html',
