@@ -176,43 +176,66 @@ def product(product_id):
     product =db.session.query(Product).get(product_id).seralize
     return jsonify(product)
 
+global challenge_code
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
-    incrementer = 0
+
 
     if request.method == 'POST':
-        incrementer = incrementer + 1
-        challenge_code = request.form['generated_code']
-        if challenge_code =='':
-            flash('ingen kod')
-            showform = True
-            return render_template('been_challenged.html', showform = showform)
-        #order_number = request.form['order']
-        #if order_number =='':  # WE WILL REMOVE
-            #flash('ingen order')
-            #return render_template('been_challenged.html')
-            #-------------------------------------
 
-        challengemessage = Challenge.query.filter_by(challenge_code=challenge_code).first()
-        if challengemessage is None:
-            flash('finns inget meddelande')
-            showform = True
-            return render_template('been_challenged.html', showform = showform)
-        if incrementer > 1:
+        if 'message_button' in request.form:
+
+            challenge_code = request.form['generated_code']
+            if challenge_code =='':
+                flash('ingen kod')
+
+                showform = True
+                return render_template('been_challenged.html', showform = showform)
+            #order_number = request.form['order']
+            #if order_number =='':  # WE WILL REMOVE
+                #flash('ingen order')
+                #return render_template('been_challenged.html')
+                #-------------------------------------
+
+            challengemessage = Challenge.query.filter_by(challenge_code=challenge_code).first()
+            if challengemessage is None:
+                flash('finns inget meddelande')
+                showform = True
+                return render_template('been_challenged.html', showform = showform )
+
+
+            #if answer_message != '':
+            #    flash('hahshdahsdh ajjajaja ja')
+            #    return render_template('been_challenged.html')
+
+            #ordertest = Order.query.filter_by(challenge_id=challengemessage.id).first()
+
+            #if ordertest is None:
+            #    flash('det finns ingen order')
+            #    return render_template('been_challenged.html')
+            #------------------------
+            message = challengemessage.message
+            email = challengemessage.address.email
+            showform = False
+            return render_template('been_challenged.html', message=message, showform=showform, email = email, challengemessage = challengemessage)
+            #------------------------
+        if 'submit' in request.form:
+            flash('vi kom hit')
+            #chal_id = request.form
+            chal_id = request.form['special']
+            flash(chal_id)
             ans_message = request.form['answer_message']
-        #if answer_message != '':
-        #    flash('hahshdahsdh ajjajaja ja')
-        #    return render_template('been_challenged.html')
+            flash(ans_message)
+            chal = Challenge.query.filter_by(id=chal_id).first()
+            flash(chal)
 
-        #ordertest = Order.query.filter_by(challenge_id=challengemessage.id).first()
+            chal.answer_message = ans_message
+            #answer = Challenge(answer_message = ans_message)
+            #db.session.add(answer)
+            db.session.commit()
+            #flash(chal)
+            return render_template('been_challenged.html')
 
-        #if ordertest is None:
-        #    flash('det finns ingen order')
-        #    return render_template('been_challenged.html')
-        message = challengemessage.message
-        email = challengemessage.address.email
-        showform = False
-        return render_template('been_challenged.html', message=message, showform=showform, email = email)
     else:
         message = ""
         showform = True
