@@ -152,11 +152,11 @@ def checkout():
         selected_product=request.form['product_radio']
         print(selected_product)
 
-
+    if 'message' in request.form:
+        message = request.form['message']
 
     return render_template('checkout_process.html',
                            product_list=product_list,
-                           #adress_form=address_form,
                            key=key)
 
 @app.route('/profile', methods=["GET", "POST"])
