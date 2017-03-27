@@ -1,15 +1,15 @@
 # coding=utf-8
+import random
+import string
 
-from OpenSSL import SSL
-
-from app import app, db, models
+from app import app, db, models, stripe_keys
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
 import json
 import stripe
 from stripe import api_key
-
+from datetime import datetime
 from .models import User, Product, UserHasUser, Address, Challenge
 from .forms import RegisterForm, AddressForm
 
@@ -17,6 +17,7 @@ from .forms import RegisterForm, AddressForm
 @app.before_request
 def before_request():
     g.user = current_user
+
 
 @app.route('/')
 @app.route('/index')
@@ -27,6 +28,8 @@ def index():
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
@@ -46,18 +49,6 @@ def login():
     flash('Logged in successfully', 'success')
     return redirect(url_for('index'))
 
-#Denna kod används inte, men har inte tagits bort ifall något liknande ska skrivas
-# @app.route('/usernameCheck', methods=["GET", "POST"])
-# def usernameCheck():
-#     username = request.data
-#     print(username)
-#     user = User.query.filter_by(username=username).first()
-#     if user is None:
-#         return "Användarnamnet finns inte"
-#     return "..."
-
-
-
 @app.route('/signout')
 def signout():
     logout_user()
@@ -66,22 +57,29 @@ def signout():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+    user_valid = True
+    email_valid = True
     if request.method == 'GET':
-        return render_template('register.html')
-
-    #address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data, zip=form.zip.data, city=form.city.data , email=form.email.data)
-    #db.session.add(address)
-    #db.session.commit()
+        return render_template('register.html',
+                               user_valid = user_valid,
+                               email_valid = email_valid)
     username = request.form['username']
-    userCheck = User.query.filter_by(username = username).first()
-    if userCheck is not None:
-        flash("Användarnamnet finns redan")
-        return redirect(url_for('register'))
+    user_check = User.query.filter_by(username = username).first()
+    if user_check is not None:
+        user_valid = False
     email = request.form['email']
-    emailCheck = User.query.filter_by(email = email).first()
-    if emailCheck is not None:
-        flash("Emailen finns redan")
-        return redirect(url_for('register'))
+
+    print('email:'+email+' usrname:'+username)
+
+
+    email_check = User.query.filter_by(email = email).first()
+    if email_check is not None:
+        email_valid = False
+    if user_check is not None or email_check is not None:
+        print('hello')
+        return render_template('register.html',
+                               user_valid = user_valid,
+                               email_valid = email_valid)
     user = User(username=username, password=request.form['password'], email=email)
     db.session.add(user)
     db.session.commit()
@@ -89,39 +87,91 @@ def register():
     return redirect(url_for('index'))
 
 
-
 @app.route('/charge', methods=['POST'])
 def charge():
 
-    # Amount in cents
-    amount = 10000
-    #username = g.user.username
+    token_id = request.form['tokenId']
+    email=request.form['email']
+    product_id=request.form['productId']
+
+    #Address
+    first_name=request.form['firstName']
+    last_name=request.form['lastName']
+    address=request.form['address']
+    city=request.form['city']
+    zip=request.form['zip']
+    message=request.form['message']
+
+
+    bought_product=db.session.query(Product).get(product_id)
+
+    new_address=Address(
+        zip=zip,
+        last_name=last_name,
+        first_name=first_name,
+        city=city,
+        address=address,
+        email=email
+    )
+    db.session.add(new_address)
+    db.session.commit()
+
+    #Make sure challenge_code is unique
+    flag=True
+    while flag:
+        length=5
+        challenge_code=''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(length))
+        test_challenge = Challenge.query.filter_by(challenge_code=challenge_code).first()
+        if test_challenge is None:
+            flag=False
+
+
+    print(challenge_code)
+
+    new_challenge=Challenge(
+        message=message,
+        address_id=new_address.id,
+        product_id=product_id,
+        datetime=datetime.now(),
+        challenge_code=challenge_code
+    )
+    db.session.add(new_challenge)
+    db.session.commit()
+
+
+    amount=int(bought_product.price)*100
 
     customer = stripe.Customer.create(
-        email='customer@example.com',
-        source=request.form['stripeToken']
+        email=email,
+        source=token_id
     )
 
     charge = stripe.Charge.create(
         customer=customer.id,
         amount=amount,
-        currency='usd',
-        description='Flask Charge'
+        currency='SEK',
+        description=bought_product.name
     )
 
-    return render_template('charge.html', amount=amount)
+    #TODO Send confirmation Email
+
+    return render_template('charge.html',
+                           email=email,
+                           product=bought_product,
+                           address=new_address)
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
 
 
-
-
 @app.route('/select_friend', methods=["GET", "POST"])
 def select_chili():
-    address_form=AddressForm()
-    #TODO: get global user and get the friends
-    #friend_list=UserHasUser.
+    address_form = AddressForm()
+    # TODO: get global user and get the friends
+    # friend_list=UserHasUser.
     if address_form.validate_on_submit():
         redirect('/index')
 
@@ -149,7 +199,7 @@ def checkout():
     key = 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu'
 
     if 'product_radio' in request.form:
-        selected_product=request.form['product_radio']
+        selected_product = request.form['product_radio']
         print(selected_product)
 
     if 'message' in request.form:
@@ -187,5 +237,5 @@ def aboutchili():
 
 @app.route('/aboutchili/<int:product_id>')
 def product(product_id):
-    product =db.session.query(Product).get(product_id).seralize
+    product = db.session.query(Product).get(product_id).seralize
     return jsonify(product)

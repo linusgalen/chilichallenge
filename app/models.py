@@ -110,6 +110,9 @@ class Challenge(db.Model):
         db.Integer, db.ForeignKey("address.id", onupdate="CASCADE", ondelete="CASCADE")
     )
 
+
+    challenge_code = db.Column(db.String(10), unique=True)
+
     address = db.relationship("Address", back_populates="challenge")
     user = db.relationship("User", back_populates="challenge")
     product = db.relationship("Product", back_populates="challenge")

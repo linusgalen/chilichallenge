@@ -1,6 +1,5 @@
 
 
-
 $(document).ready(function() {
 
     $('body').scrollspy({target: ".navbar-me", offset: 50});
@@ -16,16 +15,6 @@ $(document).ready(function() {
             });
         }
     });
-
-    /*$("#loginUsername").change(function(){
-        $.ajax({
-            method: "POST",
-            url: "/usernameCheck",
-            data:$("loginUsername").val()
-        }).done(function( msg ) {
-            alert( "Data Saved: " + msg );
-        });
-    });*/
 });
 
 
@@ -36,5 +25,3 @@ $(window).scroll(function() {
         $( ".navbar-me" ).removeClass("fixed-me");
     }
 });
-
-

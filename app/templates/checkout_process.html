@@ -1,6 +1,6 @@
 {% extends "select_chili.html" %}
 {% block nav %}
-{{super()}}
+    {{super()}}
 {% endblock %}
 {% block content  %}
 
@@ -12,38 +12,38 @@
                     <div class="connecting-line"></div>
                     <ul class="nav nav-tabs" role="tablist">
 
-                        <li role="presentation" class="active">
-                            <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                            <li role="presentation" class="active">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-fire"></i>
                             </span>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
 
-                        <li role="presentation" class="disabled">
-                            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                            <li role="presentation" class="disabled">
+                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
-                            </a>
-                        </li>
-                        <li role="presentation" class="disabled">
-                            <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                                </a>
+                            </li>
+                            <li role="presentation" class="disabled">
+                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
-                            </a>
-                        </li>
+                                </a>
+                            </li>
 
-                        <li role="presentation" class="disabled">
-                            <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                            <li role="presentation" class="disabled">
+                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-ok"></i>
                             </span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
 
                 <form role="form" method="post" id="checkout_form">
                     <div class="tab-content">
@@ -153,53 +153,46 @@
 
 
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Produktdetaljer</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <div>
-                                        <table class="table">
-                                            <thead>
-                                            <tr>
-                                                <th>Produkt</th>
-                                                <th>Pris</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <td id="confirm_product_name"></td>
-                                                <td id="confirm_product_price"></td>
-                                                <td>
-                                                    <img src="" id="confirm_product_img">
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Produktdetaljer</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div>
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th>Produkt</th>
+                                                    <th>Pris</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td id="confirm_product_name"></td>
+                                                    <td id="confirm_product_price"></td>
+                                                    <td>
+                                                        <img src="" id="confirm_product_img">
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Chilin kommer skickas till</h3>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Chilin kommer skickas till</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="confirm_address"></div>
+                                        <div id="confirm_zipcode"></div>
+                                        <div id="confirm_city"></div>
+
+
                                 </div>
-                                <div class="panel-body">
-                                    <div id="confirm_address"></div>
-                                    <div id="confirm_zipcode"></div>
-                                    <div id="confirm_city"></div>
-
-
-                                </div>
                             </div>
-
-                            <form action="/charge" method="post">
-                                <script id="stripe_script" src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                        data-key="{{ key }}"
-                                        data-description="A Flask Charge"
-                                        data-amount= 10000
-                                        data-locale="auto"></script>
-                            </form>
+                            <button id="customButton" class="btn-primary" type="submit">Purchase</button>
                         </div>
                     </div>
                     <div class="clearfix"></div>
