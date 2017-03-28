@@ -6,15 +6,27 @@
     background-image: url("http://rooziato.com/wp-content/uploads/2016/09/hot-red-chilli-pepper-155559-1024x634.jpg");
 }
 
+#chl_btn{
+    margin-top: 250px;
+    border-radius: 25px;
+}
+
+
 #about {
     padding-top: 50px;
     height: 700px;
-    color: #fff;
+    color: #ffffff;
     background-color: #eae5d0;
 }
 
-#chl_btn{
-    margin-top: 250px;
+#about_text {
+    color: #000000;
+    margin: 80px 180px 0px 180px;
+    padding: 40px;
+}
+
+#chl_about_btn {
+    margin-top: 80px;
     border-radius: 25px;
 }
 
@@ -32,14 +44,12 @@
 body{
     margin: 0px;
     padding: 0px;
-    /*min-height: 2500px;*/
-
 }
+
 .navbar-info {
     width: 100%;
-
-
 }
+
 .fixed-me{
     transition: all 0.5s ;
     -o-transition: all 0.5s;
@@ -65,7 +75,7 @@ body{
     -ms-transition: all 0.5s;
     -moz-transition: all 0.5s;
     -o-transition: all 0.5s;
-     -webkit-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
 
 
 }

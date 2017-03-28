@@ -2,15 +2,20 @@
 import random
 import string
 
-from app import app, db, models, stripe_keys
+from app import app, db, models, stripe_keys, mail, emails
 from flask import render_template, request, session, url_for, flash, redirect, jsonify, g
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_login import LoginManager
 import json
 import stripe
 from stripe import api_key
+
+
+from .models import User, Product, UserHasUser, Address, Challenge, Order
+
 from datetime import datetime
 from .models import User, Product, UserHasUser, Address, Challenge
+
 from .forms import RegisterForm, LoginForm, AddressForm
 
 
@@ -95,6 +100,9 @@ def register():
 
     return render_template('register.html', form=form)
 
+@app.route('/aboutcc', methods=['GET'])
+def yolo():
+    return render_template('aboutCC.html')
 
 @app.route('/charge', methods=['POST'])
 def charge():
@@ -162,7 +170,8 @@ def charge():
         description=bought_product.name
     )
 
-    #TODO Send confirmation Email
+    emails.mail_payment_confirmation(email, first_name, message, new_address)
+
 
     return render_template('charge.html',
                            email=email,
@@ -239,3 +248,75 @@ def product(product_id):
 @app.route('/social', methods=["GET"])
 def social():
     return render_template('socialmedia.html')
+
+
+global challenge_code
+@app.route('/challenged', methods =["GET", "POST"])
+def challenged():
+
+
+    if request.method == 'POST':
+
+        if 'message_button' in request.form:
+
+            challenge_code = request.form['generated_code']
+            if challenge_code =='':
+                flash('ingen kod')
+
+                showform = True
+                return render_template('been_challenged.html', showform = showform)
+            #order_number = request.form['order']
+            #if order_number =='':  # WE WILL REMOVE
+                #flash('ingen order')
+                #return render_template('been_challenged.html')
+                #-------------------------------------
+
+            challengemessage = Challenge.query.filter_by(challenge_code=challenge_code).first()
+            if challengemessage is None:
+                flash('finns inget meddelande')
+                showform = True
+                return render_template('been_challenged.html', showform = showform )
+
+
+            #if answer_message != '':
+            #    flash('hahshdahsdh ajjajaja ja')
+            #    return render_template('been_challenged.html')
+
+            #ordertest = Order.query.filter_by(challenge_id=challengemessage.id).first()
+
+            #if ordertest is None:
+            #    flash('det finns ingen order')
+            #    return render_template('been_challenged.html')
+            #------------------------
+            message = challengemessage.message
+            email = challengemessage.address.email
+            showform = False
+            return render_template('been_challenged.html', message=message, showform=showform, email = email, challengemessage = challengemessage)
+            #------------------------
+        if 'submit' in request.form:
+            flash('vi kom hit')
+            #chal_id = request.form
+            chal_id = request.form['special']
+            flash(chal_id)
+            ans_message = request.form['answer_message']
+            flash(ans_message)
+            chal = Challenge.query.filter_by(id=chal_id).first()
+            flash(chal)
+
+            chal.answer_message = ans_message
+            #answer = Challenge(answer_message = ans_message)
+            #db.session.add(answer)
+            db.session.commit()
+            #flash(chal)
+            return render_template('been_challenged.html')
+
+    else:
+        message = ""
+        showform = True
+    return render_template('been_challenged.html', message=message, showform=showform)
+
+
+@app.route("/mailing")
+def mailing():
+
+   return emails.mail_payment_confirmation('trouvejohanna@gmail.com', 'Oskar', "TJENARE")
