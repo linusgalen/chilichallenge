@@ -241,7 +241,7 @@ def product(product_id):
     return jsonify(product)
 
 
-global challenge_code
+
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
 
@@ -285,21 +285,16 @@ def challenged():
             return render_template('been_challenged.html', message=message, showform=showform, email = email, challengemessage = challengemessage)
             #------------------------
         if 'submit' in request.form:
-            flash('vi kom hit')
-            #chal_id = request.form
             chal_id = request.form['special']
-            flash(chal_id)
             ans_message = request.form['answer_message']
-            flash(ans_message)
             chal = Challenge.query.filter_by(id=chal_id).first()
-            flash(chal)
-
             chal.answer_message = ans_message
-            #answer = Challenge(answer_message = ans_message)
-            #db.session.add(answer)
             db.session.commit()
-            #flash(chal)
-            return render_template('been_challenged.html')
+            email = chal.address.email
+            name = chal.address.first_name + ' ' + chal.address.last_name
+            emails.mail_answer(email, ans_message, name)
+
+            return render_template('been_challenged.html', ans_message=ans_message, email=email, name=name)
 
     else:
         message = ""
@@ -311,3 +306,7 @@ def challenged():
 def mailing():
 
    return emails.mail_payment_confirmation('trouvejohanna@gmail.com', 'Oskar', "TJENARE")
+
+@app.route('/mailtest')
+def mailtest():
+    return render_template('mailtest.html')

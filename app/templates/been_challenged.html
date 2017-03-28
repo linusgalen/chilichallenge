@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-2">
-                    <input id="submit" name="submit" type="submit" value="Answer" class="btn btn-primary">
+                    <input id="submit" name="submit" type="submit" value="Skicka svar" class="btn btn-primary">
                 </div>
             </div>
             <br>
@@ -69,7 +69,17 @@
                 </div>
             </div>
         </form>
-        <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
+    {% endif %}
+    {% if ans_message %}
+         <form class="form-horizontal" id = "show_ans_form" name = "show_ans_form" method="POST" action="">
+            <div class="form-group">
+                <h4  class="col-sm-8 control-label">Ditt svar skickades till {{ email }}!</h4>
+
+            </div>
+            <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
+
+
+         </form>
     {% endif %}
     </body>
     {#<script>#}
