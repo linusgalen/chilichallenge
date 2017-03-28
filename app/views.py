@@ -244,6 +244,12 @@ def product(product_id):
     return jsonify(product)
 
 
+
+@app.route('/social', methods=["GET"])
+def social():
+    return render_template('socialmedia.html')
+
+
 global challenge_code
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
