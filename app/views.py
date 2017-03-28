@@ -9,14 +9,9 @@ from flask_login import LoginManager
 import json
 import stripe
 from stripe import api_key
-
-
 from .models import User, Product, UserHasUser, Address, Challenge, Order
-
 from datetime import datetime
 from .models import User, Product, UserHasUser, Address, Challenge
-
-from .forms import RegisterForm, LoginForm, AddressForm
 
 
 @app.before_request
@@ -44,36 +39,15 @@ def load_user(id):
 def login():
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        username = request.form['username']
-        password = request.form['password']
-        user = User.query.filter_by(username=username, password=password).first()
-
-        if user is not None:
-            login_user(user)
-            flash('Logged in successfully.')
-            session['remember_me'] = form.remember_me.data
-            return redirect(url_for('index'))
-        else:
-            flash("Username or password incorrect!")
-            return render_template('login.html',
-                                   title='Sign In',
-                                   form=form)
-
-    return render_template('login.html',
-                           title='Logga in',
-                           form=form)
-
-
-# if user.is_correct_password(password):
-
-
-# else:
-# flash('Fel anvandarnamn eller losenord')
-# return redirect(url_for('login'))
-
-
+    if request.method == 'GET':
+        return render_template('login_validation.html')
+    user = User.query.filter_by(username = request.form['username'], password = request.form['password']).first()
+    if user is None:
+        flash("Användarnamn eller lösenord är fel!")
+        return redirect(url_for('login'))
+    login_user(user)
+    flash('Logged in successfully', 'success')
+    return redirect(url_for('index'))
 
 @app.route('/signout')
 def signout():
@@ -84,21 +58,32 @@ def signout():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
-    form = RegisterForm()
+    user_valid = True
+    email_valid = True
+    if request.method == 'GET':
+        return render_template('register.html',
+                               user_valid = user_valid,
+                               email_valid = email_valid)
+    username = request.form['username']
+    user_check = User.query.filter_by(username = username).first()
+    if user_check is not None:
+        user_valid = False
+    email = request.form['email']
 
-    if form.validate_on_submit():
-        address = Address(first_name=form.first_name.data, last_name=form.last_name.data, address=form.address.data,
-                          zip=form.zip.data, city=form.city.data, email=form.email.data)
-        db.session.add(address)
-        db.session.commit()
-        user = User(username=form.username.data, password=form.password.data, email=form.email.data,
-                    address_id=address.id)
-        db.session.add(user)
-        db.session.commit()
+    email_check = User.query.filter_by(email = email).first()
+    if email_check is not None:
+        email_valid = False
+    if user_check is not None or email_check is not None:
+        print('hello')
+        return render_template('register.html',
+                               user_valid = user_valid,
+                               email_valid = email_valid)
+    user = User(username=username, password=request.form['password'], email=email)
+    db.session.add(user)
+    db.session.commit()
 
-        return redirect(url_for('index'))
+    return redirect(url_for('index'))
 
-    return render_template('register.html', form=form)
 
 @app.route('/aboutcc', methods=['GET'])
 def yolo():
@@ -142,9 +127,6 @@ def charge():
         if test_challenge is None:
             flag=False
 
-
-    print(challenge_code)
-
     new_challenge=Challenge(
         message=message,
         address_id=new_address.id,
@@ -172,7 +154,6 @@ def charge():
 
     emails.mail_payment_confirmation(email, first_name, message, new_address)
 
-
     return render_template('charge.html',
                            email=email,
                            product=bought_product,
@@ -184,45 +165,61 @@ def charge():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-@app.route('/select_friend', methods=["GET", "POST"])
-def select_chili():
-    address_form = AddressForm()
-    # TODO: get global user and get the friends
-    # friend_list=UserHasUser.
-    if address_form.validate_on_submit():
-        redirect('/index')
-
-    return render_template('select_friend.html',
-                           adress_form=address_form)
+#
+# @app.route('/select_friend', methods=["GET", "POST"])
+# def select_chili():
+#     address_form = AddressForm()
+#     # TODO: get global user and get the friends
+#     # friend_list=UserHasUser.
+#     if address_form.validate_on_submit():
+#         redirect('/index')
+#
+#     return render_template('select_friend.html',
+#                            adress_form=address_form)
 
 
 @app.route('/checkout', methods=["GET", "POST"])
 def checkout():
     product_list = Product.query.all()
-    address_form = AddressForm()
-    address_form.product_id.choices = [(product.id, 'Valj') for product in product_list]
+    # address_form=AddressForm()
+
+    if 'first_name' in request.form:
+        first_name = request.form['first_name']
+
+    if 'last_name' in request.form:
+        last_name = request.form['last_name']
+
+    if 'street_address' in request.form:
+        street_address = request.form['street_address']
+
+    if 'zipcode' in request.form:
+        zipcode = request.form['zipcode']
+
+    # address_form.product_id.choices=[(product.id, 'Valj') for product in product_list]
     key = 'pk_test_Y2poyAHtZzOY2qOmdqvzvizu'
 
     if 'product_radio' in request.form:
         selected_product = request.form['product_radio']
         print(selected_product)
 
+    if 'message' in request.form:
+        message = request.form['message']
+
     return render_template('checkout_process.html',
                            product_list=product_list,
-                           adress_form=address_form,
                            key=key)
 
 
 @app.route('/profile', methods=["GET", "POST"])
 def profile_page():
-    current_address = Address.query.filter_by(id=g.user.address_id).first();
-    challenge_list = Challenge.query.filter_by(user_id=g.user.id).all();
+
+    # current_address = Address.query.filter_by(id = g.user.address_id).first();
+    challenge_list = Challenge.query.filter_by(user_id = g.user.id).all();
 
     return render_template('profile_page.html',
-                           current_user=g.user,
-                           current_address=current_address,
-                           challenge_list=challenge_list,
+                           current_user = g.user,
+                           # current_address = current_address,
+                           challenge_list = challenge_list,
                            key=api_key)
 
 

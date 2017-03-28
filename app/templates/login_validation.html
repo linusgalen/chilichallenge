@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<div class="container center_div">
+    <h1>Logga in</h1>
+    <form data-toggle="validator" role="form" method="post">
+        <div class="form-group">
+            <label for="loginUsername" class="control-label">Användarnamn</label>
+            <input type="text" class="form-control" name="username" id="loginUsername" placeholder="Användarnamn" required>
+        </div>
+        <div class="form-group">
+            <label for="loginPassword" class="control-label">Lösenord</label>
+            <input type="password" class="form-control" name="password" id="loginPassword" placeholder="Lösenord" required>
+        </div>
+        <div class="checkbox">
+        <input type="checkbox" id="remeber_me" name="remeber_me"> Remember me
+    </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Logga in</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
