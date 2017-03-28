@@ -110,7 +110,7 @@ class Challenge(db.Model):
         db.Integer, db.ForeignKey("address.id", onupdate="CASCADE", ondelete="CASCADE")
     )
 
-    answer_message = db.Column(db.String(300))
+    # answer_message = db.Column(db.String(300))
 
 
     challenge_code = db.Column(db.String(10), unique=True)
