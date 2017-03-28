@@ -100,6 +100,9 @@ def register():
 
     return render_template('register.html', form=form)
 
+@app.route('/aboutcc', methods=['GET'])
+def yolo():
+    return render_template('aboutCC.html')
 
 @app.route('/charge', methods=['POST'])
 def charge():
@@ -239,6 +242,12 @@ def aboutchili():
 def product(product_id):
     product = db.session.query(Product).get(product_id).seralize
     return jsonify(product)
+
+
+
+@app.route('/social', methods=["GET"])
+def social():
+    return render_template('socialmedia.html')
 
 
 global challenge_code
