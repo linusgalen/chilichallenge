@@ -1,25 +1,39 @@
 {% extends "base.html" %}
-{% block nav %}
-    {{super()}}
-{% endblock %}
-
-{% block foot %}
-    {{ super()}}
-{% endblock %}
-
-
 {% block content %}
 
-    <div id="home" class="container-fluid">
-{#        <img id=chili_img src="http://wonderopolis.org/wp-content/uploads/2010/11/Wonder-50-Chili-Pepper-Static-Image.jpg"></div>#}
-        <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
+<div id="home" class="container-fluid">
+  <div class="hero-text">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <div class="carousel-caption">
+        <h1>Hett</h1>
+        <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
+      </div>
     </div>
-
-    <div id="about" class="container-fluid">
-        <h1>Vad är ChiliChallenge?</h1>
-
-     <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
+    <div class="item">
+      <div class="carousel-caption">
+        <h1>Chill</h1>
+        <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
+      </div>
     </div>
+    <div class="item">
+      <div class="carousel-caption">
+        <h1>Kom igen</h1>
+        <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+
+
+<div id="about" class="container-fluid">
+  <h1>Om Oss</h1>
+</div>
 
 
 {% endblock %}
