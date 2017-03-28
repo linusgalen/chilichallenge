@@ -262,8 +262,8 @@ def challenged():
                 #return render_template('been_challenged.html')
                 #-------------------------------------
 
-            challengemessage = Challenge.query.filter_by(challenge_code=challenge_code).first()
-            if challengemessage is None:
+            challenge_id = Challenge.query.filter_by(challenge_code=challenge_code).first()
+            if challenge_id is None:
                 flash('finns inget meddelande')
                 showform = True
                 return render_template('been_challenged.html', showform = showform )
@@ -279,19 +279,22 @@ def challenged():
             #    flash('det finns ingen order')
             #    return render_template('been_challenged.html')
             #------------------------
-            message = challengemessage.message
-            email = challengemessage.address.email
+            message = challenge_id.message
+            email = challenge_id.address.email
             showform = False
-            return render_template('been_challenged.html', message=message, showform=showform, email = email, challengemessage = challengemessage)
+            session['challenge_id'] = challenge_id.id
+            session['challenge_email'] = challenge_id.address.email
+            session['challenge_name'] = challenge_id.address.first_name + ' ' + challenge_id.address.last_name
+            return render_template('been_challenged.html', message=message, showform=showform, email = email, challenge_id = challenge_id)
             #------------------------
         if 'submit' in request.form:
-            chal_id = request.form['special']
+            chal_id = session['challenge_id']
             ans_message = request.form['answer_message']
             chal = Challenge.query.filter_by(id=chal_id).first()
             chal.answer_message = ans_message
             db.session.commit()
-            email = chal.address.email
-            name = chal.address.first_name + ' ' + chal.address.last_name
+            email = session['challenge_email']
+            name = session['challenge_name']
             emails.mail_answer(email, ans_message, name)
 
             return render_template('been_challenged.html', ans_message=ans_message, email=email, name=name)
