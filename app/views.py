@@ -37,16 +37,29 @@ def load_user(id):
 
 @app.route('/login', methods=["GET", "POST"])
 def login():
+    username_valid=True
+    password_valid=True
+
     if g.user is not None and g.user.is_authenticated:
         return redirect(url_for('index'))
     if request.method == 'GET':
-        return render_template('login_validation.html')
+        return render_template('login.html',
+                               username_valid=username_valid,
+                               password_valid=password_valid)
+
     user = User.query.filter_by(username = request.form['username'], password = request.form['password']).first()
     if user is None:
-        flash("Användarnamn eller lösenord är fel!")
-        return redirect(url_for('login'))
+        user = User.query.filter_by(username=request.form['username']).first()
+        if user is None:
+            username_valid=False
+        else:
+            password_valid=False
+
+        return render_template('login.html',
+                               username_valid=username_valid,
+                               password_valid=password_valid)
+
     login_user(user)
-    flash('Logged in successfully', 'success')
     return redirect(url_for('index'))
 
 @app.route('/signout')
@@ -78,9 +91,12 @@ def register():
         return render_template('register.html',
                                user_valid = user_valid,
                                email_valid = email_valid)
+
     user = User(username=username, password=request.form['password'], email=email)
     db.session.add(user)
     db.session.commit()
+    login_user(user)
+
 
     return redirect(url_for('index'))
 
@@ -165,17 +181,6 @@ def charge():
 if __name__ == '__main__':
     app.run(debug=True)
 
-#
-# @app.route('/select_friend', methods=["GET", "POST"])
-# def select_chili():
-#     address_form = AddressForm()
-#     # TODO: get global user and get the friends
-#     # friend_list=UserHasUser.
-#     if address_form.validate_on_submit():
-#         redirect('/index')
-#
-#     return render_template('select_friend.html',
-#                            adress_form=address_form)
 
 
 @app.route('/checkout', methods=["GET", "POST"])
@@ -262,8 +267,8 @@ def challenged():
 
                 showform = True
                 return render_template('been_challenged.html', showform = showform)
-            #order_number = request.form['order']
-            #if order_number =='':  # WE WILL REMOVE
+                #order_number = request.form['order']
+                #if order_number =='':  # WE WILL REMOVE
                 #flash('ingen order')
                 #return render_template('been_challenged.html')
                 #-------------------------------------
@@ -316,4 +321,4 @@ def challenged():
 @app.route("/mailing")
 def mailing():
 
-   return emails.mail_payment_confirmation('trouvejohanna@gmail.com', 'Oskar', "TJENARE")
+    return emails.mail_payment_confirmation('trouvejohanna@gmail.com', 'Oskar', "TJENARE")
