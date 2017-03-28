@@ -1,94 +1,57 @@
 {% extends "base.html" %}
+
 {% block content %}
-
-    <div class="container center_div">
+<div class="container-fluid col-sm-4">
+    <h1>Registrering</h1>
+    <form data-toggle="validator" role="form" method="post" id="registerForm">
+        {% if user_valid %}
         <div class="form-group">
-            <form class="form-inline" action="" method="post" name="login">
-                <h1 class="col-sm-10"> Registrering</h1>
-
-                {{ form.hidden_tag() }}
-
-                <p>
-                <div class="col-sm-10">
-                    {{ form.username (size=20, placeholder="Användarnamn", class="form-control") }}
-                    {% for error in form.username.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br> <br>
-                </div>
-                <p>
-
-                <div class="col-sm-10">
-                    {{ form.first_name (size=40, placeholder="Förnamn", class="form-control") }}
-                    {% for error in form.first_name.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br><br>
-                </div>
-
-                <div class="col-sm-10">
-                    {{ form.last_name (size=40, placeholder="Efternamn", class="form-control") }}
-                    {% for error in form.last_name.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br><br>
-                </div>
-
-
-                <div class="col-sm-10">
-                    {{ form.address (size=40, placeholder="Adress", class="form-control") }}
-                    {% for error in form.address.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br><br>
-                </div>
-
-                <div class="col-sm-10">
-                    {{ form.zip (size=10, maxlength="5", placeholder="Postnummer", class="form-control") }}
-                    {% for error in form.zip.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br><br>
-                </div>
-
-                <div class="col-sm-10">
-                    {{ form.city (size=20, placeholder="Postort", class="form-control") }}
-                    {% for error in form.city.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br><br>
-                </div>
-
-                <div class="col-sm-10">
-                    {{ form.email (size=40, placeholder="Mailadress", type="email", class="form-control") }}
-                    {% for error in form.email.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br><br>
-                </div>
-
-                <div class="col-sm-10">
-                    {{ form.password (size=40, placeholder="Lösenord", type="password", class="form-control") }}
-                    {% for error in form.password.errors %}
-                        <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                        <span style="color: red;">{{ error }} </span>
-                    {% endfor %}<br><br>
-                </div>
-
-                {#     Bekräfta lösenord:<br>#}
-                {#          {{ form.password (size=80) }}<br>#}
-                {#  {% for error in form.password.errors %}#}
-                {#            <span style="color: red;">[{{ error }}]</span>#}
-                {#          {% endfor %}<br>#}
-                {#          <p>#}
-                {##}
-                {#      </p>#}
-
-                <div class="col-sm-10">
-                    <button id="button_cancel" type="button" class="btn btn-default">Cancel</button>
-                    <input type="submit" value="Registrera"class="btn btn-default">
-                </div>
-            </form>
+            <label for="regUsername" class="control-label">Användarnamn</label>
+            <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control" id="regUsername" name="username"
+            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
+            <div class="help-block with-errors"></div>
         </div>
-    </div>
+        {% else %}
+        <div class="form-group has-error">
+            <label for="regUsername2" class="control-label">Användarnamn</label>
+            <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control input-check" id="regUsername2" name="username"
+            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
+            <div class="help-block with-errors label-check">Användarnamnet finns redan</div>
+        </div>
+        {% endif %}
+        {% if email_valid %}
+        <div class="form-group">
+            <label for="regEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" name="email" placeholder="Email"
+            data-required-error="Skriv en het mail" data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors"></div>
+        </div>
+        {% else %}
+        <div class="form-group has-error">
+            <label for="regEmail2" class="control-label">Email</label>
+            <input type="email" class="form-control input-check" id="regEmail2" name="email" placeholder="Email"
+            data-required-error="Skriv en het mail" data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors label-check">Emailen finns redan</div>
+        </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="regPassword" class="control-label">Lösenord</label>
+            <div class="form-inline row">
+                <div class="form-group col-sm-6">
+                    <input type="password" data-minlength="6" data-minlength-error="För kort, inte hett nog" class="form-control" id="regPassword"
+                    name="password" data-required-error="Skriv ett hett lösenord" placeholder="Lösenord" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="password" class="form-control" id="regPasswordConfirm" data-match="#regPassword"
+                    data-error="Det är hett med likadana lösenord" placeholder="Upprepa Lösenord" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Registrera</button>
+        </div>
+    </form>
+</div>
 {% endblock %}

@@ -3,9 +3,6 @@ $(document).ready(function () {
     //Initialize tooltips
     $('.nav-tabs > li a[title]').tooltip();
 
-
-
-
     //Wizard
     $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
 
@@ -17,12 +14,17 @@ $(document).ready(function () {
     });
 
     $(".next-step").click(function (e) {
-
-        var $active = $('.wizard .nav-tabs li.active');
-        $active.next().removeClass('disabled');
-        nextTab($active);
-
+        if ($(this).hasClass('disabled') == false){
+            var $active = $('.wizard .nav-tabs li.active');
+            $active.next().removeClass('disabled');
+            nextTab($active);
+        }
     });
+
+    $(".nonSubmit").click(function(e){
+        return false;
+    });
+
     $(".prev-step").click(function (e) {
 
         var $active = $('.wizard .nav-tabs li.active');
@@ -107,12 +109,17 @@ $(document).ready(function () {
             });
 
 
+
             //  var jsonData=JSON.stringify({
             //     tokenId:token.id,
             //     email:token.email,
             //     productId:getCurrentProductId()
-            // });
+        }
+    });
 
+    $('#checkout_form').change(function(){
+        // console.log($('#checkout_form').serializeArray());
+        $('#checkout_form').v
             //console.log(jsonData);
 
             // $.ajax({
@@ -123,7 +130,7 @@ $(document).ready(function () {
             //     data: jsonData
             // })
 
-        }
+
     });
 
 
@@ -154,7 +161,7 @@ $(document).ready(function () {
     $('#checkout_from').change(function(){
         $('#checkout_from').v
 
-        var $inputs = $('#checkout_from :input');
+        var $inputs = $('#checkout_form :input');
 
 
         // not sure if you wanted this, but I thought I'd add it.
@@ -184,10 +191,12 @@ $(document).ready(function () {
         $('#confirm_product_img').append(values['product_img']);
         $('#confirm_product_price').append(values['product_price']);
         $('#confirm_product_name').append(values['product_name']);
+
         $('#confirm_address').append(values['address']);
         $('#confirm_zipcode').append(values['zipcode']);
         $('#confirm_city').append(values['city']);
 
+        $('#stripe_script').attr('data-amount', values['product_price']);
 
 
     });
