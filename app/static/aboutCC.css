@@ -1,0 +1,18 @@
+
+#about {
+    padding-top: 50px;
+    height: 700px;
+    color: #ffffff;
+    background-color: #eae5d0;
+}
+
+#about_text {
+    color: #000000;
+    margin: 80px 180px 0px 180px;
+    padding: 40px;
+}
+
+#chl_about_btn {
+    margin-top: 80px;
+    border-radius: 25px;
+}
