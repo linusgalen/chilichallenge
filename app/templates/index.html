@@ -1,55 +1,63 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div id="home" class="container-fluid">
-  <div class="hero-text">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <div class="carousel-caption">
-        <h1>Hett</h1>
-        <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
-      </div>
+    <div id="home" class="container-fluid">
+        <div class="hero-text">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div class="carousel-caption">
+                            <h1>Hett</h1>
+                            <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="carousel-caption">
+                            <h1>Chill</h1>
+                            <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="carousel-caption">
+                            <h1>Kom igen</h1>
+                            <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-arrow">
+            <a href="/index#about"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
+        </div>
     </div>
-    <div class="item">
-      <div class="carousel-caption">
-        <h1>Chill</h1>
-        <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
-      </div>
+
+
+    <div id="about" class="container">
+        <div class="row">
+
+            <div id="about_text" class="col-md-6">
+                <h1>Vad är ChiliChallenge?</h1>
+                <p> ChiliChallenge är tjänsten som hjälper dig att skicka hetta i form av chili till dina vänner. I tre enkla steg guidas du genom köpet som gör att du (om möjligt) anses ännu hetare! </p>
+                <h5> 1) Välj chilin du vill skicka </h5>
+                <h5> 2) Skriv in adressuppgifter om dig själv och den du vill utmana </h5>
+                <h5> 3) Fyll i dina kortuppgifter </h5>
+                <p> När köpet är genomfört kommer din utvalda chili skickas hem till din vän i en exklusiv ask och med ditt personliga meddelande. Hen får då själv välja hur hon eller han bevisar för dig att utmaningen verkligen ägt rum. Det finns även möjlighet för vederbörande att utmana dig tillbaka.</p>
+                <a href="/checkout"><button type="button" class="btn btn-default">Start Challenge</button></a>
+            </div>
+
+
+            <img src="./static/img/hurdetfungerarcc.png" class="col-md-6">
+
+        </div>
     </div>
-    <div class="item">
-      <div class="carousel-caption">
-        <h1>Kom igen</h1>
-        <a href="/checkout"><button type="button" class="btn-xlarge btn-default">Start Challenge</button></a>
-      </div>
+
+    <div id="instagram-picture">
+        <iframe src="//lightwidget.com/widgets/38516d543ab7541fa834885ab87fd239.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width: 70%; border: 0; overflow: hidden;"></iframe>
     </div>
-  </div>
-</div>
-  </div>
-  <div class="scroll-arrow">
-   <a href="/index#about"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></a>
-  </div>
-</div>
 
-
-<div id="about" class="container">
-<div class="row">
-
-  <div id="about_text" class="col-md-6">
-    <h1>Vad är ChiliChallenge?</h1>
-    <p> ChiliChallenge är tjänsten som hjälper dig att skicka hetta i form av chili till dina vänner. I tre enkla steg guidas du genom köpet som gör att du (om möjligt) anses ännu hetare! </p>
-    <h5> 1) Välj chilin du vill skicka </h5>
-    <h5> 2) Skriv in adressuppgifter om dig själv och den du vill utmana </h5>
-    <h5> 3) Fyll i dina kortuppgifter </h5>
-    <p> När köpet är genomfört kommer din utvalda chili skickas hem till din vän i en exklusiv ask och med ditt personliga meddelande. Hen får då själv välja hur hon eller han bevisar för dig att utmaningen verkligen ägt rum. Det finns även möjlighet för vederbörande att utmana dig tillbaka.</p>
-    <a href="/checkout"><button type="button" class="btn btn-default">Start Challenge</button></a>
-  </div>
-
-
-<img src="./static/img/hurdetfungerarcc.png" class="col-md-6">
-
-</div>
 
 {% endblock %}
+
+
