@@ -2,8 +2,6 @@
 
 $(document).ready(function() {
 
-    $('body').scrollspy({target: ".navbar-me", offset: 50});
-
     $("#thenavbar a").on('click', function (event) {
         if (this.hash !== "") {
             event.preventDefault();
@@ -15,13 +13,14 @@ $(document).ready(function() {
             });
         }
     });
-});
 
 
-$(window).scroll(function() {
-    if($(this).scrollTop()>50) {
-        $( ".navbar-me" ).addClass("fixed-me");
-    } else {
-        $( ".navbar-me" ).removeClass("fixed-me");
-    }
+    $(window).scroll(function() {
+      if ($(document).scrollTop() > 50) {
+        $('nav').addClass('shrink');
+      } else {
+        $('nav').removeClass('shrink');
+      }
+    });
+
 });
