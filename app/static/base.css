@@ -17,7 +17,6 @@ body {
 }
 .content {
   padding-top: 70px;
-
 }
 .navbar-nav > li > a {
   font-weight: bold;
@@ -28,29 +27,17 @@ body {
   background-color: white;
   border: none;
 }
-nav.navbar.shrink {
-  height: 20px !important;
-}
-
-nav.navbar {
-   -webkit-transition: all 0.4s ease;
-   transition: all 0.4s ease;
-}
 .navbar-nav li a {
-    padding:0 15px;
-    line-height:70px;
-
+    padding: 0 15px;
+    line-height: 70px;
+}
 #social-media-buttons {
     margin-top: 30px;
     margin-bottom: 30px;
 }
-
-ul.nav a:visited {
-
-}
 #navbar-logo {
-  height: 100%;
   padding-top: 0px;
+  height: 100%;
 }
 #home {
     background-image: url("https://images.pexels.com/photos/35010/paprika-fruit-the-inside-of-the-peppers-the-grain-of-paprika.jpg?w=940&h=650&auto=compress&cs=tinysrgb");
@@ -60,7 +47,6 @@ ul.nav a:visited {
     padding-top: 70px;
     height: 100%;
     background-attachment: fixed;
-
 }
 .hero-text {
     text-align: center;
@@ -71,8 +57,15 @@ ul.nav a:visited {
     color: white;
     width: 100%;
 }
-.hero-text button {
+button {
   border: none;
+}
+#about button {
+  background-color: red;
+  color: white;
+}
+#about button:hover {
+  background-color: rgb(255, 116, 116);
 }
 .btn-xlarge {
     padding: 18px 28px;
@@ -93,8 +86,7 @@ ul.nav a:visited {
 /* CSS for the social media page */
 
 #instagram-picture {
-padding-top: 50px;
-padding-left: 20px;
-    padding-right: 20px;
-
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
