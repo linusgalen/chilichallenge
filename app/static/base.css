@@ -141,3 +141,26 @@ button {
 .scroll-arrow a{
   color: rgb(89, 175, 85);
 }
+
+.photo-box .image-wrap img {
+  width: 100%;
+}
+.photo-box .image-wrap .likes {
+  position: absolute;
+  bottom: 5px;
+  left: 15px;
+  /*padding: padding/2;*/
+  background: black;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+}
+.photo-box .description {
+  background: white;
+  color: grey;
+  letter-spacing: 1px;
+  /*padding: padding;*/
+  height: 75px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
