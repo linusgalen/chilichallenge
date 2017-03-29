@@ -265,14 +265,8 @@ def challenged():
             challenge_code = request.form['generated_code']
             if challenge_code =='':
                 flash('ingen kod')
-
                 showform = True
                 return render_template('been_challenged.html', showform = showform)
-                #order_number = request.form['order']
-                #if order_number =='':  # WE WILL REMOVE
-                #flash('ingen order')
-                #return render_template('been_challenged.html')
-                #-------------------------------------
 
             challenge_id = Challenge.query.filter_by(challenge_code=challenge_code).first()
             if challenge_id is None:
@@ -280,17 +274,6 @@ def challenged():
                 showform = True
                 return render_template('been_challenged.html', showform = showform )
 
-
-            #if answer_message != '':
-            #    flash('hahshdahsdh ajjajaja ja')
-            #    return render_template('been_challenged.html')
-
-            #ordertest = Order.query.filter_by(challenge_id=challengemessage.id).first()
-
-            #if ordertest is None:
-            #    flash('det finns ingen order')
-            #    return render_template('been_challenged.html')
-            #------------------------
             message = challenge_id.message
             email = challenge_id.address.email
             showform = False
@@ -300,8 +283,8 @@ def challenged():
             session['challenge_email'] = challenge_id.address.email
             session['challenge_name'] = challenge_id.address.first_name + ' ' + challenge_id.address.last_name
             return render_template('been_challenged.html', message=message, showform=showform, email = email, challenge_id = challenge_id, answer_message = answer_message)
-            #------------------------
-        if 'submit' in request.form:
+
+        if 'answer_button' in request.form:
 
             chal_id = session['challenge_id']
             ans_message = request.form['answer_message']
