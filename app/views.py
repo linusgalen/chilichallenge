@@ -294,12 +294,15 @@ def challenged():
             message = challenge_id.message
             email = challenge_id.address.email
             showform = False
+            answer_message = challenge_id.answer_message
+            
             session['challenge_id'] = challenge_id.id
             session['challenge_email'] = challenge_id.address.email
             session['challenge_name'] = challenge_id.address.first_name + ' ' + challenge_id.address.last_name
-            return render_template('been_challenged.html', message=message, showform=showform, email = email, challenge_id = challenge_id)
+            return render_template('been_challenged.html', message=message, showform=showform, email = email, challenge_id = challenge_id, answer_message = answer_message)
             #------------------------
         if 'submit' in request.form:
+
             chal_id = session['challenge_id']
             ans_message = request.form['answer_message']
             chal = Challenge.query.filter_by(id=chal_id).first()
