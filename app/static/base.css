@@ -1,94 +1,133 @@
-
+html, body {
+  height: 100% !important;
+  overflow-x: hidden;
+}
+body {
+  position: relative;
+  padding-top: 70px;
+}
 #home {
-    padding-top: 50px;
-    height: 700px;
-    color: #fff;
-    background-image: url("http://rooziato.com/wp-content/uploads/2016/09/hot-red-chilli-pepper-155559-1024x634.jpg");
+  padding-top: 70px;
+  height: 80%;
+  background-color: black;
+  position: relative;
 }
-
 #about {
-    padding-top: 50px;
-    height: 700px;
-    color: #fff;
-    background-color: #eae5d0;
+  padding-top: 70px;
+  height: 100%;
+  color: #ffffff;
 }
-
-#chl_btn{
-    margin-top: 250px;
-    border-radius: 25px;
+.content {
+  padding-top: 70px;
 }
-
-#the_end {
-    height: 200px;
-    background-color: #0000;
-    text-align: center
+.navbar-nav > li > a {
+  font-weight: bold;
 }
-
-body{
-    margin: 0px;
-    padding: 0px;
-    /*min-height: 2500px;*/
-
+.navbar {
+  width: 100%;
+  height: 70px;
+  background-color: white;
+  border: none;
 }
-.navbar-info {
-    width: 100%;
-
-
+.navbar-nav li a {
+    padding: 0 15px;
+    line-height: 70px;
 }
-.fixed-me{
-    transition: all 0.5s ;
-    -o-transition: all 0.5s;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -ms-transition: all 0.5s;
+#social-media-buttons {
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
-
-.fixed-me{
-    background-color:#fff !important;
-    padding: 0px  !important;
-    margin-bottom: 0px;
-    position: fixed;
-    top:0;
-	z-index:888;
-    width: 100%;
-
+#navbar-logo {
+  padding-top: 0px;
+  height: 100%;
 }
-
-.navbar-me {
-
-   transition: all 0.5s ;
-    -ms-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -o-transition: all 0.5s;
-     -webkit-transition: all 0.5s;
-
-
+#home {
+    background-image: url("https://images.pexels.com/photos/35010/paprika-fruit-the-inside-of-the-peppers-the-grain-of-paprika.jpg?w=940&h=650&auto=compress&cs=tinysrgb");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 70px;
+    background-attachment: fixed;
 }
-.header-right-menu{
- padding: 5px 15px !important;
-
-}
-.site-logo{
-    padding: 15px 20px !important;
-    margin: 15px 10px !important;
-}
-.navbar-me{
-    padding: 0px 0px;
-    background-color: transparent;
-    top: 0px;
-    border: 0px;
-    border-radius: 0px;
-}
-.navbar-collapse{
+.hero-text {
     text-align: center;
-    border-top-width: 0px;
-    padding-top: 10px;
-    margin-top: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    width: 100%;
+}
+button {
+  border: none;
+}
+#about button {
+  background-color: red;
+  color: white;
+}
+#about button:hover {
+  background-color: rgb(255, 116, 116);
+}
+#about_text {
+    color: #000000;
+    padding-left: 25%;
+    padding-right: 25%;
+}
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 22px;
+    line-height: normal;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+.carousel-caption{
+    position:static;
+    height: 100%;
+}
+.carousel {
+  height: 100;
 }
 
-.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
-    background-color: transparent;
+/* CSS for the social media page */
+
+#instagram-picture {
+  padding-top: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
-.menu-collapsed-button{
-    margin: 20px 15px 10px 15px !important;
+
+.navbar-right {
+  padding-right: 30px;
+}
+
+.navbar .divider-vertical {
+    height: 20px;
+    margin: 25px 25px;
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #f2f2f2;
+}
+
+.navbar-inverse .divider-vertical {
+    border-right-color: #222222;
+    border-left-color: #111111;
+}
+
+@media (max-width: 767px) {
+    .navbar-collapse .nav > .divider-vertical {
+        display: none;
+     }
+}
+.scroll-arrow {
+  position: absolute;
+  font-size: 50px;
+  width: 100%;
+  bottom: -7%;
+  text-align: center;
+}
+.scroll-arrow a:hover{
+  color: rgb(200, 43, 43);
+}
+.scroll-arrow a{
+  color: rgb(89, 175, 85);
 }

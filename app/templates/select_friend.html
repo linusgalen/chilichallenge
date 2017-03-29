@@ -5,58 +5,61 @@
 {% block content %}
 
 
-    <div class="container center_div">
-        <form class="form-inline" action="" method="post" name="shipping_address">
-            <h1 class="col-sm-10">Skriv in vem som ska frå utmaningen</h1>
+    <div class="container-fluid">
+      <h1 class="col-sm-10">Skriv in vem som ska få utmaningen</h1>
+      <form data-toggle="validator" role="form" method="post">
 
-            {{ adress_form.hidden_tag() }}
+          <div class="form-group">
+            <label for="regEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" name="email"
+            placeholder="Email" data-required-error="Skriv en het mail"
+            data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors"></div>
+          </div>
 
-            <div class="col-sm-10">
-                {{ adress_form.email (size=20, placeholder="Din email för kvitto", class="form-control") }}
-                {% for error in adress_form.email.errors %}
-                    <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                    <span style="color: red;">{{ error }} </span>
-                {% endfor %}<br><br>
-            </div>
+          <div class="form-group">
+            <label for="regEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" name="email"
+            placeholder="Email" data-required-error="Skriv en het mail"
+            data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors"></div>
+          </div>
 
-            <div class="col-sm-10">
-                {{ adress_form.first_name (size=20, placeholder="Förnamn", class="form-control") }}
-                {% for error in adress_form.first_name.errors %}
-                    <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                    <span style="color: red;">{{ error }} </span>
-                {% endfor %}<br><br>
-            </div>
-            <div class="col-sm-10">
-                {{ adress_form.last_name (size=40, placeholder="Efternamn", class="form-control") }}
-                {% for error in adress_form.last_name.errors %}
-                    <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                    <span style="color: red;">{{ error }} </span>
-                {% endfor %}<br><br>
-            </div>
-            <div class="col-sm-10">
-                {{ adress_form.address (size=40, placeholder="Gatuadress", class="form-control") }}
-                {% for error in adress_form.address.errors %}
-                    <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                    <span style="color: red;">{{ error }} </span>
-                {% endfor %}<br><br>
-            </div>
-            <div class="col-sm-10">
-                {{ adress_form.zipcode (size=40, placeholder="Postnummer", class="form-control") }}
-                {% for error in adress_form.zipcode.errors %}
-                    <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                    <span style="color: red;">{{ error }} </span>
-                {% endfor %}<br><br>
-            </div>
-            <div class="col-sm-10">
-                {{ adress_form.city (size=40, placeholder="Stad", class="form-control") }}
-                {% for error in adress_form.city.errors %}
-                    <span style="color: red;"class="glyphicon glyphicon-ban-circle"> </span>
-                    <span style="color: red;">{{ error }} </span>
-                {% endfor %}<br><br>
-            </div>
-            <div class="col-sm-10">
-                <p><input type="submit" value="Till betalning" class="btn btn-default"></p>
-            </div>
+          <div class="form-group">
+            <label for="regEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" name="email"
+            placeholder="Email" data-required-error="Skriv en het mail"
+            data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" name="email"
+            placeholder="Email" data-required-error="Skriv en het mail"
+            data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" name="email"
+            placeholder="Email" data-required-error="Skriv en het mail"
+            data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail" class="control-label">Email</label>
+            <input type="email" class="form-control" id="regEmail" name="email"
+            placeholder="Email" data-required-error="Skriv en het mail"
+            data-error="Gör det ordentligt och skriv en riktig mail" required>
+            <div class="help-block with-errors"></div>
+          </div>
+
+          <div class="col-sm-10">
+            <p><input type="submit" value="Till betalning" class="btn btn-default"></p>
+          </div>
         </form>
     </div>
 {% endblock %}
