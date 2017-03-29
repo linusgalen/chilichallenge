@@ -16,6 +16,14 @@ body {
   padding-top: 70px;
   height: 100%;
   color: #ffffff;
+  position: relative;
+  background-color: red;
+}
+#social {
+  padding-top: 70px;
+  height: 70%;
+  width: 100%;
+  position: relative;
 }
 .content {
   padding-top: 70px;
@@ -92,9 +100,11 @@ button {
 /* CSS for the social media page */
 
 #instagram-picture {
-  padding-top: 50px;
-  padding-left: 20px;
-  padding-right: 20px;
+  width: 100%;
+  border: 0;
+  height: 70%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .navbar-right {
