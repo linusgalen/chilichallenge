@@ -97,6 +97,7 @@ def register():
     db.session.commit()
     login_user(user)
 
+    emails.mail_registration_confirmation(user)
 
     return redirect(url_for('index'))
 
