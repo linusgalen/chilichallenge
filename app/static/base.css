@@ -6,13 +6,6 @@ body {
   position: relative;
   padding-top: 70px;
 }
-nav.navbar.shrink {
-  height: 35px;
-}
-nav.navbar{
-   -webkit-transition: all 0.4s ease;
-   transition: all 0.4s ease;
-}
 #home {
   padding-top: 70px;
   height: 80%;
