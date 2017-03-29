@@ -62,6 +62,33 @@ def login():
     login_user(user)
     return redirect(url_for('index'))
 
+@app.route('/recover_password', methods=["GET", "POST"])
+def recover_password():
+    valid = False
+    not_valid = False
+    if g.user is not None and g.user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'GET':
+        return render_template('recover_password.html',
+                               valid = valid,
+                               not_valid = not_valid)
+
+    user = User.query.filter_by(username=request.form['recPassword']).first()
+    if user is not None:
+        valid = True
+    else:
+        user = User.query.filter_by(email=request.form['recPassword']).first()
+    if user is not None:
+        valid = True
+    else:
+        not_valid = True
+    return render_template('recover_password.html',
+                           valid=valid,
+                           not_valid=not_valid,
+                           user=user)
+
+
+
 @app.route('/signout')
 def signout():
     logout_user()
