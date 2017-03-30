@@ -256,51 +256,25 @@ def social():
 
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
-
-
     if request.method == 'POST':
 
         if 'message_button' in request.form:
+            challenge_id = Challenge.query.filter_by(challenge_code=request.form['generated_code']).first()
 
-            challenge_code = request.form['generated_code']
-            if challenge_code =='':
-                flash('ingen kod')
-                showform = True
-                return render_template('been_challenged.html', showform = showform)
-
-            challenge_id = Challenge.query.filter_by(challenge_code=challenge_code).first()
             if challenge_id is None:
-                flash('finns inget meddelande')
-                showform = True
-                return render_template('been_challenged.html', showform = showform )
+                return render_template('been_challenged.html', show_enter_code = True )
 
-            message = challenge_id.message
-            email = challenge_id.address.email
-            showform = False
-            answer_message = challenge_id.answer_message
-            
             session['challenge_id'] = challenge_id.id
-            session['challenge_email'] = challenge_id.address.email
-            session['challenge_name'] = challenge_id.address.first_name + ' ' + challenge_id.address.last_name
-            return render_template('been_challenged.html', message=message, showform=showform, email = email, challenge_id = challenge_id, answer_message = answer_message)
+            return render_template('been_challenged.html', message=challenge_id.message, show_message_answer=True, email = challenge_id.address.email,  answer_message = challenge_id.answer_message)
 
         if 'answer_button' in request.form:
-
-            chal_id = session['challenge_id']
-            ans_message = request.form['answer_message']
-            chal = Challenge.query.filter_by(id=chal_id).first()
-            chal.answer_message = ans_message
+            chal = Challenge.query.filter_by(id=session['challenge_id']).first()
+            chal.answer_message = request.form['answer_message']
             db.session.commit()
-            email = session['challenge_email']
-            name = session['challenge_name']
-            emails.mail_answer(email, ans_message, name)
+            emails.mail_answer(chal.address.email, chal.answer_message, chal.address.first_name + ' ' + chal.address.last_name)
+            return render_template('been_challenged.html', show_email_have_been_sent_page=True, email=chal.address.email)
 
-            return render_template('been_challenged.html', ans_message=ans_message, email=email, name=name)
-
-    else:
-        message = ""
-        showform = True
-    return render_template('been_challenged.html', message=message, showform=showform)
+    return render_template('been_challenged.html', show_enter_code=True)
 
 
 @app.route("/mailing")

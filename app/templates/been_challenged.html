@@ -4,14 +4,14 @@
 
 {% block content %}
     <body>
-    {% if showform %}
+    {% if show_enter_code %}
         <div class="container">
         <h2>Utmanad</h2>
         <form action="" id="confirm_code" name="confirm_code" method="POST">
             <div class="form-group"  >
                 <div class = "col-xs-3">
                     <label for="email">Skriv koden du har fått via utmaningen:</label>
-                    <input type="text" class="form-control" placeholder = "kod" id="generated_code" name="generated_code">
+                    <input type="text" class="form-control" placeholder = "kod" id="generated_code" name="generated_code" autofocus>
                     <br>
                     <input type="submit" class="btn btn-primary" name="message_button" value="se meddelande" id = "message_button"></input>
                 </div>
@@ -20,27 +20,24 @@
     {% endif %}
 
     </div>
-    {% if message %}
+    {% if show_message_answer %}
         <form class="form-horizontal" id = "show_msg_form" name = "show_msg_form" method="POST" action="">
             <div class="form-group">
                 <label for="message" class="col-sm-2 control-label">Meddelande</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static">
-                        <div class="well col-sm-7">
-                        {{message}}
+                        <div class="well col-sm-7 "form-control-static"">
+                        {% if message %}
+                            {{message}}
+                        {% else %}
+                            Det finns inget meddelande till dig.
+                        {% endif %}
                         </div>
-                    </p>
-                    <!-- <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value=""> -->
                 </div>
             </div>
-            <br>
             <div class="form-group">
-                <label for="email" class="col-sm-2 control-label">Utmanarens email</label>
-                <div class="col-sm-10">
-                    <p class="form-control-static">
-                        {{email}}
-                    </p>
-                    <!-- <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value=""> -->
+                <label for="email" class="col-sm-2 control-label">Svaret skickas till</label>
+                <div class="col-sm-10 form-control-static">
+                    {{email}}
                 </div>
             </div>
             <div class="form-group">
@@ -51,9 +48,9 @@
                     <textarea class="well col-sm-7" form="show_msg_form" placeholder="Svar" id="answer_message" name="answer_message" type="submit">{{ answer_message }}</textarea>
                 </div>
                 {% else %}
-                <label class="col-sm-2 control-label"> Skriv ditt meddelande</label>
+                <label class="col-sm-2 control-label"> Skriv ditt svar</label>
                 <div class="col-sm-10">
-                    <textarea class="well col-sm-7" form="show_msg_form" placeholder="Svar" id="answer_message" name="answer_message" type="submit"></textarea>
+                    <textarea class="well col-sm-7" form="show_msg_form" placeholder="Svar" id="answer_message" name="answer_message" type="submit" autofocus></textarea>
                 </div>
                 {% endif %}
 
@@ -69,16 +66,9 @@
                   {% endif %}
                 </div>
             </div>
-            <br>
-
-            <div class="form-group">
-                <div class="col-sm-10">
-                    <! Will be used to display an alert to the user>
-                </div>
-            </div>
         </form>
     {% endif %}
-    {% if ans_message %}
+    {% if show_email_have_been_sent_page %}
          <form class="form-horizontal" id = "show_ans_form" name = "show_ans_form" method="POST" action="">
             <div class="form-group">
                 <h4  class="col-sm-8 control-label">Ditt svar skickades till {{ email }}!</h4>
