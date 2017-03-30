@@ -21,6 +21,11 @@ body {
   height: 70%;
   width: 100%;
 }
+
+#instagrampics {
+
+}
+
 .navbar-nav > li > a {
   font-weight: bold;
 }
