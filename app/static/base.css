@@ -22,8 +22,16 @@ body {
   width: 100%;
 }
 
-#instagrampics {
+#instapics {
+    height: 65%;
+    background-color: #ff8a84;
+}
 
+#instafeed {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .navbar-nav > li > a {
