@@ -33,6 +33,28 @@ $(document).ready(function () {
     });
 
 
+    $(window).on('hashchange', function(e){
+        var url=window.location.href;
+        if(url.includes('checkout') && !url.includes('#')){
+            var currentStep='step1';
+        }else {
+            var currentStep = window.location.href.split('#')[1];
+
+        }
+        console.log(currentStep);
+        $('a[aria-controls='+currentStep+']').click();
+
+    });
+
+
+
+
+
+    $('a[data-toggle="tab"]').click(function(e){
+        window.location = this.href;
+    });
+
+    //Getters for from data
     function getCurrentProductId(){
         return product_id=$("input[type='radio'][name=product_radio]:checked").val();
     }
@@ -45,27 +67,27 @@ $(document).ready(function () {
 
 
     function getFirstName(){
-        return $('#checkout_first_name').val()
+        return $('#buy_first_name').val()
     }
 
     function getLastName(){
-        return $('#checkout_last_name').val()
+        return $('#buy_last_name').val()
     }
 
     function getZip(){
-        return $('#checkout_zip').val()
+        return $('#buy_zipcode').val()
     }
 
     function getAddress(){
-        return $('#checkout_address').val();
+        return $('#buy_street_address').val();
     }
 
     function getCity(){
-        return $('#checkout_city').val();
+        return $('#buy_city').val();
     }
 
     function getMessage(){
-        return $('#checkout_message').val();
+        return $('#buy_message').val();
     }
 
     //Stripe Handler
@@ -120,15 +142,15 @@ $(document).ready(function () {
     $('#checkout_form').change(function(){
         // console.log($('#checkout_form').serializeArray());
         $('#checkout_form').v
-            //console.log(jsonData);
+        //console.log(jsonData);
 
-            // $.ajax({
-            //     dataType: "json",
-            //     contentType: 'application/json',
-            //     method: "POST",
-            //     url: "/charge",
-            //     data: jsonData
-            // })
+        // $.ajax({
+        //     dataType: "json",
+        //     contentType: 'application/json',
+        //     method: "POST",
+        //     url: "/charge",
+        //     data: jsonData
+        // })
 
 
     });
