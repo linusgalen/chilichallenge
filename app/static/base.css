@@ -3,6 +3,7 @@ html, body {
   overflow-x: hidden;
 }
 body {
+  padding-top: 70px;
   position: relative;
 }
 #home {
@@ -20,10 +21,6 @@ body {
   height: 70%;
   width: 100%;
 }
-.content {
-  padding-top: 70px;
-  height: 100%;
-}
 .navbar-nav > li > a {
   font-weight: bold;
 }
@@ -36,6 +33,12 @@ body {
 .navbar-nav li a {
     padding: 0 15px;
     line-height: 70px;
+}
+ul.nav a {
+  color: black !important;
+}
+ul.nav a:hover {
+  color: grey !important;
 }
 #navbar-logo {
   padding-top: 0px;
@@ -106,8 +109,8 @@ button {
 .navbar .divider-vertical {
     height: 20px;
     margin: 25px 25px;
-    border-right: 1px solid #ffffff;
-    border-left: 1px solid #f2f2f2;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 }
 
 .navbar-inverse .divider-vertical {
@@ -144,6 +147,7 @@ footer .row {
   height: 80%;
   padding-top: 10%;
   padding-bottom: 10%;
+  bottom: 0;
 }
 #footer-pic {
   bottom: 0;
