@@ -73,20 +73,34 @@ def recover_password():
                                valid = valid,
                                not_valid = not_valid)
 
-    user = User.query.filter_by(username=request.form['recPassword']).first()
-    if user is not None:
-        valid = True
-    else:
-        user = User.query.filter_by(email=request.form['recPassword']).first()
-    if user is not None:
-        valid = True
-    else:
-        not_valid = True
-    return render_template('recover_password.html',
-                           valid=valid,
-                           not_valid=not_valid,
-                           user=user)
+    if not 'send_mail' in request.form:
+        user = User.query.filter_by(username=request.form['recPassword']).first()
 
+        if user is not None:
+            valid = True
+            session['user_changer'] = user.id
+        else:
+            user = User.query.filter_by(email=request.form['recPassword']).first()
+        if user is not None:
+            valid = True
+            session['user_changer'] = user.id
+        else:
+            not_valid = True
+        return render_template('recover_password.html',
+                               valid=valid,
+                               not_valid=not_valid,
+                               user=user)
+    else:
+        length = 8
+        new_password = ''.join(random.SystemRandom().choice(string.ascii_lowercase + string.digits) for _ in range(length))
+        user_temp = session['user_changer']
+        user = User.query.filter_by(id = user_temp).first()
+        user.password = new_password
+
+        db.session.commit()
+
+        emails.mail_password(user.email, user.password)
+        return redirect(url_for('index'))
 
 
 @app.route('/signout')
