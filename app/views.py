@@ -50,6 +50,7 @@ def login():
     user = User.query.filter_by(username = request.form['username'], password = request.form['password']).first()
     if user is None:
         user = User.query.filter_by(username=request.form['username']).first()
+        session['active_user_id'] = user.id
         if user is None:
             username_valid=False
         else:
@@ -185,13 +186,15 @@ def charge():
         if test_challenge is None:
             flag=False
 
+    #user = User.query.filter_by(id = session['active_user_id']).first()
     new_challenge=Challenge(
         message=message,
         address_id=new_address.id,
         product_id=product_id,
         datetime=datetime.now(),
-        challenge_code=challenge_code
-    )
+        challenge_code=challenge_code,
+        user_id = g.user.id)
+
     db.session.add(new_challenge)
     db.session.commit()
 
@@ -298,6 +301,7 @@ def social():
 
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
+    
     if request.method == 'POST':
 
         if 'message_button' in request.form:
