@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container-fluid col-sm-4">
+<div class="container">
     <h1>Registrering</h1>
-    <form data-toggle="validator" role="form" method="post" id="registerForm">
+    <form data-toggle="validator" role="form" method="post" id="registerForm" class="col-sm-4">
         {% if user_valid %}
         <div class="form-group">
             <label for="regUsername" class="control-label">Användarnamn</label>
