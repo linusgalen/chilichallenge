@@ -84,8 +84,7 @@ button {
 }
 #about_text {
     color: #000000;
-    padding-left: 25%;
-    padding-right: 25%;
+
 }
 .btn-xlarge {
     padding: 18px 28px;
@@ -106,6 +105,9 @@ button {
 /* CSS for the social media page */
 
 #instagram-picture {
+  /*padding-top: 50px;*/
+  padding-left: 20px;
+  padding-right: 20px;
   width: 100%;
   border: 0;
   height: 70%;
@@ -138,14 +140,14 @@ button {
   position: absolute;
   font-size: 50px;
   width: 100%;
-  bottom: -7%;
+  bottom: 1%;
   text-align: center;
 }
 .scroll-arrow a:hover{
   color: rgb(200, 43, 43);
 }
 .scroll-arrow a{
-  color: rgb(89, 175, 85);
+  color: rgb(255, 255, 255);
 }
 
 .photo-box .image-wrap img {
