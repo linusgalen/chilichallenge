@@ -1,57 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container-fluid col-sm-4">
-    <h1>Registrering</h1>
-    <form data-toggle="validator" role="form" method="post" id="registerForm">
-        {% if user_valid %}
-        <div class="form-group">
-            <label for="regUsername" class="control-label">Användarnamn</label>
-            <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control" id="regUsername" name="username"
-            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
-            <div class="help-block with-errors"></div>
-        </div>
-        {% else %}
-        <div class="form-group has-error">
-            <label for="regUsername2" class="control-label">Användarnamn</label>
-            <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control input-check" id="regUsername2" name="username"
-            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
-            <div class="help-block with-errors label-check">Användarnamnet finns redan</div>
-        </div>
-        {% endif %}
-        {% if email_valid %}
-        <div class="form-group">
-            <label for="regEmail" class="control-label">Email</label>
-            <input type="email" class="form-control" id="regEmail" name="email" placeholder="Email"
-            data-required-error="Skriv en het mail" data-error="Gör det ordentligt och skriv en riktig mail" required>
-            <div class="help-block with-errors"></div>
-        </div>
-        {% else %}
-        <div class="form-group has-error">
-            <label for="regEmail2" class="control-label">Email</label>
-            <input type="email" class="form-control input-check" id="regEmail2" name="email" placeholder="Email"
-            data-required-error="Skriv en het mail" data-error="Gör det ordentligt och skriv en riktig mail" required>
-            <div class="help-block with-errors label-check">Emailen finns redan</div>
-        </div>
-        {% endif %}
-        <div class="form-group">
-            <label for="regPassword" class="control-label">Lösenord</label>
-            <div class="form-inline row">
-                <div class="form-group col-sm-6">
-                    <input type="password" data-minlength="6" data-minlength-error="För kort, inte hett nog" class="form-control" id="regPassword"
-                    name="password" data-required-error="Skriv ett hett lösenord" placeholder="Lösenord" required>
+    <body>
+    <div class="container">
+        <h1>Registrering</h1>
+        <form data-toggle="validator" role="form" method="post" id="registerForm" class="col-sm-4">
+            {% if user_valid %}
+                <div class="form-group">
+                    <label for="regUsername" class="control-label">Användarnamn</label>
+                    <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control" id="regUsername" name="username"
+                           placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
                     <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group col-sm-6">
-                    <input type="password" class="form-control" id="regPasswordConfirm" data-match="#regPassword"
-                    data-error="Det är hett med likadana lösenord" placeholder="Upprepa Lösenord" required>
+            {% else %}
+                <div class="form-group has-error">
+                    <label for="regUsername2" class="control-label">Användarnamn</label>
+                    <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control input-check" id="regUsername2" name="username"
+                           placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
+                    <div class="help-block with-errors label-check">Användarnamnet finns redan</div>
+                </div>
+            {% endif %}
+            {% if email_valid %}
+                <div class="form-group">
+                    <label for="regEmail" class="control-label">Email</label>
+                    <input type="email" class="form-control" id="regEmail" name="email" placeholder="Email"
+                           data-required-error="Skriv en het mail" data-error="Gör det ordentligt och skriv en riktig mail" required>
                     <div class="help-block with-errors"></div>
+                </div>
+            {% else %}
+                <div class="form-group has-error">
+                    <label for="regEmail2" class="control-label">Email</label>
+                    <input type="email" class="form-control input-check" id="regEmail2" name="email" placeholder="Email"
+                           data-required-error="Skriv en het mail" data-error="Gör det ordentligt och skriv en riktig mail" required>
+                    <div class="help-block with-errors label-check">Emailen finns redan</div>
+                </div>
+            {% endif %}
+            <div class="form-group">
+                <label for="regPassword" class="control-label">Lösenord</label>
+                <div class="form-inline row">
+                    <div class="form-group col-sm-6">
+                        <input type="password" data-minlength="6" data-minlength-error="För kort, inte hett nog" class="form-control" id="regPassword"
+                               name="password" data-required-error="Skriv ett hett lösenord" placeholder="Lösenord" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <input type="password" class="form-control" id="regPasswordConfirm" data-match="#regPassword"
+                               data-error="Det är hett med likadana lösenord" placeholder="Upprepa Lösenord" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Registrera</button>
-        </div>
-    </form>
-</div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Registrera</button>
+            </div>
+        </form>
+    </div>
+    </body>
 {% endblock %}
