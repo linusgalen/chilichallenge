@@ -11,6 +11,7 @@
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/base.css">
     <link rel="stylesheet" href="/static/checkout_process.css">
+    <link rel="stylesheet" href="/static/font-awesome.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -27,6 +28,8 @@
     <script src="{{url_for('static', filename='checkout_process.js')}}"></script>
     <script  src="../static/register.js"></script>
     <script src="../static/base.js"></script>
+    <script src="../static/Instafeed.js"></script>
+    <script src="../static/app.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,6 +37,8 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+  <body>
+
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul>
@@ -45,7 +50,6 @@
 {% endwith %}
 
 {% block nav %}
-
   <nav class="navbar navbar-default navbar-fixed-top shrink">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -60,18 +64,12 @@
           <img id="navbar-logo" alt="Brand" src="https://s-media-cache-ak0.pinimg.com/originals/d7/2b/cd/d72bcdd49a20a229f950ff559e917fda.png">
         </a>
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
         <ul class="nav navbar-nav">
-
         </ul>
-
         <form class="navbar-form navbar-left">
-
         </form>
-
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/index#home">Hem</a></li>
           <li><a href="/index#about">Om</a></li>
@@ -84,27 +82,48 @@
               <li > <a href="/login" id="test">Logga In</a> </li>
           {% endif %}
         </ul>
-
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
 {% endblock %}
 
-{% block content %}
-{% endblock %}
+  {% block content %}
+  {% endblock %}
 
 {% block foot %}
-    <div id="the_end" class="containter-fluid">
-        <div id="social-media-buttons">
-            <a href="https://www.instagram.com/chilichallenge/">
-                <img title="Instagram" alt="RSS" src="https://socialmediawidgets.files.wordpress.com/2014/03/10_instagram.png" width="35" height="35" >
-            </a>
-            <a href="[full link to your Facebook page]">
-                <img title="Facebook" alt="Facebook" src="https://socialmediawidgets.files.wordpress.com/2014/03/02_facebook.png" width="35" height="35" />
-            </a>
+  <footer>
+    <!-- <img id="footer-pic" class="col-md-2" src="./static/img/footer-pic.png" alt=""> -->
+    <div class="container">
+      <div class="row">
+        <div class="text-left col-md-3 col-xs-12">
+          <h2 id="footer-brand">ChiliChallenge</h2>
         </div>
-        <p style="text-align: center">  Copyright ChiliChallange  .</p>
+        <div class="col-md-3 col-xs-4">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-xs-4">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">News</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3 col-xs-4">
+          <div id="social-media-buttons">
+            <a href="https://www.instagram.com/chilichallenge/" target="_blank"><i class="fa fa-instagram fa-5x"></i></a>
+            <a href="#"><i class="fa fa-facebook-square fa-5x"></i></a>
+          </div>
+        </div>
+      </div>
     </div>
+  </footer>
 {% endblock %}
+
 </body>
 </html>
