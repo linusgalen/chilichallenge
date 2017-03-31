@@ -8,7 +8,7 @@ def mail_payment_confirmation(email, first_name, message, new_address):
     mail.send(msg)
 
 def mail_answer(email, ans_message, name):
-    msg = Message("Svar från " + name, sender='chilichallengeinfo@gmail.com', recipients=[email])
+    msg = Message("Svar fran " + name, sender='chilichallengeinfo@gmail.com', recipients=[email])
     msg.html = render_template('mailtest.html', ans_message=ans_message, name=name)
     mail.send(msg)
 
@@ -18,6 +18,6 @@ def mail_registration_confirmation(user):
     mail.send(msg)
 
 def mail_password(email, password):
-    msg = Message("Nytt lösenord", sender='chilichallengeinfo@gmail.com', recipients=[email])
+    msg = Message("Nytt losenord", sender='chilichallengeinfo@gmail.com', recipients=[email])
     msg.html = render_template('password_mail.html', password=password)
     mail.send(msg)
