@@ -36,7 +36,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-  <body>
+<body>
 
 {% with messages = get_flashed_messages() %}
     {% if messages %}
@@ -49,79 +49,77 @@
 {% endwith %}
 
 {% block nav %}
-  <nav class="navbar navbar-default navbar-fixed-top shrink">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand navbar-left" href="./">
-          <img id="navbar-logo" alt="Brand" src="https://s-media-cache-ak0.pinimg.com/originals/d7/2b/cd/d72bcdd49a20a229f950ff559e917fda.png">
-        </a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-        </ul>
-        <form class="navbar-form navbar-left">
-        </form>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="/index#home">Hem</a></li>
-          <li><a href="/index#about">Om</a></li>
-          <li class="divider-vertical"></li>
-          {% if g.user.is_authenticated %}
-              <li> <a href="/profile" id="test">{{ g.user.username }} </a></li>
-              <li> <a href="/signout" id="test">Logga ut </a></li>
-          {% else %}
-              <li > <a href="/register" id="test">Registrera dig</a> </li>
-              <li > <a href="/login" id="test">Logga In</a> </li>
-          {% endif %}
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+    <nav class="navbar navbar-default navbar-fixed-top shrink">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand navbar-left" href="./">
+                    <img id="navbar-logo" alt="Brand" src="https://s-media-cache-ak0.pinimg.com/originals/d7/2b/cd/d72bcdd49a20a229f950ff559e917fda.png">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                </ul>
+                <form class="navbar-form navbar-left">
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/index#home">Hem</a></li>
+                    <li><a href="/index#about">Om</a></li>
+                    <li class="divider-vertical"></li>
+                    {% if g.user.is_authenticated %}
+                        <li> <a href="/profile" id="test">{{ g.user.username }} </a></li>
+                        <li> <a href="/signout" id="test">Logga ut </a></li>
+                    {% else %}
+                        <li > <a href="/register" id="test">Registrera dig</a> </li>
+                        <li > <a href="/login" id="test">Logga In</a> </li>
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
 {% endblock %}
 
-  {% block content %}
-  {% endblock %}
+{% block content %}
+{% endblock %}
 
 {% block foot %}
-  <footer>
-    <!-- <img id="footer-pic" class="col-md-2" src="./static/img/footer-pic.png" alt=""> -->
-    <div class="container">
-      <div class="row">
-        <div class="text-left col-md-3 col-xs-12">
-          <h2 id="footer-brand">ChiliChallenge</h2>
+    <footer>
+        <!-- <img id="footer-pic" class="col-md-2" src="./static/img/footer-pic.png" alt=""> -->
+        <div class="container">
+            <div class="row">
+                <div class="text-left col-md-3 col-xs-12">
+                    <h2 id="footer-brand">ChiliChallenge</h2>
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    <ul>
+                        <li><a href="/index#home">Hem</a></li>
+                        <li><a href="/index#about">Om oss</a></li>
+                        <li><a href="/register">Registrera dig</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    <ul>
+                        <h3>Kontakta oss</h3>
+                        <h6>chilichallengeinfo@gmail.com</h6>
+
+                    </ul>
+                </div>
+                <div class="col-md-3 col-xs-4">
+                    <div id="social-media-buttons">
+                        <a target="_blank" href="https://www.instagram.com/chilichallenge/" target="_blank"><i class="fa fa-instagram fa-5x"></i></a>
+                        <a target="_blank" href="https://www.facebook.com/chilichallenge/"><i class="fa fa-facebook-square fa-5x"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3 col-xs-4">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-xs-4">
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-xs-4">
-          <div id="social-media-buttons">
-            <a href="https://www.instagram.com/chilichallenge/" target="_blank"><i class="fa fa-instagram fa-5x"></i></a>
-            <a href="#"><i class="fa fa-facebook-square fa-5x"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 {% endblock %}
 
 </body>
