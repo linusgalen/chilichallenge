@@ -1,17 +1,16 @@
 {% extends "base.html" %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
 
 {% block content %}
     <body>
-    {% if showform %}
+    {% if show_enter_code %}
         <div class="container">
         <h2>Utmanad</h2>
         <form action="" id="confirm_code" name="confirm_code" method="POST">
             <div class="form-group"  >
                 <div class = "col-xs-3">
                     <label for="email">Skriv koden du har fått via utmaningen:</label>
-                    <input type="text" class="form-control" placeholder = "kod" id="generated_code" name="generated_code">
+                    <input type="text" class="form-control" placeholder = "kod" id="generated_code" name="generated_code" autofocus>
                     <br>
                     <input type="submit" class="btn btn-primary" name="message_button" value="se meddelande" id = "message_button"></input>
                 </div>
@@ -20,74 +19,68 @@
     {% endif %}
 
     </div>
-    {% if message %}
+    {% if show_message_answer %}
         <form class="form-horizontal" id = "show_msg_form" name = "show_msg_form" method="POST" action="">
             <div class="form-group">
                 <label for="message" class="col-sm-2 control-label">Meddelande</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static">
-                        <div class="well col-sm-7">
-                        {{message}}
+                        <div class="well col-sm-7 form-control-static">
+                        {% if message %}
+                            {{message}}
+                        {% else %}
+                            Det finns inget meddelande till dig.
+                        {% endif %}
                         </div>
-                    </p>
-                    <!-- <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value=""> -->
                 </div>
             </div>
-            <br>
             <div class="form-group">
-                <label for="email" class="col-sm-2 control-label">Email</label>
+                <label for="email" class="col-sm-2 control-label">Svaret skickas till</label>
+                <div class="col-sm-10 form-control-static">
+                    {{email}}
+                </div>
+            </div>
+            <div class="form-group">
+
+                {% if answer_message %}
+                <label class="col-sm-2 control-label"> Uppdatera ditt svar</label>
                 <div class="col-sm-10">
-                    <p class="form-control-static">
-                        {{email}}
-                    </p>
-                    <!-- <input type="email" class="form-control" id="email" name="email" placeholder="example@domain.com" value=""> -->
+                    <textarea class="well col-sm-7" form="show_msg_form" placeholder="Svar" id="answer_message" name="answer_message" type="submit">{{ answer_message }}</textarea>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="message" class="col-sm-2 control-label">Message</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" placeholder = "Svar" id="answer_message" name="answer_message">
+                {% else %}
+                <label class="col-sm-2 control-label"> Skriv ditt svar</label>
+                <div class="col-sm-10">
+                    <textarea class="well col-sm-7" form="show_msg_form" placeholder="Svar" id="answer_message" name="answer_message" type="submit" autofocus></textarea>
                 </div>
+                {% endif %}
+
+
+
             </div>
             <div class="form-group">
                 <div class="col-sm-6 col-sm-offset-2">
-                    <input id="submit" name="submit" type="submit" value="Skicka svar" class="btn btn-primary">
-                </div>
-            </div>
-            <br>
-
-            <div class="form-group">
-                <div class="col-sm-10">
-                    <! Will be used to display an alert to the user>
+                  {% if answer_message %}
+                   <input id="answer_button" name="answer_button" type="submit" value="Skicka nytt svar" class="btn btn-primary">
+                  {% else %}
+                    <input id="answer_button" name="answer_button" type="submit" value="Skicka svar" class="btn btn-primary">
+                  {% endif %}
                 </div>
             </div>
         </form>
     {% endif %}
-    {% if ans_message %}
+    {% if show_email_have_been_sent_page %}
          <form class="form-horizontal" id = "show_ans_form" name = "show_ans_form" method="POST" action="">
             <div class="form-group">
                 <h4  class="col-sm-8 control-label">Ditt svar skickades till {{ email }}!</h4>
 
             </div>
-            <a href="/checkout"><button id="chl_btn" class="btn btn-large btn-primary center-block" type="button"> <h1> Start Challenge </h1></button></a>
+
+            <div class="form-group">
+                <a href="/checkout"><button type="button" class="btn-xlarge btn-default ">Starta Challenge</button></a>
+            </div>
+
 
 
          </form>
     {% endif %}
     </body>
-    {#<script>#}
-    {#      $(document).ready(function(){#}
-    {##}
-    {#        $("#message_container").hide();#}
-    {#        $("#confirm_code").show();#}
-    {##}
-    {##}
-    {#        $("#message_button").click(function() {#}
-    {#          $("#confirm_code").hide();#}
-    {#          $("#message_container").show();#}
-    {#        });#}
-    {##}
-    {#      });#}
-    {#      </script>#}
-    <script src="../static/been_challenged.js"></script>
 {%endblock %}
