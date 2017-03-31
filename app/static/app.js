@@ -28,11 +28,7 @@ $(function() {
         accessToken: '4921404690.1677ed0.11aa5af3e45448c387dc4a0389e0bfa7',
         links: 'true',
         limit: '4',
-        template: '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="photo-box"><div class="image-wrap"><a href="{{link}}"><img src="{{image}}"></a></div><div class="description"><textarea>{{caption}}</textarea><div class="date">{{model.date}}</div></div></div></div>'
+        template: '<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3"><div class="photo-box"><div class="image-wrap"><a href="{{link}}"><img src="{{image}}"></a></div><div class="description"><span>{{caption}}</span><div class="date">{{model.date}}</div></div></div></div>'
     });
     userFeed.run();
 });
-
-
-
-
