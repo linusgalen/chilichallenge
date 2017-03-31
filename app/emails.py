@@ -18,6 +18,6 @@ def mail_registration_confirmation(user):
     mail.send(msg)
 
 def mail_password(email, password):
-    msg = Message("Nytt lösenord", sender='chilichallengeinfo@gmail.com', recipients=[email])
+    msg = Message("Nytt losenord", sender='chilichallengeinfo@gmail.com', recipients=[email])
     msg.html = render_template('password_mail.html', password=password)
     mail.send(msg)
