@@ -211,7 +211,7 @@ def charge():
     )
 
     if g.user is not None and g.user.is_authenticated:
-        emails.mail_payment_confirmation(g.user.email, g.user.username, message, new_address)
+        emails.mail_payment_confirmation(email, g.user.username, message, new_address)
     else:
         emails.mail_payment_confirmation(email, first_name, message, new_address)
 
