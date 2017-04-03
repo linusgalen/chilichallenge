@@ -1,8 +1,7 @@
 
 
 $(document).ready(function() {
-
-    $("#thenavbar a").on('click', function (event) {
+    $("nav a, .scroll-arrow a").on('click', function (event) {
         if (this.hash !== "") {
             event.preventDefault();
             var hash = this.hash;
@@ -14,5 +13,8 @@ $(document).ready(function() {
         }
     });
 
-});
+    $(".carousel").carousel({
+    interval: 3000
+    });
 
+});
