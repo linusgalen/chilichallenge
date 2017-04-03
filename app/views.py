@@ -241,13 +241,23 @@ def charge():
             flag=False
 
     #user = User.query.filter_by(id = session['active_user_id']).first()
-    new_challenge=Challenge(
-        message=message,
-        address_id=new_address.id,
-        product_id=product_id,
-        datetime=datetime.now(),
-        challenge_code=challenge_code,
-        user_id = g.user.id)
+    if g.user is not None and g.user.is_authenticated:
+        new_challenge=Challenge(
+            message=message,
+            address_id=new_address.id,
+            product_id=product_id,
+            datetime=datetime.now(),
+            challenge_code=challenge_code,
+            user_id = g.user.id
+        )
+    else:
+        new_challenge=Challenge(
+            message=message,
+            address_id=new_address.id,
+            product_id=product_id,
+            datetime=datetime.now(),
+            challenge_code=challenge_code
+        )
 
     db.session.add(new_challenge)
     db.session.commit()
