@@ -29,6 +29,9 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 @login_manager.user_loader
 def load_user(id):
@@ -348,7 +351,7 @@ def product(product_id):
 
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
-    
+
     if request.method == 'POST':
 
         if 'message_button' in request.form:
@@ -368,5 +371,3 @@ def challenged():
             return render_template('been_challenged.html', show_email_have_been_sent_page=True, email=chal.address.email)
 
     return render_template('been_challenged.html', show_enter_code=True)
-
-
