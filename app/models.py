@@ -104,7 +104,7 @@ class Challenge(db.Model):
         db.Integer, db.ForeignKey("product.id", onupdate="CASCADE", ondelete="CASCADE")
     )
     user_id = db.Column(
-        db.Integer, db.ForeignKey("user.id", onupdate="CASCADE", ondelete="CASCADE")
+    db.Integer, db.ForeignKey("user.id", onupdate="CASCADE", ondelete="CASCADE")
     )
     address_id = db.Column(
         db.Integer, db.ForeignKey("address.id", onupdate="CASCADE", ondelete="CASCADE")
