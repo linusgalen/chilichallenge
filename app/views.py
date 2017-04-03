@@ -58,7 +58,9 @@ def login():
 
         return render_template('login.html',
                                username_valid=username_valid,
-                               password_valid=password_valid)
+                               password_valid=password_valid,
+                               usernameformvalue = request.form['username'],
+                               passwordformvalue = request.form['password'])
 
     login_user(user)
     return redirect(url_for('index'))
@@ -119,21 +121,23 @@ def register():
         return render_template('register.html',
                                user_valid = user_valid,
                                email_valid = email_valid)
-    username = request.form['username']
-    user_check = User.query.filter_by(username = username).first()
+    user_check = User.query.filter_by(username = request.form['username']).first()
     if user_check is not None:
         user_valid = False
-    email = request.form['email']
 
-    email_check = User.query.filter_by(email = email).first()
+    email_check = User.query.filter_by(email = request.form['email']).first()
     if email_check is not None:
         email_valid = False
     if user_check is not None or email_check is not None:
         return render_template('register.html',
                                user_valid = user_valid,
-                               email_valid = email_valid)
+                               email_valid = email_valid,
+                               usernameformvalue = request.form['username'],
+                               emailformvalue = request.form['email'],
+                               passwordformvalue = request.form['password'],
+                               passwordconfirmformvalue = request.form['passwordconfirm'])
 
-    user = User(username=username, password=request.form['password'], email=email)
+    user = User(username=request.form['username'], password=request.form['password'], email=request.form['email'])
     db.session.add(user)
     db.session.commit()
     login_user(user)
