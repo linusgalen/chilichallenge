@@ -9,14 +9,14 @@
         <div class="form-group">
             <label for="regUsername" class="control-label">Användarnamn</label>
             <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control" id="regUsername" name="username"
-            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
+            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required autofocus>
             <div class="help-block with-errors"></div>
         </div>
         {% else %}
         <div class="form-group has-error">
             <label for="regUsername2" class="control-label">Användarnamn</label>
             <input type="text" pattern="^[_A-z0-9]{1,}$" class="form-control input-check" id="regUsername2" name="username"
-            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required>
+            placeholder="Användarnamn" data-required-error="Skriv ett hett användarnamn" data-error="Bara heta tecken gäller" required autofocus>
             <div class="help-block with-errors label-check">Användarnamnet finns redan</div>
         </div>
         {% endif %}
