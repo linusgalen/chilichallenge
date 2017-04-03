@@ -50,6 +50,7 @@ def login():
     user = User.query.filter_by(username = request.form['username'], password = request.form['password']).first()
     if user is None:
         user = User.query.filter_by(username=request.form['username']).first()
+        session['active_user_id'] = user.id
         if user is None:
             username_valid=False
         else:
@@ -145,6 +146,54 @@ def register():
 
     return redirect(url_for('index'))
 
+@app.route('/change_userinfo', methods=["GET", "POST"])
+def change_userinfo():
+    user_valid = True
+    email_valid = True
+    if request.method == 'GET':
+        return render_template('change_userinfo.html',
+                               user_valid = user_valid,
+                               email_valid = email_valid,
+                               password = True,
+                               pas_valid = True)
+    if 'pasbtn' in request.form:
+        if request.form['checkpassword'] != g.user.password:
+            return render_template('change_userinfo.html',
+                                   user_valid = user_valid,
+                                   email_valid = email_valid,
+                                   password = True,
+                                   pas_valid = False)
+        else:
+            return render_template('change_userinfo.html',
+                                   user_valid = user_valid,
+                                   email_valid = email_valid,
+                                   password = False,
+                                   curusername = g.user.username,
+                                   curemail = g.user.email)
+    username = request.form['username']
+    user_check = User.query.filter_by(username = username).first()
+    if user_check is not None and user_check.username != g.user.username:
+        user_valid = False
+    email = request.form['email']
+
+    email_check = User.query.filter_by(email = email).first()
+    if email_check is not None and email_check.email != g.user.email:
+        email_valid = False
+    if user_valid == False or email_valid == False:
+        return render_template('change_userinfo.html',
+                               user_valid = user_valid,
+                               email_valid = email_valid,
+                               password = False,
+                               curusername = g.user.username,
+                               curemail = g.user.email)
+
+    g.user.username = username
+    g.user.email = email
+    g.user.password = request.form['password']
+    db.session.commit()
+
+    return redirect(url_for('profile_page'))
+
 
 @app.route('/aboutcc', methods=['GET'])
 def yolo():
@@ -188,13 +237,15 @@ def charge():
         if test_challenge is None:
             flag=False
 
+    #user = User.query.filter_by(id = session['active_user_id']).first()
     new_challenge=Challenge(
         message=message,
         address_id=new_address.id,
         product_id=product_id,
         datetime=datetime.now(),
-        challenge_code=challenge_code
-    )
+        challenge_code=challenge_code,
+        user_id = g.user.id)
+
     db.session.add(new_challenge)
     db.session.commit()
 
@@ -297,6 +348,7 @@ def product(product_id):
 
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
+    
     if request.method == 'POST':
 
         if 'message_button' in request.form:
