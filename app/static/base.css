@@ -6,6 +6,7 @@ body {
   padding-top: 70px;
   position: relative;
 }
+
 #home {
   padding-top: 70px;
   height: 80%;
@@ -182,8 +183,9 @@ footer {
 footer .row {
   height: 80%;
   padding-top: 10%;
-  padding-bottom: 10%;
+  padding-bottom: 0%;
   bottom: 0;
+
 }
 #footer-pic {
   bottom: 0;
@@ -192,11 +194,12 @@ footer .row {
 }
 footer a {
   color: white;
-  font-size: 20px;
+  font-size: 100%;
 }
 footer a:hover {
   color: grey;
   text-decoration: none;
+  font-size: 100%;
 }
 footer ul {
   list-style-type: none;
