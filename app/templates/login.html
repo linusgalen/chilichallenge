@@ -17,14 +17,14 @@
                 <div class="form-group">
                     <label for="loginUsername" class="control-label">Användarnamn</label>
                     <input type="text" class="form-control" name="username" id="loginUsername" placeholder="Användarnamn"
-                           required data-required-error="Skriv ett hett användarnamn" autofocus>
+                           value="{{ usernameformvalue }}" required data-required-error="Skriv ett hett användarnamn" autofocus>
                     <div class="help-block with-errors"></div>
                 </div>
             {% else %}
                 <div class="form-group has-error">
                     <label for="loginUsername" class="control-label">Användarnamn</label>
                     <input type="text" class="form-control input-check" name="username" id="loginUsername" placeholder="Användarnamn"
-                           required data-required-error="Skriv ett hett användarnamn" autofocus>
+                           value="{{ usernameformvalue }}" data-required-error="Skriv ett hett användarnamn" autofocus>
                     <div class="help-block with-errors label-check">Användarnamnet finns ej</div>
                 </div>
             {% endif %}
@@ -32,14 +32,14 @@
             <div class="form-group">
                 <label for="loginPassword" class="control-label">Lösenord</label>
                 <input type="password" class="form-control" name="password" id="loginPassword" placeholder="Lösenord" required
-                       data-required-error="Skriv ett hett lösenord">
+                       value="{{ passwordformvalue }}" data-required-error="Skriv ett hett lösenord">
                 <div class="help-block with-errors"></div>
             </div>
             {% else %}
             <div class="form-group  has-error">
                 <label for="loginPassword" class="control-label">Lösenord</label>
                 <input type="password" class="form-control input-check" name="password" id="loginPassword" placeholder="Lösenord" required
-                       data-required-error="Skriv ett hett lösenord">
+                       value="{{ passwordformvalue }}" data-required-error="Skriv ett hett lösenord">
                 <div class="help-block with-errors label-check">Lösenordet stämmer inte</div>
             </div>
             {% endif %}
