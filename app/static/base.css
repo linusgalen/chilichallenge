@@ -204,3 +204,36 @@ footer ul {
 #footer-brand {
   top: 0;
 }
+#about_text {
+    padding-right: 10%;
+}
+
+#headertext {
+    color: red;
+}
+
+#chilitext {
+    padding-top: 3%;
+    padding-left: 8%;
+}
+
+#addresstext {
+    padding-top: 2%;
+    padding-left: 8%;
+}
+
+#buytext {
+    padding-top: 2%;
+    padding-left: 8%;
+}
+
+#aboutbuttonarea {
+    padding-top: 3%;
+    text-align: center;
+}
+
+#epicpic {
+     position:relative;
+     padding-top: 10%;
+
+}

@@ -257,7 +257,10 @@ def charge():
         description=bought_product.name
     )
 
-    emails.mail_payment_confirmation(email, first_name, message, new_address)
+    if g.user is not None and g.user.is_authenticated:
+        emails.mail_payment_confirmation(email, g.user.username, message, new_address)
+    else:
+        emails.mail_payment_confirmation(email, first_name, message, new_address)
 
     return render_template('charge.html',
                            email=email,
@@ -336,13 +339,6 @@ def product(product_id):
 
 
 
-
-@app.route('/social', methods=["GET"])
-def social():
-    return render_template('socialmedia.html')
-
-
-
 @app.route('/challenged', methods =["GET", "POST"])
 def challenged():
     if request.method == 'POST':
@@ -366,7 +362,3 @@ def challenged():
     return render_template('been_challenged.html', show_enter_code=True)
 
 
-@app.route("/mailing")
-def mailing():
-
-    return emails.mail_payment_confirmation('trouvejohanna@gmail.com', 'Oskar', "TJENARE")
