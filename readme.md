@@ -2,31 +2,30 @@
 
 Challenge friends on a hot and fun experience
 
+Live-preview of [ChiliChallenge](https://chilichallenge.herokuapp.com)
+
+
+
 ## Installation
 
 ### Database
+First time:
+```command
 
-First time run:
-$ python db_create.py
+Well, you do not have to install any database, we have fixed that for you!
 
-If classes added or minor changes run:
-$ python db_migrate.py
+(You are connected to the live database)
 
-If major constraints changed or db_migrate gives errors
-delete app.db and the db_repository folder and rereate the db with
-$ python db_create.py
+```
 
 
-To add test data to db run the "db_add_*tablename*" scripts
-example: $ python db_add_products.py
+## Run on local server
 
+```command
 
-## Usage
+$ python app.py
 
-To start the server after database created and loaded with data:
-$ python run.py
-
-
+```
 
 ## Credits
 
